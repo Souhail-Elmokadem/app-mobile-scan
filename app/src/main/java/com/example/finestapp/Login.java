@@ -89,7 +89,7 @@ public class Login extends AppCompatActivity {
                             data[1] = password;
 
                             //The IP-Adress means that devices needs to be connected to the same WIFI network
-                            PutData putData = new PutData("http://192.168.11.63/Loginregister/login.php", "POST", field, data);
+                            PutData putData = new PutData("http://192.168.11.20/Loginregister/login.php", "POST", field, data);
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     progressBar.setVisibility(View.GONE);
