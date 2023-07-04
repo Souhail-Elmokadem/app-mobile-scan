@@ -2,7 +2,6 @@ package com.example.finestapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -34,14 +33,11 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
         Username = findViewById(R.id.username);
         Password = findViewById(R.id.password);
         Login = findViewById(R.id.loginbtn);
         CheckBox = findViewById(R.id.checkBox);
-
         progressBar = findViewById(R.id.progress);
-
         sharedPreferences = getPreferences(MODE_PRIVATE);
 
 
@@ -49,7 +45,7 @@ public class Login extends AppCompatActivity {
         int state = sharedPreferences.getInt("state",-1);
         if(state!=-1)
         {
-            Intent intent = new Intent(getApplicationContext(), GestionChoix.class);
+            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
             startActivity(intent);
             finish();
             Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
@@ -96,7 +92,7 @@ public class Login extends AppCompatActivity {
                                     String result = putData.getResult();
                                     //End ProgressBar (Set visibility to GONE)
                                     if(result.equals("Login Success")){
-                                        Intent intent = new Intent(getApplicationContext(), GestionChoix.class);
+                                        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                                         startActivity(intent);
                                         finish();
                                         Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
