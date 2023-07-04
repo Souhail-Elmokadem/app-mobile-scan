@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FinestApp"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".addFournisseur"
+            android:exported="false"
+            android:label="Add Supplier"/>
+        <activity
+            android:name=".fournisseurlist"
+            android:exported="false"
+            android:label="Supplier List"/>
+        <activity
+            android:name=".GestionChoix"
+            android:exported="false"/>
+        <activity
+            android:name=".ProductDetail"
+            android:exported="false"
+            android:label="Product Detail" />
+        <activity
+            android:name=".AddProduct"
+            android:exported="false"
+            android:label="Add Product" />
+        <activity
+            android:name=".Scancamera"
+            android:exported="false"
+            android:label="Scan Your Code Here" />
+
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
+
+        <activity
+            android:name=".ProductList"
+            android:exported="false"
+            android:label="List Of Products" />
+        <activity
+            android:name=".Register"
+            android:exported="false"
+            android:label="Create Account"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".Login"
+            android:exported="false"
+            android:label="Login" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
