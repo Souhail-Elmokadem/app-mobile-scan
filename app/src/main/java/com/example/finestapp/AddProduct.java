@@ -29,12 +29,14 @@ public class AddProduct extends AppCompatActivity {
         price = findViewById(R.id.prenom);
         marge = findViewById(R.id.tel);
         fournisseur = findViewById(R.id.fournisseur);
+
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,8 +63,8 @@ public class AddProduct extends AppCompatActivity {
                             data[3] = Fournisseur;
                             //Adresse IP Local
                             PutData putData = new PutData("http://192.168.11.63/Loginregister/addproduct.php", "POST", field, data);
-//                            //Adresse IP Cloud
-//                            PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/addProduct.php", "POST", field, data);
+                            //Adresse IP Cloud
+//                          PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/addProduct.php", "POST", field, data);
 
 
                             if(putData.startPut()){
@@ -72,16 +74,16 @@ public class AddProduct extends AppCompatActivity {
                                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                         startActivity(intent);
                                         finish();
-                                        Toast.makeText(getApplicationContext(),"Added avec succes",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Product Added !",Toast.LENGTH_SHORT).show();
                                     }else{
-                                        Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Error Adding Product",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
                         }
                     });
                 }else{
-                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vide",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"All Fields Required",Toast.LENGTH_SHORT).show();
                 }
             }
         });

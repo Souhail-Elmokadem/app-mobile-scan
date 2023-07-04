@@ -24,12 +24,13 @@
             android:exported="false"
             android:label="Add Supplier"/>
         <activity
-            android:name=".fournisseurlist"
+            android:name=".FournisseurList"
             android:exported="false"
             android:label="Supplier List"/>
         <activity
-            android:name=".GestionChoix"
-            android:exported="false"/>
+            android:name=".Dashboard"
+            android:exported="false"
+            android:label="Dashboard"/>
         <activity
             android:name=".ProductDetail"
             android:exported="false"
