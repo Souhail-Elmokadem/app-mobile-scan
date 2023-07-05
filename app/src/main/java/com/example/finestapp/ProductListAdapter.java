@@ -12,35 +12,40 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class ProductListAdapter extends ArrayAdapter<Product> {
-    private Context mContext;
-    private List<Product> mProductList;
-
-    public ProductListAdapter(Context context, List<Product> productList) {
-        super(context, 0, productList);
-        mContext = context;
-        mProductList = productList;
+public class ProductListAdapter extends ArrayAdapter<Item> {
+    private LayoutInflater inflater;
+    public ProductListAdapter(Context context, List<Item> items) {
+        super(context, 0, items);
+        inflater = LayoutInflater.from(context);
     }
 
-    @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View listItemView = convertView;
-        if (listItemView == null) {
-            listItemView = LayoutInflater.from(mContext).inflate(R.layout.list_item_product, parent, false);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.list_item_layout, parent, false);
+
+            holder = new ViewHolder();
+            holder.productNameTextView = convertView.findViewById(R.id.productNameTextView);
+            holder.productPriceTextView = convertView.findViewById(R.id.productPriceTextView);
+
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        Product currentProduct = mProductList.get(position);
+        Item item = getItem(position);
 
-        TextView nameTextView = listItemView.findViewById(R.id.text_name);
-        nameTextView.setText(currentProduct.getNomProd());
+        holder.productNameTextView.setText(item.getName());
+        holder.productPriceTextView.setText(item.getPrice());
 
-        TextView priceTextView = listItemView.findViewById(R.id.text_price);
-        priceTextView.setText(String.valueOf(currentProduct.getPrixAchat()));
-
-        TextView dateTextView = listItemView.findViewById(R.id.text_date);
-        dateTextView.setText(currentProduct.getDateProd());
-
-        return listItemView;
+        return convertView;
     }
+
+    private static class ViewHolder {
+        TextView productNameTextView;
+        TextView productPriceTextView;
+    }
+
 }

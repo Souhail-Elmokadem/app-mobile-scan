@@ -68,11 +68,11 @@ public class AddProduct extends AppCompatActivity {
                             if(putData.startPut()){
                                 if(putData.onComplete()){
                                     String res = putData.getResult();
-                                    if(res.equals("Added Success")){
-                                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                    if(res.equals("Add Success")){
+                                        Intent intent = new Intent(getApplicationContext(),ProductList.class);
                                         startActivity(intent);
                                         finish();
-                                        Toast.makeText(getApplicationContext(),"Added avec succes",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Product Added !",Toast.LENGTH_SHORT).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
                                     }

@@ -13,7 +13,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,7 +35,7 @@ public class ProductList extends AppCompatActivity {
     private static final String PHP_SCRIPT_URL = "http://192.168.11.63/Loginregister/ListItem.php";
 
     private ListView listView;
-    private ArrayAdapter<String> adapter;
+    private ProductListAdapter adapter;
 
     private SharedPreferences sharedPreferences;
 
@@ -41,7 +46,7 @@ public class ProductList extends AppCompatActivity {
         setContentView(R.layout.activity_product_list);
 
         listView = findViewById(R.id.subListView);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        adapter = new ProductListAdapter(this, new ArrayList<Item>());
         listView.setAdapter(adapter);
 
         ProductListAsyncTask ProductListAsyncTask = new ProductListAsyncTask();
@@ -50,18 +55,19 @@ public class ProductList extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String productName = adapter.getItem(position);
+                Item item = adapter.getItem(position);
+                String productName = item.getName();
+                String productPrice = item.getPrice();
                 // Handle click event for the product
-                Toast.makeText(ProductList.this, "Clicked on: " + productName, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private class ProductListAsyncTask extends AsyncTask<Void, Void, List<String>> {
+    private class ProductListAsyncTask extends AsyncTask<Void, Void, List<Item>> {
 
         @Override
-        protected List<String> doInBackground(Void... voids) {
-            List<String> resultList = new ArrayList<>();
+        protected List<Item> doInBackground(Void... voids) {
+            List<Item> resultList = new ArrayList<>();
 
             try {
                 URL url = new URL(PHP_SCRIPT_URL);
@@ -69,17 +75,31 @@ public class ProductList extends AppCompatActivity {
 
                 InputStream inputStream = connection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder response = new StringBuilder();
                 String line;
 
                 while ((line = bufferedReader.readLine()) != null) {
-                    resultList.add(line);
+                    response.append(line);
                 }
 
                 bufferedReader.close();
                 inputStream.close();
                 connection.disconnect();
 
-            } catch (IOException e) {
+                // Parse the JSON response
+                JSONArray jsonArray = new JSONArray(response.toString());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    String productName = jsonObject.getString("NomProd");
+                    String productPrice = jsonObject.getString("PrixAchat");
+
+                    Item item = new Item(productName, productPrice);
+                    resultList.add(item);
+                }
+
+
+            } catch (IOException | JSONException e) {
                 Log.e(TAG, "Error retrieving data: " + e.getMessage());
             }
 
@@ -87,19 +107,16 @@ public class ProductList extends AppCompatActivity {
 
         }
 
-
         @Override
-        protected void onPostExecute(List<String> resultList) {
+        protected void onPostExecute(List<Item> resultList) {
             // Process the retrieved data (resultList)
             Toast.makeText(ProductList.this, "Received data: " + resultList.size() + " items", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "Received data: " + resultList.size() + " items");
 
             adapter.clear();
-            for (String item : resultList) {
-                adapter.add(item);
-            }
+            adapter.addAll(resultList);
             adapter.notifyDataSetChanged();
-        }
+            }
     }
 
 
