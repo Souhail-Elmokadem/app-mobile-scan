@@ -3,7 +3,7 @@ require "DataBase.php";
 $db = new DataBase();
 
     if ($db->dbConnect()) {
-        if ($db->getItems("produit")) {
+        if ($db->getItemDetail("produit")) {
             echo "End Of List";
         }
     } 

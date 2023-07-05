@@ -66,7 +66,7 @@ class DataBase
             return true;
         } else return false;
     }
-    function addProduct($table, $nomproduct, $priceproduct,$dateprod, $margeprod, $idfour ,$iduser)
+    function addProduct($table, $nomproduct, $priceproduct, $dateprod, $margeprod, $idfour ,$iduser)
     {
         $nomproduct = $this->prepareData($nomproduct);
         $priceproduct = $this->prepareData($priceproduct);
@@ -82,36 +82,96 @@ class DataBase
     }
     function getItems($table)
     {
-        $products = array(); // Initialize an empty array to store the results
     
-        $this->sql = "SELECT NomProd, PrixAchat, dateProd, MargeProd, idFour FROM $table";
+        $this->sql = "SELECT NomProd, PrixAchat FROM $table";
         $result = mysqli_query($this->connect, $this->sql);
     
         if ($result) {
-            // Fetch the rows from the result set
+            $items = array();
+ 
             while ($row = mysqli_fetch_assoc($result)) {
-                // Append the row to the products array
-                $products[] = $row;
+
+                $item = array(
+                    "NomProd" => $row["NomProd"],
+                    "PrixAchat" => $row["PrixAchat"]
+                );
+    
+                // Append the item to the items array
+                $items[] = $item;
+      
             }
-            foreach ($products as $product) {
-                // Access the column values by their names
-                $nomProd = $product['NomProd'];
-                $prixAchat = $product['PrixAchat'];
-                $dateProd = $product['dateProd'];
-                $margeProd = $product['MargeProd'];
-                $idFour = $product['idFour'];
-        
-                // Do something with the values
-                echo "Product: $nomProd, Price: $prixAchat, Date: $dateProd, Margin: $margeProd, Supplier ID: $idFour<br>";
-            }
+
+            // Return the items array as JSON
+             echo json_encode($items);
+
         } else {
             echo "Error executing the query: " . mysqli_error($this->connect);
         }
     
-        return $products;
     }
+    function getItemDetail($table)
+    {
     
+        $this->sql = "SELECT NomProd, PrixAchat, dateProd, MargeProd, idFour, idUser FROM $table";
+        $result = mysqli_query($this->connect, $this->sql);
+    
+        if ($result) {
+            $items = array();
+ 
+            while ($row = mysqli_fetch_assoc($result)) {
 
+                $item = array(
+                    "NomProd" => $row["NomProd"],
+                    "PrixAchat" => $row["PrixAchat"],
+                    "dateProd" => $row["dateProd"],
+                    "MargeProd" => $row["MargeProd"],
+                    "idFour" => $row["idFour"]
+                );
+    
+                // Append the item to the items array
+                $items[] = $item;
+      
+            }
+
+            // Return the items array as JSON
+             echo json_encode($items);
+
+        } else {
+            echo "Error executing the query: " . mysqli_error($this->connect);
+        }
+    
+    }
+    function getFournisseur($table)
+    {
+    
+        $this->sql = "SELECT NomFour, PrenomFour, TelFour FROM $table";
+        $result = mysqli_query($this->connect, $this->sql);
+    
+        if ($result) {
+            $items = array();
+ 
+            while ($row = mysqli_fetch_assoc($result)) {
+
+                $item = array(
+                    "NomFour" => $row["NomFour"],
+                    "PrenomFour" => $row["PrenomFour"],
+                    "TelFour" => $row["TelFour"]
+                );
+    
+                // Append the item to the items array
+                $items[] = $item;
+      
+            }
+
+            // Return the items array as JSON
+             echo json_encode($items);
+
+        } else {
+            echo "Error executing the query: " . mysqli_error($this->connect);
+        }
+    
+    }
+ //   getItems("produit");
 }
 
 ?>
