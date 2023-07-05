@@ -92,7 +92,7 @@ public class Login extends AppCompatActivity {
                                     String result = putData.getResult();
                                     //End ProgressBar (Set visibility to GONE)
                                     if(result.equals("Login Success")){
-                                        Intent intent = new Intent(getApplicationContext(), ProductList.class);
+                                        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                                         startActivity(intent);
                                         finish();
                                         Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
