@@ -12,11 +12,11 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class ProductListAdapter extends ArrayAdapter<Item> {
+public class ProductDetailAdapter extends ArrayAdapter<Item> {
     private Context context;
     private int resource;
 
-    public ProductListAdapter(Context context, int resource, List<Item> items) {
+    public ProductDetailAdapter(Context context, int resource, List<Item> items) {
         super(context, resource, items);
         this.context = context;
         this.resource = resource;
@@ -31,17 +31,22 @@ public class ProductListAdapter extends ArrayAdapter<Item> {
             itemView = inflater.inflate(resource, parent, false);
         }
 
-        TextView textViewName = itemView.findViewById(R.id.productNameTextView);
-        TextView textViewPrice = itemView.findViewById(R.id.productPriceTextView);
+        TextView textViewProductName = itemView.findViewById(R.id.textViewProductName);
+        TextView textViewProductPrice = itemView.findViewById(R.id.textViewProductPrice);
+        TextView textViewProductDate = itemView.findViewById(R.id.textViewProductDate);
+        TextView textViewProductMarge = itemView.findViewById(R.id.textViewProductMarge);
+        TextView textViewFournisseurName = itemView.findViewById(R.id.textViewFournisseurName);
 
         Item currentItem = getItem(position);
         if (currentItem != null) {
-            textViewName.setText(currentItem.getName());
+            textViewProductName.setText(currentItem.getName());
             String priceText = currentItem.getPrice() + " DHS";
-            textViewPrice.setText(priceText);
+            textViewProductPrice.setText(priceText);
+            textViewProductDate.setText(currentItem.getDate());
+            textViewProductMarge.setText(String.valueOf(currentItem.getMarge()));
+            textViewFournisseurName.setText(currentItem.getFournisseurName());
         }
 
         return itemView;
     }
-
 }

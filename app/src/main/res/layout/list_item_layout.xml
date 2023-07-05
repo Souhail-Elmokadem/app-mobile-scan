@@ -9,12 +9,14 @@
         android:id="@+id/productNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceListItem" />
+        android:textAppearance="?android:textAppearanceListItem"
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/productPriceTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceListItem" />
+        android:textAppearance="?android:textAppearanceListItem"
+        android:textColor="#00DFA2"/>
 
 </LinearLayout>

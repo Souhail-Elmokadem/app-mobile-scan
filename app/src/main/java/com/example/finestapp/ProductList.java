@@ -46,7 +46,7 @@ public class ProductList extends AppCompatActivity {
         setContentView(R.layout.activity_product_list);
 
         listView = findViewById(R.id.subListView);
-        adapter = new ProductListAdapter(this, new ArrayList<Item>());
+        adapter = new ProductListAdapter(this,R.layout.list_item_layout, new ArrayList<>());
         listView.setAdapter(adapter);
 
         ProductListAsyncTask ProductListAsyncTask = new ProductListAsyncTask();
@@ -55,13 +55,19 @@ public class ProductList extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Item item = adapter.getItem(position);
-                String productName = item.getName();
-                String productPrice = item.getPrice();
-                // Handle click event for the product
+                Item selectedItem = adapter.getItem(position);
+                String productName = selectedItem.getName();
+                String productPrice = selectedItem.getPrice();
+
+                Intent intent = new Intent(ProductList.this, ProductDetail.class);
+                intent.putExtra("productName", productName);
+                intent.putExtra("productPrice", productPrice);
+                startActivity(intent);
             }
         });
     }
+
+
 
     private class ProductListAsyncTask extends AsyncTask<Void, Void, List<Item>> {
 
