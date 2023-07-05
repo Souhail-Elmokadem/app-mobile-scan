@@ -12,41 +12,6 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class ProductDetailAdapter extends ArrayAdapter<Item> {
-    private Context context;
-    private int resource;
+public class ProductDetailAdapter{
 
-    public ProductDetailAdapter(Context context, int resource, List<Item> items) {
-        super(context, resource, items);
-        this.context = context;
-        this.resource = resource;
-    }
-
-    @NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View itemView = convertView;
-        if (itemView == null) {
-            LayoutInflater inflater = LayoutInflater.from(context);
-            itemView = inflater.inflate(resource, parent, false);
-        }
-
-        TextView textViewProductName = itemView.findViewById(R.id.textViewProductName);
-        TextView textViewProductPrice = itemView.findViewById(R.id.textViewProductPrice);
-        TextView textViewProductDate = itemView.findViewById(R.id.textViewProductDate);
-        TextView textViewProductMarge = itemView.findViewById(R.id.textViewProductMarge);
-        TextView textViewFournisseurName = itemView.findViewById(R.id.textViewFournisseurName);
-
-        Item currentItem = getItem(position);
-        if (currentItem != null) {
-            textViewProductName.setText(currentItem.getName());
-            String priceText = currentItem.getPrice() + " DHS";
-            textViewProductPrice.setText(priceText);
-            textViewProductDate.setText(currentItem.getDate());
-            textViewProductMarge.setText(String.valueOf(currentItem.getMarge()));
-            textViewFournisseurName.setText(currentItem.getFournisseurName());
-        }
-
-        return itemView;
-    }
 }
