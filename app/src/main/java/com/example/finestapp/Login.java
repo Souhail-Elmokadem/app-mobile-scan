@@ -85,14 +85,14 @@ public class Login extends AppCompatActivity {
                             data[1] = password;
 
                             //The IP-Adress means that devices needs to be connected to the same WIFI network
-                            PutData putData = new PutData("http://192.168.11.104/Loginregister/login.php", "POST", field, data);
+                            PutData putData = new PutData("http://192.168.11.63/Loginregister/login.php", "POST", field, data);
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     progressBar.setVisibility(View.GONE);
                                     String result = putData.getResult();
                                     //End ProgressBar (Set visibility to GONE)
                                     if(result.equals("Login Success")){
-                                        Intent intent = new Intent(getApplicationContext(), Listcon.class);
+                                        Intent intent = new Intent(getApplicationContext(), ProductList.class);
                                         startActivity(intent);
                                         finish();
                                         Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();

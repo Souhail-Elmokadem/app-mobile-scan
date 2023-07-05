@@ -12,5 +12,4 @@ public class SessionActivity {
     private static final String KEY_USERNAME = "username";
     private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
 
-
 }
