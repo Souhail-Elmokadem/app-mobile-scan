@@ -53,13 +53,13 @@
                 android:id="@+id/userbtn"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                app:srcCompat="@drawable/big_logo_products"/>
+                app:srcCompat="@drawable/big_logo_users" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/scanbtn"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                app:srcCompat="@drawable/big_logo_fournisseurs"/>
+                app:srcCompat="@drawable/big_logo_scan" />
         </TableRow>
     </TableLayout>
 

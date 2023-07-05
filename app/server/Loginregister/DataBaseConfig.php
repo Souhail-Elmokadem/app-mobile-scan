@@ -9,15 +9,15 @@ class DataBaseConfig
 
     public function __construct()
     {
-//         local
-//         $this->servername = 'localhost';
-//         $this->username = 'root';
-//         $this->password = '';
-//         $this->databasename = 'savagi70_AppMohammedia';
-            $this->servername = 'http://ftapp.finesttechnology.ma';
-            $this->username = 'stagiaires55@savagegaming.ma';
-            $this->password = 'NWbGkPGsw,=X';
-            $this->databasename = 'savagi70_AppMohammedia';
+        $this->servername = 'localhost';
+        $this->username = 'root';
+        $this->password = '';
+        $this->databasename = 'savagi70_appmohammedia';
+        // $this->servername = 'http://ftapp.finesttechnology.ma';
+        // $this->username = 'stagiaires55@savagegaming.ma';
+        // $this->password = 'NWbGkPGsw,=X';
+        // $this->databasename = 'savagi70_AppMohammedia';
+
     }
 }
 

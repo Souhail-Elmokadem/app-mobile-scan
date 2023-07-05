@@ -82,20 +82,35 @@ class DataBase
     }
     function getItems($table)
     {
-        
-        $this->sql = "SELECT `nomprod`, `prixprod`, `margeprod`, `supplier` FROM " . $table . ";";
+        $products = array(); // Initialize an empty array to store the results
+    
+        $this->sql = "SELECT NomProd, PrixAchat, dateProd, MargeProd, idFour FROM $table";
         $result = mysqli_query($this->connect, $this->sql);
-        $row = mysqli_fetch_assoc($result);
-        if (mysqli_num_rows($result) != 0) {
-            $dbNomProd = $row['nomprod'];
-            $dbprixprod = $row['prixprod'];
-            $dbmargeprod = $row['margeprod'];
-            $dbsupplier = $row['supplier'];
-            echo  $dbNomProd;
-                $res = true;
-            } else $res = false;
-        return $res;
+    
+        if ($result) {
+            // Fetch the rows from the result set
+            while ($row = mysqli_fetch_assoc($result)) {
+                // Append the row to the products array
+                $products[] = $row;
+            }
+            foreach ($products as $product) {
+                // Access the column values by their names
+                $nomProd = $product['NomProd'];
+                $prixAchat = $product['PrixAchat'];
+                $dateProd = $product['dateProd'];
+                $margeProd = $product['MargeProd'];
+                $idFour = $product['idFour'];
+        
+                // Do something with the values
+                echo "Product: $nomProd, Price: $prixAchat, Date: $dateProd, Margin: $margeProd, Supplier ID: $idFour<br>";
+            }
+        } else {
+            echo "Error executing the query: " . mysqli_error($this->connect);
+        }
+    
+        return $products;
     }
+    
 
 }
 

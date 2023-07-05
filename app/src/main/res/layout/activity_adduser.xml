@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".addFournisseur">
+    tools:context=".Adduser">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical"
-        tools:context=".AddProduct">
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -32,64 +31,98 @@
                     android:id="@+id/useridtext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Add Fournisseur"
+                    android:text="REGISTER USER"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="36sp"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/border"
-                    android:drawablePadding="8dp"
-                    android:hint="Nom"
-                    android:padding="8dp"
-                    android:textColor="@color/black" />
-
-                <EditText
                     android:id="@+id/prenomtxt"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="40dp"
                     android:background="@drawable/border"
+                    android:drawableLeft="@drawable/baseline_person_24"
                     android:drawablePadding="8dp"
-                    android:hint="prenom"
+                    android:hint="Firstname"
                     android:padding="8dp"
                     android:textColor="@color/black" />
 
-
                 <EditText
-                    android:id="@+id/teltxt"
+                    android:id="@+id/nom"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/border"
+                    android:drawableLeft="@drawable/baseline_person_24"
                     android:drawablePadding="8dp"
-                    android:hint="Tel"
+                    android:hint="Lastname"
+                    android:padding="8dp"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/border"
+                    android:drawableLeft="@drawable/baseline_alternate_email_24"
+                    android:drawablePadding="8dp"
+                    android:hint="Email"
+                    android:padding="8dp"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/border"
+                    android:drawableLeft="@drawable/baseline_lock_24"
+                    android:drawablePadding="8dp"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/telephone"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/border"
+                    android:drawableLeft="@drawable/baseline_local_phone_24"
+                    android:drawablePadding="8dp"
+                    android:hint="Telephone"
                     android:inputType="phone|number"
+                    android:maxLength="10"
                     android:padding="8dp"
                     android:textColor="@color/black" />
 
                 <Button
-                    android:id="@+id/addbtn"
+                    android:id="@+id/registerbtn"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:backgroundTint="#00DFA2"
-                    android:text="ADD"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="#D6955B"
+                    android:text="REGISTER"
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />
 
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
                 <Button
-                    android:id="@+id/cancel"
+                    android:id="@+id/leavebtn"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
-                    android:backgroundTint="#E76161"
-                    android:text="CANCEL"
+                    android:backgroundTint="#d0a06f"
+                    android:text="BACK"
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />
 

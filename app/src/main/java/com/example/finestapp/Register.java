@@ -6,14 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class Register extends AppCompatActivity {
@@ -29,7 +27,7 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        Prenom = findViewById(R.id.prenom);
+        Prenom = findViewById(R.id.prenomtxt);
         Nom = findViewById(R.id.nom);
         Username = findViewById(R.id.username);
         Password = findViewById(R.id.password);

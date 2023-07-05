@@ -10,13 +10,14 @@ import android.widget.Toast;
 
 public class Dashboard extends AppCompatActivity {
 
-    ImageView fournisseur,product;
+
+    ImageView fournisseur,product,scanbtn,userbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
-
+        userbtn = findViewById(R.id.userbtn);
+        scanbtn = findViewById(R.id.scanbtn);
         fournisseur = findViewById(R.id.fournisseurbtn);
         product = findViewById(R.id.productbtn);
         product.setOnClickListener(new View.OnClickListener() {
@@ -32,6 +33,18 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), FournisseurList.class);
                 startActivity(intent);
+            }
+        });
+        scanbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Scancamera.class));
+            }
+        });
+        userbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Userliste.class));
             }
         });
     }

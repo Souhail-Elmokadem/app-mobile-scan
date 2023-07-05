@@ -26,8 +26,8 @@ public class AddProduct extends AppCompatActivity {
         cancel = findViewById(R.id.cancel);
         addbtn = findViewById(R.id.addbtn);
         name = findViewById(R.id.name);
-        price = findViewById(R.id.prenom);
-        marge = findViewById(R.id.tel);
+        price = findViewById(R.id.prenomtxt);
+        marge = findViewById(R.id.teltxt);
         fournisseur = findViewById(R.id.fournisseur);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,71 +3,53 @@ package com.example.finestapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
-public class Login extends AppCompatActivity {
+public class Adduser extends AppCompatActivity {
 
-    private static final String KEY_USER_ID = "userId";
-    public static SharedPreferences sharedPreferences;
-    EditText Username, Password;
-    Button Login;
+
+    EditText Prenom, Nom, Username, Password, Telephone;
+    Button Register;
     ProgressBar progressBar;
-    CheckBox CheckBox;
+
     private Button leavebtn;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_adduser);
 
+        Prenom = findViewById(R.id.prenomtxt);
+        Nom = findViewById(R.id.nom);
         Username = findViewById(R.id.username);
         Password = findViewById(R.id.password);
-        Login = findViewById(R.id.loginbtn);
-        CheckBox = findViewById(R.id.checkBox);
+        Telephone = findViewById(R.id.telephone);
+
+        Register = findViewById(R.id.registerbtn);
+
         progressBar = findViewById(R.id.progress);
-        sharedPreferences = getPreferences(MODE_PRIVATE);
 
-
-
-        int state = sharedPreferences.getInt("state",-1);
-        if(state!=-1)
-        {
-            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-            startActivity(intent);
-            finish();
-            Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
-        }
-        Login.setOnClickListener(new View.OnClickListener() {
+        Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(CheckBox.isChecked()==true)
-                {
-                    sharedPreferences.edit().putInt("state",1).apply();
-
-                }
-
-
-                String username, password;
-
+                String prenom, nom, username, password, telephone;
+                prenom = String.valueOf(Prenom.getText());
+                nom = String.valueOf(Nom.getText());
                 username = String.valueOf(Username.getText());
                 password = String.valueOf(Password.getText());
+                telephone = String.valueOf(Telephone.getText());
 
-
-                if(!username.equals("") && !password.equals("")) {
+                if(!prenom.equals("") && !nom.equals("") && !username.equals("") && !password.equals("") && !telephone.equals("")) {
                     progressBar.setVisibility(View.VISIBLE);
                     //Start ProgressBar first (Set visibility VISIBLE)
                     Handler handler = new Handler(Looper.getMainLooper());
@@ -76,28 +58,34 @@ public class Login extends AppCompatActivity {
                         public void run() {
                             //Starting Write and Read data with URL
                             //Creating array for parameters
-                            String[] field = new String[2];
-                            field[0] = "EmailUser";
-                            field[1] = "PasswordUser";
+                            String[] field = new String[5];
+                            field[0] = "NomUser";
+                            field[1] = "PrenomUser";
+                            field[2] = "EmailUser";
+                            field[3] = "PasswordUser";
+                            field[4] = "TelUser";
                             //Creating array for data
-                            String[] data = new String[2];
-                            data[0] = username;
-                            data[1] = password;
+                            String[] data = new String[5];
+                            data[0] = prenom;
+                            data[1] = nom;
+                            data[2] = username;
+                            data[3] = password;
+                            data[4] = telephone;
 
                             //The IP-Adress means that devices needs to be connected to the same WIFI network
-                            PutData putData = new PutData("http://192.168.11.104/Loginregister/login.php", "POST", field, data);
+                            PutData putData = new PutData("http://192.168.11.104/Loginregister/signup.php", "POST", field, data);
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     progressBar.setVisibility(View.GONE);
                                     String result = putData.getResult();
                                     //End ProgressBar (Set visibility to GONE)
-                                    if(result.equals("Login Success")){
-                                        Intent intent = new Intent(getApplicationContext(), Listcon.class);
+                                    if(result.equals("Sign Up Success")){
+                                        Intent intent = new Intent(getApplicationContext(), Userliste.class);
                                         startActivity(intent);
                                         finish();
-                                        Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Account Created!", Toast.LENGTH_SHORT).show();
                                     }else {
-                                        Toast.makeText(Login.this, "Try Again", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Error Creating Account !", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -106,10 +94,12 @@ public class Login extends AppCompatActivity {
                     });
                 }
                 else {
-                    Toast.makeText(Login.this, "All fields are required", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "All fields are required", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+
 
 
         leavebtn = findViewById(R.id.leavebtn);
@@ -126,6 +116,4 @@ public class Login extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
-
-
 }
