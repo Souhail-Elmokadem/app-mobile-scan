@@ -14,7 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.finestapp.product.ProductDetail;
+import com.example.finestapp.product.productDetails.ProductDetail;
 import com.example.finestapp.R;
 
 import org.json.JSONArray;

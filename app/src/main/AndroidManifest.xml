@@ -38,7 +38,7 @@
             android:exported="false"
             android:label="Dashboard" />
         <activity
-            android:name=".product.ProductDetail"
+            android:name=".product.productDetails.ProductDetail"
             android:exported="false"
             android:label="Product Detail" />
         <activity

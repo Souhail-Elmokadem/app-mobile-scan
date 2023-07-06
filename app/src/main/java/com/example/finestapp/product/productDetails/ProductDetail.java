@@ -1,4 +1,4 @@
-package com.example.finestapp.product;
+package com.example.finestapp.product.productDetails;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +29,7 @@ public class ProductDetail extends AppCompatActivity {
             String productPrice = extras.getString("productPrice");
             String productDate = extras.getString("productDate");
             int productMarge = extras.getInt("productMarge");
-            String fournisseurName = extras.getString("fournisseurName");
+            String fournisseurName = extras.getString("productfourn");
 
             // Set values to TextView elements
             TextView textViewProductName = findViewById(R.id.textViewProductName);

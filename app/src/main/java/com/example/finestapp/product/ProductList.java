@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.finestapp.product.productDetails.ProductDetail;
 import com.example.finestapp.user.Login;
 import com.example.finestapp.MainActivity;
 import com.example.finestapp.R;
@@ -35,7 +36,7 @@ import java.util.List;
 public class ProductList extends AppCompatActivity {
 
     private static final String TAG = "ProductList";
-    private static final String PHP_SCRIPT_URL = "http://ftapp.finesttechnology.ma/Loginregister/ListItem.php";
+    private static final String PHP_SCRIPT_URL = "http://ftapp.finesttechnology.ma/Loginregister/ItemDetail.php";
 
     private ListView listView;
     private ProductListAdapter adapter;
@@ -61,8 +62,15 @@ public class ProductList extends AppCompatActivity {
                 Item selectedItem = adapter.getItem(position);
                 String productName = selectedItem.getName();
                 String productPrice = selectedItem.getPrice();
-
+                String productDate = selectedItem.getDate();
+                String productMarge = selectedItem.getMarge();
+                String productfourn = selectedItem.getFournisseurName();
+                //String productId = selectedItem.getId();
                 Intent intent = new Intent(ProductList.this, ProductDetail.class);
+                //intent.putExtra("productId",productId);
+               intent.putExtra("productfourn",productfourn);
+                intent.putExtra("productMarge",productMarge);
+                intent.putExtra("productDate",productDate);
                 intent.putExtra("productName", productName);
                 intent.putExtra("productPrice", productPrice);
                 startActivity(intent);
@@ -99,15 +107,14 @@ public class ProductList extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(response.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-
+                    //String productId = jsonObject.getString("idProd");
                     String productName = jsonObject.getString("NomProd");
                     String productPrice = jsonObject.getString("PrixAchat");
-                    //String productdate = jsonObject.getString("dateProd");
-                   // String productMarge = jsonObject.getString("MargeProd");
-                 //   String productFourn = jsonObject.getString("idFour ");
-                   // String productId = jsonObject.getString("idProd ");
-                    Item item = new Item(productName, productPrice);
-                   // Item item = new Item(productName, productPrice,productdate,productMarge,productFourn);
+                     String productdate = jsonObject.getString("dateProd");
+                    String productMarge = jsonObject.getString("MargeProd");
+                    String productFourn = jsonObject.getString("idFour");
+                   // Item item = new Item(productName, productPrice);
+                    Item item = new Item(productName, productPrice,productdate,productMarge,productFourn);
                     resultList.add(item);
                 }
 
