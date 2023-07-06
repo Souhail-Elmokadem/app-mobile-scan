@@ -60,9 +60,9 @@ public class AddProduct extends AppCompatActivity {
                             data[2] = Marge;
                             data[3] = Fournisseur;
                             //Adresse IP Local
-                            PutData putData = new PutData("http://192.168.11.66/Loginregister/addproduct.php", "POST", field, data);
+//                            PutData putData = new PutData("http://192.168.11.66/Loginregister/addproduct.php", "POST", field, data);
 //                            //Adresse IP Cloud
-//                            PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/addProduct.php", "POST", field, data);
+                           PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/addProduct.php", "POST", field, data);
 
 
                             if(putData.startPut()){
