@@ -1,4 +1,4 @@
-package com.example.finestapp;
+package com.example.finestapp.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.finestapp.Dashboard;
+import com.example.finestapp.R;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class Login extends AppCompatActivity {
@@ -43,12 +45,10 @@ public class Login extends AppCompatActivity {
 
 
         int state = sharedPreferences.getInt("state",-1);
+
         if(state!=-1)
         {
-            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-            startActivity(intent);
-            finish();
-            Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
+            // Login Restriction
         }
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,10 +56,7 @@ public class Login extends AppCompatActivity {
 
                 if(CheckBox.isChecked()==true)
                 {
-                    sharedPreferences.edit().putInt("state",1).apply();
-
-                }
-
+                sharedPreferences.edit().putInt("state",1).apply();
 
                 String username, password;
 
@@ -107,6 +104,7 @@ public class Login extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(Login.this, "All fields are required", Toast.LENGTH_SHORT).show();
+                }
                 }
             }
         });

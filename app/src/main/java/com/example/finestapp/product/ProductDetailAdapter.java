@@ -1,4 +1,4 @@
-package com.example.finestapp;
+package com.example.finestapp.product;
 
 import android.content.Context;
 import android.view.LayoutInflater;

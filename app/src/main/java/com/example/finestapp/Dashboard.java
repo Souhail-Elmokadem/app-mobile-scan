@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.finestapp.fournisseur.FournisseurList;
+import com.example.finestapp.product.ProductList;
+import com.example.finestapp.user.UserList;
+
 public class Dashboard extends AppCompatActivity {
 
 
@@ -44,7 +48,7 @@ public class Dashboard extends AppCompatActivity {
         userbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Userliste.class));
+                startActivity(new Intent(getApplicationContext(), UserList.class));
             }
         });
     }

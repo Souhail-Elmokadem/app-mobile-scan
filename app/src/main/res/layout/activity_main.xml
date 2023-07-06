@@ -20,19 +20,9 @@
         android:layout_height="60dp"
         android:text="LOGIN"
         android:id="@+id/login"
-        android:textSize="18sp"
+        android:textSize="18dp"
         android:layout_marginTop="20dp"
-        android:backgroundTint="#F99B7D"
-        app:cornerRadius = "10dp"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="REGISTER"
-        android:id="@+id/register"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#C9A7EB"
+        android:backgroundTint="#8EAC50"
         app:cornerRadius = "10dp"/>
 
 </LinearLayout>

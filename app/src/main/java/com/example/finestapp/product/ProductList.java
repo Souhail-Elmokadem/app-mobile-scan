@@ -1,4 +1,4 @@
-package com.example.finestapp;
+package com.example.finestapp.product;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,10 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.finestapp.user.Login;
+import com.example.finestapp.MainActivity;
+import com.example.finestapp.R;
+import com.example.finestapp.Scancamera;
 
 import org.json.JSONArray;
 import org.json.JSONException;

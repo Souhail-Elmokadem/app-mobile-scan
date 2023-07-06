@@ -1,4 +1,4 @@
-package com.example.finestapp;
+package com.example.finestapp.fournisseur;
 
 public class Fournisseur {
     private String nom;
