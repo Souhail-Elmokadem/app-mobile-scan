@@ -69,6 +69,7 @@
                     android:background="@drawable/border"
                     android:drawablePadding="8dp"
                     android:hint="Tel"
+                    android:maxLength="10"
                     android:inputType="phone|number"
                     android:padding="8dp"
                     android:textColor="@color/black" />

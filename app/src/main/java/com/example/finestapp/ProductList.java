@@ -32,7 +32,7 @@ import java.util.List;
 public class ProductList extends AppCompatActivity {
 
     private static final String TAG = "ProductList";
-    private static final String PHP_SCRIPT_URL = "http://192.168.11.63/Loginregister/ListItem.php";
+    private static final String PHP_SCRIPT_URL = "http://192.168.11.66/Loginregister/ListItem.php";
 
     private ListView listView;
     private ProductListAdapter adapter;
