@@ -4,7 +4,7 @@ public class Item {
     private String name;
     private String price;
     private String date;
-    private int marge;
+    private String marge;
     private String fournisseurName;
 
     public Item(String name, String price) {
@@ -12,7 +12,7 @@ public class Item {
         this.price = price;
     }
 
-    public Item(String name, String price, String date, int marge, String fournisseurName){
+    public Item(String name, String price, String date, String marge, String fournisseurName){
         this.name = name;
         this.price = price;
         this.date = date;
@@ -32,7 +32,7 @@ public class Item {
         return date;
     }
 
-    public int getMarge() {
+    public String getMarge() {
         return marge;
     }
 

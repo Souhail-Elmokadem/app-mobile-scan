@@ -31,7 +31,7 @@ public class FournisseurList extends AppCompatActivity {
 
     private static final String TAG = "FournisseurList";
 
-    private static final String PHP_SCRIPT_URL = "http://192.168.11.66/Loginregister/ListFournisseur.php";
+    private static final String PHP_SCRIPT_URL = "http://ftapp.finesttechnology.ma/Loginregister/ListFournisseur.php";
 
     private ListView listView;
     private FournisseurListAdapter adapter;

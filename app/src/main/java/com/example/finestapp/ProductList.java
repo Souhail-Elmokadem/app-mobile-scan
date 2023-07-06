@@ -32,7 +32,7 @@ import java.util.List;
 public class ProductList extends AppCompatActivity {
 
     private static final String TAG = "ProductList";
-    private static final String PHP_SCRIPT_URL = "http://192.168.11.66/Loginregister/ListItem.php";
+    private static final String PHP_SCRIPT_URL = "http://ftapp.finesttechnology.ma/Loginregister/ListItem.php";
 
     private ListView listView;
     private ProductListAdapter adapter;
@@ -99,8 +99,12 @@ public class ProductList extends AppCompatActivity {
 
                     String productName = jsonObject.getString("NomProd");
                     String productPrice = jsonObject.getString("PrixAchat");
-
+                    //String productdate = jsonObject.getString("dateProd");
+                   // String productMarge = jsonObject.getString("MargeProd");
+                 //   String productFourn = jsonObject.getString("idFour ");
+                   // String productId = jsonObject.getString("idProd ");
                     Item item = new Item(productName, productPrice);
+                   // Item item = new Item(productName, productPrice,productdate,productMarge,productFourn);
                     resultList.add(item);
                 }
 
