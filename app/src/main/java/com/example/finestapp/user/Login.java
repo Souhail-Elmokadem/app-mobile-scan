@@ -48,7 +48,10 @@ public class Login extends AppCompatActivity {
 
         if(state!=-1)
         {
-            // Login Restriction
+            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+            startActivity(intent);
+            finish();
+            Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
         }
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +59,10 @@ public class Login extends AppCompatActivity {
 
                 if(CheckBox.isChecked()==true)
                 {
-                sharedPreferences.edit().putInt("state",1).apply();
+                    sharedPreferences.edit().putInt("state",1).apply();
+
+
+
 
                 String username, password;
 
