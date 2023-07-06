@@ -2,12 +2,12 @@ package com.example.finestapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.finestapp.user.Login;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
 //        listbutton = findViewById(R.id.listbutton);
         login = findViewById(R.id.login);
-        register = findViewById(R.id.register);
 
 
 //        listbutton.setOnClickListener(new View.OnClickListener() {
@@ -52,14 +51,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Login.class);
-                startActivity(intent);
-            }
-        });
-
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Register.class);
                 startActivity(intent);
             }
         });

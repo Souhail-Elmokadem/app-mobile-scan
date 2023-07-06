@@ -1,4 +1,4 @@
-package com.example.finestapp;
+package com.example.finestapp.product;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.finestapp.R;
 
 public class ProductDetail extends AppCompatActivity {
 

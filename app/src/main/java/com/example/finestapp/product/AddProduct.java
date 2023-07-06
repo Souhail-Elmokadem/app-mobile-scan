@@ -1,4 +1,4 @@
-package com.example.finestapp;
+package com.example.finestapp.product;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.finestapp.R;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class AddProduct extends AppCompatActivity {

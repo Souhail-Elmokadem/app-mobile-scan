@@ -20,17 +20,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Adduser"
+            android:name=".user.Adduser"
             android:exported="false" />
         <activity
-            android:name=".Userliste"
+            android:name=".user.UserList"
             android:exported="false" />
         <activity
-            android:name=".addFournisseur"
+            android:name=".fournisseur.addFournisseur"
             android:exported="false"
             android:label="Add Supplier" />
         <activity
-            android:name=".FournisseurList"
+            android:name=".fournisseur.FournisseurList"
             android:exported="false"
             android:label="Supplier List" />
         <activity
@@ -38,11 +38,11 @@
             android:exported="false"
             android:label="Dashboard" />
         <activity
-            android:name=".ProductDetail"
+            android:name=".product.ProductDetail"
             android:exported="false"
             android:label="Product Detail" />
         <activity
-            android:name=".AddProduct"
+            android:name=".product.AddProduct"
             android:exported="false"
             android:label="Add Product" />
         <activity
@@ -55,16 +55,11 @@
             android:value="barcode" />
 
         <activity
-            android:name=".ProductList"
+            android:name=".product.ProductList"
             android:exported="false"
             android:label="List Of Products" />
         <activity
-            android:name=".Register"
-            android:exported="false"
-            android:label="Create Account"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".Login"
+            android:name=".user.Login"
             android:exported="false"
             android:label="Login" />
         <activity

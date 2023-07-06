@@ -1,10 +1,12 @@
-package com.example.finestapp;
+package com.example.finestapp.fournisseur;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.finestapp.R;
 
 public class addFournisseur extends AppCompatActivity {
 

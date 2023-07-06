@@ -1,4 +1,4 @@
-package com.example.finestapp;
+package com.example.finestapp.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.finestapp.R;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class Adduser extends AppCompatActivity {
@@ -80,7 +81,7 @@ public class Adduser extends AppCompatActivity {
                                     String result = putData.getResult();
                                     //End ProgressBar (Set visibility to GONE)
                                     if(result.equals("Sign Up Success")){
-                                        Intent intent = new Intent(getApplicationContext(), Userliste.class);
+                                        Intent intent = new Intent(getApplicationContext(), UserList.class);
                                         startActivity(intent);
                                         finish();
                                         Toast.makeText(getApplicationContext(), "Account Created!", Toast.LENGTH_SHORT).show();

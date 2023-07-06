@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".addFournisseur">
+    tools:context=".fournisseur.addFournisseur">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        tools:context=".AddProduct">
+        tools:context=".product.AddProduct">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

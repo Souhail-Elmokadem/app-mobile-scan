@@ -1,4 +1,4 @@
-package com.example.finestapp;
+package com.example.finestapp.user;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Userliste extends AppCompatActivity {
+import com.example.finestapp.R;
+
+public class UserList extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -22,8 +24,7 @@ public class Userliste extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_userliste);
-        this.setTitle("Liste des utilisateurs");
+        setContentView(R.layout.activity_user_list);
 
 
     }
