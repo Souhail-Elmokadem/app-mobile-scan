@@ -58,10 +58,10 @@ public class FournisseurList extends AppCompatActivity {
                 String FournisseurNom = selectedItem.getNom();
                 String FournisseurTelephone = selectedItem.getTelephone();
 
-//                Intent intent = new Intent(FournisseurList.this, ProductDetail.class);
-//                intent.putExtra("FournisseurNom", FournisseurNom);
-//                intent.putExtra("FournisseurTelephone", FournisseurTelephone);
-//                startActivity(intent);
+                Intent intent = new Intent(FournisseurList.this, ProductDetail.class);
+                intent.putExtra("FournisseurNom", FournisseurNom);
+                intent.putExtra("FournisseurTelephone", FournisseurTelephone);
+                startActivity(intent);
             }
         });
 

@@ -35,7 +35,8 @@ public class Dashboard extends AppCompatActivity {
         fournisseur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), FournisseurList.class));
+                Intent intent = new Intent(getApplicationContext(), FournisseurList.class);
+                startActivity(intent);
             }
         });
         scanbtn.setOnClickListener(new View.OnClickListener() {
