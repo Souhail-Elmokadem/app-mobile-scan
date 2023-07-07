@@ -20,7 +20,7 @@ public class addFournisseur extends AppCompatActivity {
     private Button cancel,addbtn;
 
     EditText prenom,tel,nom;
-
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
