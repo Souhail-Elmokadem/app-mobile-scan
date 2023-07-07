@@ -57,13 +57,9 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(CheckBox.isChecked()==true)
-                {
-                    sharedPreferences.edit().putInt("state",1).apply();
-
-
-
-
+                if(CheckBox.isChecked()==true) {
+                    sharedPreferences.edit().putInt("state", 1).apply();
+                }
                 String username, password;
 
                 username = String.valueOf(Username.getText());
@@ -111,7 +107,7 @@ public class Login extends AppCompatActivity {
                 else {
                     Toast.makeText(Login.this, "All fields are required", Toast.LENGTH_SHORT).show();
                 }
-                }
+
             }
         });
 
