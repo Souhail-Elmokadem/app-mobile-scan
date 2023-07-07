@@ -27,6 +27,7 @@ public class ProductDetail extends AppCompatActivity {
     private TextView productPriceTextView;
     Button savebtn;
     EditText Name,price,datep,fourn2,margep;
+    Button backbtn;
 
 
     @Override
@@ -34,12 +35,12 @@ public class ProductDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
         // textbox product details pour edit btn
+
         Name = findViewById(R.id.name2);
         price = findViewById(R.id.editprice);
         datep = findViewById(R.id.editdate);
         margep = findViewById(R.id.editmarge);
         fourn2 = findViewById(R.id.fournisseur2);
-        Button backbtn;
         backbtn = findViewById(R.id.backbtn);
         savebtn = findViewById(R.id.savebtn);
         // Retrieve extras
@@ -135,6 +136,8 @@ public class ProductDetail extends AppCompatActivity {
             String productDate = extras.getString("productDate");
             String productMarge = extras.getString("productMarge");
             String fournisseurName = extras.getString("productfourn");
+            backbtn = findViewById(R.id.backbtn);
+            backbtn.setText("Cancel");
         Name.setVisibility(View.VISIBLE);
         Name.setText(productName);
         price.setVisibility(View.VISIBLE);
@@ -155,6 +158,7 @@ public class ProductDetail extends AppCompatActivity {
         textViewProductMarge.setVisibility(View.GONE);
         TextView textViewFournisseurName = findViewById(R.id.textViewFournisseurName);
         textViewFournisseurName.setVisibility(View.GONE);
+        savebtn.setVisibility(View.VISIBLE);
         }
         else if (item.getItemId() == R.id.deletebtn) {
             Toast.makeText(this, "Scan Product", Toast.LENGTH_SHORT).show();
