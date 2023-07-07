@@ -39,7 +39,7 @@ public class addFournisseur extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
+//
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
