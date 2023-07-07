@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.finestapp.product.ProductDetail;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -24,6 +26,7 @@ import java.io.IOException;
 
 public class Scancamera extends AppCompatActivity {
 
+    private boolean isProcessingBarcode = false;
     private SurfaceView surfaceView;
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
@@ -45,7 +48,6 @@ public class Scancamera extends AppCompatActivity {
         backbtn = findViewById(R.id.backbtn);
 
         initialiseDetectorsAndSources();
-
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,28 +107,39 @@ public class Scancamera extends AppCompatActivity {
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
-                if (barcodes.size() != 0) {
+                if (barcodes.size() != 0 && !isProcessingBarcode) {
+                    isProcessingBarcode = true;
 
+                    Barcode barcode = barcodes.valueAt(0);
+                    if (barcode.email != null) {
+                        barcodeData = barcode.email.address;
+                    } else {
+                        barcodeData = barcode.displayValue;
+                        barcodeText.setText(barcodeData);
+                        toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
+                            Intent intent = new Intent(Scancamera.this, ProductDetail.class);
+                            intent.putExtra("productId", barcodeData);
+                            startActivity(intent);
+                            finish();
 
-                    barcodeText.post(new Runnable() {
+//                        cameraSource.stop();
+//                        barcodeDetector.release();
+                    }
 
-                        @Override
-                        public void run() {
-
-                            if (barcodes.valueAt(0).email != null) {
-                                barcodeText.removeCallbacks(null);
-                                barcodeData = barcodes.valueAt(0).email.address;
-                                barcodeText.setText(barcodeData);
-                                toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
-                            } else {
-
-                                barcodeData = barcodes.valueAt(0).displayValue;
-                                barcodeText.setText(barcodeData);
-                                toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
-
-                            }
-                        }
-                    });
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            barcodeText.setText(barcodeData);
+//                            toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
+//                            Intent intent = new Intent(Scancamera.this, ProductDetail.class);
+//                            intent.putExtra("productId", barcodeData);
+//                            startActivity(intent);
+//                            isProcessingBarcode = false;
+//                        }
+//                    });
+                    // Stop the camera and barcode detection after the first barcode is detected
+//                    cameraSource.stop();
+//                    barcodeDetector.release();
 
                 }
             }

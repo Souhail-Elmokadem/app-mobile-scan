@@ -29,7 +29,7 @@ public class ProductDetail extends AppCompatActivity {
             String productName = extras.getString("productName");
             String productPrice = extras.getString("productPrice");
             String productDate = extras.getString("productDate");
-            int productMarge = extras.getInt("productMarge");
+            String productMarge = extras.getString("productMarge");
             String fournisseurName = extras.getString("productfourn");
 
             // Set values to TextView elements

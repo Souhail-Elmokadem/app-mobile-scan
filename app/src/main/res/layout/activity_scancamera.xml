@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Scancamera"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <SurfaceView
@@ -19,18 +20,26 @@
         android:id="@+id/barcodeText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:textSize="30dp"
         android:textColor="@color/black"
         android:text="Barcode Text"/>
 
-    <Button
-        android:id="@+id/backbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:backgroundTint="#D6955B">
-    </Button>
+    <RelativeLayout
+        android:padding="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/backbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:layout_gravity="bottom"
+            android:backgroundTint="#E76161"/>
+    </RelativeLayout>
 
 
 

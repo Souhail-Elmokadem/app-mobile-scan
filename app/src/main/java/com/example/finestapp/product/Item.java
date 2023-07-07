@@ -1,7 +1,7 @@
 package com.example.finestapp.product;
 
 public class Item {
-    //private String idprod;
+    private String idprod;
     private String name;
     private String price;
     private String date;
@@ -14,7 +14,6 @@ public class Item {
     }
 
     public Item(String name, String price, String date, String marge, String fournisseurName){
-//        this.idprod=idprod;
         this.name = name;
         this.price = price;
         this.date = date;
@@ -22,9 +21,16 @@ public class Item {
         this.fournisseurName = fournisseurName;
     }
 
-    // public String getId(){
-//        return this.idprod;
-//    }
+    public Item(String idprod, String name, String price, String date, String marge, String fournisseurName){
+        this.idprod=idprod;
+        this.name = name;
+        this.price = price;
+        this.date = date;
+        this.marge = marge;
+        this.fournisseurName = fournisseurName;
+    }
+
+    public String getId() { return this.idprod; }
     public String getName() {
         return name;
     }
