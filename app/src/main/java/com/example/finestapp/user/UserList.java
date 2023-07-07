@@ -57,10 +57,11 @@ public class UserList extends AppCompatActivity {
                 User selectedItem = adapter.getItem(position);
                 String nomUser = selectedItem.getNom();
                 String prenomUser = selectedItem.getPrenom();
-
+                String emailUser = selectedItem.getEmail();
                 Intent intent = new Intent(UserList.this, ProductDetail.class);
                 intent.putExtra("nomUser", nomUser);
                 intent.putExtra("prenomUser", prenomUser);
+                intent.putExtra("emailUser",emailUser);
                 startActivity(intent);
             }
         });
@@ -97,8 +98,9 @@ public class UserList extends AppCompatActivity {
 
                     String nomUser = jsonObject.getString("NomUser");
                     String prenomUser = jsonObject.getString("PrenomUser");
+                    String email = jsonObject.getString("EmailUser");
 
-                    User users = new User(nomUser, prenomUser);
+                    User users = new User(nomUser, prenomUser,email);
                     resultList.add(users);
                 }
 

@@ -47,27 +47,45 @@ public class ProductDetail extends AppCompatActivity {
         // Retrieve extras
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String productName = extras.getString("productName");
-            String productPrice = extras.getString("productPrice");
-            String productDate = extras.getString("productDate");
-            String productMarge = extras.getString("productMarge");
-            String fournisseurName = extras.getString("productfourn");
+            if (extras.getString("productName")!=null && extras.getString("productMarge")!=null){
+                String productName = extras.getString("productName");
+                String productPrice = extras.getString("productPrice");
+                String productDate = extras.getString("productDate");
+                String productMarge = extras.getString("productMarge");
+                String fournisseurName = extras.getString("productfourn");
 
-            // Set values to TextView elements
-            TextView textViewProductName = findViewById(R.id.textViewProductName);
-            textViewProductName.setText("Product Name: " + productName);
+                // Set values to TextView elements
+                TextView textViewProductName = findViewById(R.id.textViewProductName);
+                textViewProductName.setText("Product Name: " + productName);
 
-            TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
-            textViewProductPrice.setText("Product Price: " + productPrice + "DHS");
+                TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
+                textViewProductPrice.setText("Product Price: " + productPrice + "DHS");
 
-            TextView textViewProductDate = findViewById(R.id.textViewProductDate);
-            textViewProductDate.setText("Product Date: " + productDate);
+                TextView textViewProductDate = findViewById(R.id.textViewProductDate);
+                textViewProductDate.setText("Product Date: " + productDate);
 
-            TextView textViewProductMarge = findViewById(R.id.textViewProductMarge);
-            textViewProductMarge.setText("Product Marge: " + productMarge + "DHS");
+                TextView textViewProductMarge = findViewById(R.id.textViewProductMarge);
+                textViewProductMarge.setText("Product Marge: " + productMarge + "DHS");
 
-            TextView textViewFournisseurName = findViewById(R.id.textViewFournisseurName);
-            textViewFournisseurName.setText("Fournisseur Name: " + fournisseurName);
+                TextView textViewFournisseurName = findViewById(R.id.textViewFournisseurName);
+                textViewFournisseurName.setText("Fournisseur Name: " + fournisseurName);
+            }else if (extras.getString("FournisseurNom")!=null){
+                TextView textViewFournName = findViewById(R.id.textViewProductName);
+                textViewFournName.setText("Fournisseur Prenom : "+ extras.getString("FournisseurNom"));
+                TextView textViewFournTel = findViewById(R.id.textViewProductPrice);
+                textViewFournTel.setText("Telephone : "+extras.getString("FournisseurTelephone"));
+                TextView textViewFournisseurPrenome = findViewById(R.id.textViewProductDate);
+                textViewFournisseurPrenome.setText("Fournisseur Nom: " + extras.getString("FournisseurPrenom"));
+
+            } else if (extras.getString("nomUser")!=null) {
+                TextView textViewFournName = findViewById(R.id.textViewProductName);
+                textViewFournName.setText("nom de utilisateur : "+ extras.getString("nomUser"));
+                TextView textViewFournTel = findViewById(R.id.textViewProductPrice);
+                textViewFournTel.setText("Prenom de utilisateur : "+extras.getString("prenomUser"));
+                TextView textViewFournisseurPrenome = findViewById(R.id.textViewProductDate);
+                textViewFournisseurPrenome.setText("Email de utilisateur : " + extras.getString("emailUser"));
+
+            }
         }
         backbtn = findViewById(R.id.backbtn);
 
