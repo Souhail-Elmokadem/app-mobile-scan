@@ -74,7 +74,7 @@ public class Adduser extends AppCompatActivity {
                             data[4] = telephone;
 
                             //The IP-Adress means that devices needs to be connected to the same WIFI network
-                            PutData putData = new PutData("http://192.168.11.63/Loginregister/signup.php", "POST", field, data);
+                            PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/signup.php", "POST", field, data);
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     progressBar.setVisibility(View.GONE);
