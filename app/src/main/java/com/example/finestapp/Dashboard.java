@@ -13,8 +13,6 @@ import com.example.finestapp.product.ProductList;
 import com.example.finestapp.user.UserList;
 
 public class Dashboard extends AppCompatActivity {
-
-
     ImageView fournisseur,product,scanbtn,userbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
