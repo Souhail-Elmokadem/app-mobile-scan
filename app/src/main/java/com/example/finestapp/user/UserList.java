@@ -45,7 +45,6 @@ public class UserList extends AppCompatActivity {
 
         listView = findViewById(R.id.subListView);
         adapter = new UserListAdapter(this,R.layout.list_user_layout, new ArrayList<>());
-
         listView.setAdapter(adapter);
 
 
@@ -96,8 +95,8 @@ public class UserList extends AppCompatActivity {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                    String nomUser = jsonObject.getString("nomUser");
-                    String prenomUser = jsonObject.getString("prenomUser");
+                    String nomUser = jsonObject.getString("NomUser");
+                    String prenomUser = jsonObject.getString("PrenomUser");
 
                     User users = new User(nomUser, prenomUser);
                     resultList.add(users);
