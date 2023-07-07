@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+//import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.finestapp.Dashboard;
@@ -24,11 +24,9 @@ public class Login extends AppCompatActivity {
     public static SharedPreferences sharedPreferences;
     EditText Username, Password;
     Button Login;
-    ProgressBar progressBar;
+//    ProgressBar progressBar;
     CheckBox CheckBox;
     private Button leavebtn;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +37,10 @@ public class Login extends AppCompatActivity {
         Password = findViewById(R.id.password);
         Login = findViewById(R.id.loginbtn);
         CheckBox = findViewById(R.id.checkBox);
-        progressBar = findViewById(R.id.progress);
+//        progressBar = findViewById(R.id.progress);
         sharedPreferences = getPreferences(MODE_PRIVATE);
 
-
-
         int state = sharedPreferences.getInt("state",-1);
-
         if(state!=-1)
         {
             Intent intent = new Intent(getApplicationContext(), Dashboard.class);
@@ -67,7 +62,7 @@ public class Login extends AppCompatActivity {
 
 
                 if(!username.equals("") && !password.equals("")) {
-                    progressBar.setVisibility(View.VISIBLE);
+//                    progressBar.setVisibility(View.VISIBLE);
                     //Start ProgressBar first (Set visibility VISIBLE)
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
@@ -87,7 +82,7 @@ public class Login extends AppCompatActivity {
                             PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/login.php", "POST", field, data);
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
-                                    progressBar.setVisibility(View.GONE);
+//                                    progressBar.setVisibility(View.GONE);
                                     String result = putData.getResult();
                                     //End ProgressBar (Set visibility to GONE)
                                     if(result.equals("Login Success")){
