@@ -100,23 +100,7 @@ public class ProductDetail extends AppCompatActivity {
             TextView textViewFournisseurName = findViewById(R.id.textViewFournisseurName);
             textViewFournisseurName.setVisibility(View.GONE);
         }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navdetail, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.editbtn) {
-            Toast.makeText(this, "Add Product", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(ProductDetail.this, AddProduct.class);
-            startActivity(intent);
-            return true;
-        }else if (id == R.id.deletebtn) {
+        else if (item.getItemId() == R.id.deletebtn) {
             Toast.makeText(this, "Scan Product", Toast.LENGTH_SHORT).show();
             // Handle scanbtn click action
             Intent intent = new Intent(ProductDetail.this, Scancamera.class);
@@ -124,7 +108,12 @@ public class ProductDetail extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.navdetail, menu);
+        return true;
     }
 
 
