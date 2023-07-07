@@ -18,7 +18,7 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 public class addFournisseur extends AppCompatActivity {
 // test
     private Button cancel,addbtn;
-
+//
     EditText prenom,tel,nom;
 
     @Override
