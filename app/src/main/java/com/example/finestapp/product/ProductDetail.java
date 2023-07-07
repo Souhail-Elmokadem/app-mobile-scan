@@ -2,13 +2,19 @@ package com.example.finestapp.product;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.finestapp.MainActivity;
 import com.example.finestapp.R;
+import com.example.finestapp.Scancamera;
+import com.example.finestapp.user.Login;
 
 public class ProductDetail extends AppCompatActivity {
 
@@ -62,6 +68,24 @@ public class ProductDetail extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.navdetail, menu);
         return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.editbtn) {
+            Toast.makeText(this, "Add Product", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ProductDetail.this, AddProduct.class);
+            startActivity(intent);
+            return true;
+        }else if (id == R.id.deletebtn) {
+            Toast.makeText(this, "Scan Product", Toast.LENGTH_SHORT).show();
+            // Handle scanbtn click action
+            Intent intent = new Intent(ProductDetail.this, Scancamera.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 
 
