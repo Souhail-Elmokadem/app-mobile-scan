@@ -13,13 +13,7 @@ public class Item {
         this.price = price;
     }
 
-    public Item(String name, String price, String date, String marge, String fournisseurName){
-        this.name = name;
-        this.price = price;
-        this.date = date;
-        this.marge = marge;
-        this.fournisseurName = fournisseurName;
-    }
+
 
     public Item(String idprod, String name, String price, String date, String marge, String fournisseurName){
         this.idprod=idprod;

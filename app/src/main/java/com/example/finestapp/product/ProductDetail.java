@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,12 +19,14 @@ import com.example.finestapp.MainActivity;
 import com.example.finestapp.R;
 import com.example.finestapp.Scancamera;
 import com.example.finestapp.user.Login;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class ProductDetail extends AppCompatActivity {
 
     private TextView productNameTextView;
     private TextView productPriceTextView;
-    EditText Name,price,datep,fourn2;
+    Button savebtn;
+    EditText Name,price,datep,fourn2,margep;
 
 
     @Override
@@ -33,10 +37,11 @@ public class ProductDetail extends AppCompatActivity {
         Name = findViewById(R.id.name2);
         price = findViewById(R.id.editprice);
         datep = findViewById(R.id.editdate);
+        margep = findViewById(R.id.editmarge);
         fourn2 = findViewById(R.id.fournisseur2);
         Button backbtn;
         backbtn = findViewById(R.id.backbtn);
-
+        savebtn = findViewById(R.id.savebtn);
         // Retrieve extras
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -70,6 +75,55 @@ public class ProductDetail extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        savebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle extras = getIntent().getExtras();
+                String productID = extras.getString("productId");
+                if (!Name.equals("") && !fourn2.equals("") && !datep.equals("")
+                && !price.equals("")
+                ){
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            String[] field = new String[6];
+                            field[0] = "idProd";
+                            field[1] = "NomProd";
+                            field[2] = "PrixAchat";
+                            field[3] = "dateProd";
+                            field[4] = "MargeProd";
+                            field[5] = "idFour";
+                            //Creating array for data
+                            String[] data = new String[6];
+                            data[0] = productID;
+                            data[1] = String.valueOf(Name.getText());
+                            data[2] = String.valueOf(price.getText());
+                            data[3] = String.valueOf(datep.getText());
+                            data[4] = String.valueOf(margep.getText());
+                            data[5] = String.valueOf(fourn2.getText());
+                            PutData putData = new PutData("https://ftapp.finesttechnology.ma/Loginregister/updateProd.php", "POST", field, data);
+                            if (putData.startPut()){
+                                if (putData.onComplete()){
+                                    String res = putData.getResult();
+                                    if (res.equals("Updated Success")){
+                                        startActivity(new Intent(getApplicationContext(),ProductList.class));
+                                        finish();
+                                        Toast.makeText(getApplicationContext(),"Update Success",Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+
+                        }
+                    });
+                }else{
+                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vide",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -79,7 +133,7 @@ public class ProductDetail extends AppCompatActivity {
             String productName = extras.getString("productName");
             String productPrice = extras.getString("productPrice");
             String productDate = extras.getString("productDate");
-           // String productMarge = extras.getString("productMarge");
+            String productMarge = extras.getString("productMarge");
             String fournisseurName = extras.getString("productfourn");
         Name.setVisibility(View.VISIBLE);
         Name.setText(productName);
@@ -87,6 +141,8 @@ public class ProductDetail extends AppCompatActivity {
         price.setText(productPrice);
         datep.setVisibility(View.VISIBLE);
         datep.setText(productDate);
+        margep.setVisibility(View.VISIBLE);
+        margep.setText(productMarge);
         fourn2.setVisibility(View.VISIBLE);
         fourn2.setText(fournisseurName);
         TextView textViewProductName = findViewById(R.id.textViewProductName);
@@ -97,8 +153,8 @@ public class ProductDetail extends AppCompatActivity {
         textViewProductDate.setVisibility(View.GONE);
         TextView textViewProductMarge = findViewById(R.id.textViewProductMarge);
         textViewProductMarge.setVisibility(View.GONE);
-            TextView textViewFournisseurName = findViewById(R.id.textViewFournisseurName);
-            textViewFournisseurName.setVisibility(View.GONE);
+        TextView textViewFournisseurName = findViewById(R.id.textViewFournisseurName);
+        textViewFournisseurName.setVisibility(View.GONE);
         }
         else if (item.getItemId() == R.id.deletebtn) {
             Toast.makeText(this, "Scan Product", Toast.LENGTH_SHORT).show();

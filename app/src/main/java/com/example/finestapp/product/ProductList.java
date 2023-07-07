@@ -64,9 +64,9 @@ public class ProductList extends AppCompatActivity {
                 String productDate = selectedItem.getDate();
                 String productMarge = selectedItem.getMarge();
                 String productfourn = selectedItem.getFournisseurName();
-                //String productId = selectedItem.getId();
+                String productId = selectedItem.getId();
                 Intent intent = new Intent(ProductList.this, ProductDetail.class);
-                //intent.putExtra("productId",productId);
+                intent.putExtra("productId",productId);
                intent.putExtra("productfourn",productfourn);
                 intent.putExtra("productMarge",productMarge);
                 intent.putExtra("productDate",productDate);
@@ -106,14 +106,14 @@ public class ProductList extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(response.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    //String productId = jsonObject.getString("idProd");
+                    String productId = jsonObject.getString("idProd");
                     String productName = jsonObject.getString("NomProd");
                     String productPrice = jsonObject.getString("PrixAchat");
                      String productdate = jsonObject.getString("dateProd");
                     String productMarge = jsonObject.getString("MargeProd");
                     String productFourn = jsonObject.getString("idFour");
                    // Item item = new Item(productName, productPrice);
-                    Item item = new Item(productName, productPrice,productdate,productMarge,productFourn);
+                    Item item = new Item(productId,productName, productPrice,productdate,productMarge,productFourn);
                     resultList.add(item);
                 }
 

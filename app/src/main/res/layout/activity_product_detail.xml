@@ -47,6 +47,19 @@
         android:visibility="gone" />
 
     <EditText
+        android:id="@+id/editmarge"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/border"
+        android:drawablePadding="8dp"
+        android:hint="Product Marge"
+        android:inputType="number"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:visibility="gone" />
+
+    <EditText
         android:id="@+id/fournisseur2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
