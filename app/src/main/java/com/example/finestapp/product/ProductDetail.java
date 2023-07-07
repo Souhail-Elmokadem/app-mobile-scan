@@ -168,14 +168,34 @@ public class ProductDetail extends AppCompatActivity {
             alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            String[] field = new String[1];
+                            field[0] = "idProd";
+                            String[] data = new String[1];
+                            data[0] = getIntent().getExtras().getString("productId");
+                            PutData putData = new PutData("https://ftapp.finesttechnology.ma/Loginregister/deleteProd.php", "POST", field, data);
+                            if (putData.startPut()){
+                                if (putData.onComplete()){
+                                    String res = putData.getResult();
+                                    if (res.equals("Product deleted successfully.")){
+                                        startActivity(new Intent(getApplicationContext(),ProductList.class));
+                                        finish();
+                                        Toast.makeText(getApplicationContext(), "Suppression with success", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                    }
+                    });
 
-                    Toast.makeText(getApplicationContext(), "OK clicked", Toast.LENGTH_SHORT).show();
                 }
             });
             alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // Perform action when Cancel button is clicked
+                    // Any Message for inform user cancel
                 }
             });
 
