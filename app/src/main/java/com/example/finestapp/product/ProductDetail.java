@@ -1,6 +1,7 @@
 package com.example.finestapp.product;
-
+import android.content.DialogInterface;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -28,7 +29,7 @@ public class ProductDetail extends AppCompatActivity {
     Button savebtn;
     EditText Name,price,datep,fourn2,margep;
     Button backbtn;
-
+    AlertDialog.Builder alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,11 +162,26 @@ public class ProductDetail extends AppCompatActivity {
         savebtn.setVisibility(View.VISIBLE);
         }
         else if (item.getItemId() == R.id.deletebtn) {
-            Toast.makeText(this, "Scan Product", Toast.LENGTH_SHORT).show();
-            // Handle scanbtn click action
-            Intent intent = new Intent(ProductDetail.this, Scancamera.class);
-            startActivity(intent);
-            return true;
+            alertDialog = new AlertDialog.Builder(ProductDetail.this);
+            alertDialog.setTitle("Suppression");
+            alertDialog.setMessage("Are you sure ?");
+            alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    Toast.makeText(getApplicationContext(), "OK clicked", Toast.LENGTH_SHORT).show();
+                }
+            });
+            alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Perform action when Cancel button is clicked
+                }
+            });
+
+            AlertDialog dialog = alertDialog.create();
+            dialog.show();
+
         }
         return super.onOptionsItemSelected(item);
     }
