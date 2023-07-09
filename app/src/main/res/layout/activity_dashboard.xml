@@ -10,15 +10,27 @@
     >
 
 
-
-
     <TableLayout
-        android:gravity="center"
         android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:stretchColumns="*"
-        android:padding="10dp">
+        android:gravity="center"
+        android:padding="10dp"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:translationX="230dp"
+            android:translationY="-160dp">
+
+            <ImageView
+                android:id="@+id/profile_user"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textAlignment="textEnd"
+                app:srcCompat="@drawable/profile_icon" />
+        </TableRow>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -37,13 +49,14 @@
                 android:id="@+id/productbtn"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                app:srcCompat="@drawable/big_logo_products"/>
+                app:srcCompat="@drawable/big_logo_products" />
 
             <ImageView
                 android:id="@+id/fournisseurbtn"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                app:srcCompat="@drawable/big_logo_fournisseurs"/>
+                app:srcCompat="@drawable/big_logo_fournisseurs" />
+
         </TableRow>
 
         <TableRow
@@ -64,11 +77,6 @@
                 app:srcCompat="@drawable/big_logo_scan" />
         </TableRow>
     </TableLayout>
-
-
-
-
-
 
 
 </LinearLayout>

@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finestapp.fournisseur.FournisseurList;
@@ -50,5 +52,6 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), UserList.class));
             }
         });
+
     }
 }
