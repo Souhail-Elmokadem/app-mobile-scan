@@ -22,6 +22,7 @@ public class Dashboard extends AppCompatActivity {
         scanbtn = findViewById(R.id.scanbtn);
         fournisseur = findViewById(R.id.fournisseurbtn);
         product = findViewById(R.id.productbtn);
+        getSupportActionBar().hide();
         product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
