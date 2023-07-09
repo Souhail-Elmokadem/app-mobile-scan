@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 
@@ -24,58 +25,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-//
-//        if (isLoggedIn()) {
-//            // User is logged in, proceed with the app flow
-//            // For example, you can redirect to the product list activity or perform other actions.
-//            // You may consider displaying a welcome message based on the retrieved username.
-//        } else {
-//            // User is not logged in, show the login form or perform any necessary actions for a guest user.
-//        }
-
-//        listbutton = findViewById(R.id.listbutton);
-        login = findViewById(R.id.login);
-
-
-//        listbutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, ProductList.class);
-//                startActivity(intent);
-//            }
-//        });
-
-        login.setOnClickListener(new View.OnClickListener() {
+        getSupportActionBar().hide();
+        NextActivity();
+    }
+    public void NextActivity()
+    {
+        Handler handler =  new Handler();
+        handler.postDelayed(new Runnable(){
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Login.class);
-                startActivity(intent);
+            public void run() {
+
+                Intent mainIntent = new Intent(MainActivity.this,Login.class);
+                MainActivity.this.startActivity(mainIntent);
+                MainActivity.this.finish();
             }
-        });
-    }
+        }, 2000);
 
- /*   private void saveLoginStatus(String username) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_USERNAME, username);
-        editor.putBoolean(KEY_IS_LOGGED_IN, true);
-        editor.apply();
     }
-
-    private boolean isLoggedIn() {
-        return sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false);
-    }
-
-    private String getUsername() {
-        return sharedPreferences.getString(KEY_USERNAME, "");
-    }
-
-    private void logout() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-        // Perform any other actions necessary for logging out the user.
-    }
-*/
 }
