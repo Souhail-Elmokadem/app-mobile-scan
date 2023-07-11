@@ -12,8 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.finestapp.product.Item;
 import com.example.finestapp.product.ProductDetail;
 import com.example.finestapp.R;
 
@@ -32,6 +34,10 @@ import java.util.List;
 
 public class FournisseurList extends AppCompatActivity {
 
+    private SearchView searchView;
+    private List<Fournisseur> originalItemList;
+
+
     private static final String TAG = "FournisseurList";
 
     private static final String PHP_SCRIPT_URL = "http://ftapp.finesttechnology.ma/Loginregister/ListFournisseur.php";
@@ -47,6 +53,27 @@ public class FournisseurList extends AppCompatActivity {
         listView = findViewById(R.id.subListView);
         adapter = new FournisseurListAdapter(this,R.layout.list_fournisseur_layout, new ArrayList<>());
         listView.setAdapter(adapter);
+
+        searchView = findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterItems(newText);
+                return true;
+            }
+        });
+
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setIconified(false);
+            }
+        });
 
         FournisseurListAsyncTask FournisseurListAsyncTask = new FournisseurListAsyncTask();
         FournisseurListAsyncTask.execute();
@@ -65,6 +92,21 @@ public class FournisseurList extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void filterItems(String query) {
+        List<Fournisseur> filteredList = new ArrayList<>();
+        for (Fournisseur fournisseur : originalItemList) {
+            String nom = fournisseur.getNom().toLowerCase();
+            String prenom = fournisseur.getPrenom().toLowerCase();
+            query = query.toLowerCase();
+            if (nom.startsWith(query) || prenom.startsWith(query)) {
+                filteredList.add(fournisseur);
+            }
+        }
+        adapter.clear();
+        adapter.addAll(filteredList);
+        adapter.notifyDataSetChanged();
     }
 
     private class FournisseurListAsyncTask extends AsyncTask<Void, Void, List<Fournisseur>> {
@@ -111,6 +153,7 @@ public class FournisseurList extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<Fournisseur> resultList) {
+            originalItemList = resultList;
             // Process the retrieved data (resultList)
             Toast.makeText(FournisseurList.this, "Received data: " + resultList.size() + " items", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "Received data: " + resultList.size() + " items");

@@ -24,8 +24,7 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class ProductDetail extends AppCompatActivity {
 
-    private TextView productNameTextView;
-    private TextView productPriceTextView;
+
     Button savebtn;
     EditText Name,price,datep,fourn2,margep;
     Button backbtn;
@@ -118,7 +117,6 @@ public class ProductDetail extends AppCompatActivity {
                                     }
                                 }
                             }
-
                         }
                     });
                 }else{
@@ -183,7 +181,7 @@ public class ProductDetail extends AppCompatActivity {
                                     if (res.equals("Product deleted successfully.")){
                                         startActivity(new Intent(getApplicationContext(),ProductList.class));
                                         finish();
-                                        Toast.makeText(getApplicationContext(), "Suppression with success", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Product Deleted !", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
