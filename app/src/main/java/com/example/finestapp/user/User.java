@@ -12,7 +12,11 @@ public class User {
         this.nom = nom;
         this.prenom = prenom;
     }
-
+    public User (String nom, String prenom,String email) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email=email;
+    }
     public String getNom() {
         return nom;
     }

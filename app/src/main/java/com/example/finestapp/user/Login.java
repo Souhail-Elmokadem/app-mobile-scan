@@ -27,12 +27,12 @@ public class Login extends AppCompatActivity {
 //    ProgressBar progressBar;
     CheckBox CheckBox;
     private Button leavebtn;
-
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        getSupportActionBar().hide();
         Username = findViewById(R.id.username);
         Password = findViewById(R.id.password);
         Login = findViewById(R.id.loginbtn);
