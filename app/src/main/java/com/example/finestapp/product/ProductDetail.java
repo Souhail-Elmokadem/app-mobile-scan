@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.LoginFilter;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,17 +32,19 @@ public class ProductDetail extends AppCompatActivity {
     Button backbtn;
     AlertDialog.Builder alertDialog;
 
+    String NameTest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
         // textbox product details pour edit btn
 
-        Name = findViewById(R.id.name2);
+        Name = findViewById(R.id.editname);
         price = findViewById(R.id.editprice);
         datep = findViewById(R.id.editdate);
         margep = findViewById(R.id.editmarge);
-        fourn2 = findViewById(R.id.fournisseur2);
+        fourn2 = findViewById(R.id.editfournisseur);
         backbtn = findViewById(R.id.backbtn);
         savebtn = findViewById(R.id.savebtn);
         // Retrieve extras
@@ -68,23 +72,27 @@ public class ProductDetail extends AppCompatActivity {
 
                 TextView textViewFournisseurName = findViewById(R.id.textViewFournisseurName);
                 textViewFournisseurName.setText("Fournisseur Name: " + fournisseurName);
-            }else if (extras.getString("FournisseurNom")!=null){
-                TextView textViewFournName = findViewById(R.id.textViewProductName);
-                textViewFournName.setText("Fournisseur Prenom : "+ extras.getString("FournisseurNom"));
-                TextView textViewFournTel = findViewById(R.id.textViewProductPrice);
-                textViewFournTel.setText("Telephone : "+extras.getString("FournisseurTelephone"));
-                TextView textViewFournisseurPrenome = findViewById(R.id.textViewProductDate);
-                textViewFournisseurPrenome.setText("Fournisseur Nom: " + extras.getString("FournisseurPrenom"));
-
-            } else if (extras.getString("nomUser")!=null) {
-                TextView textViewFournName = findViewById(R.id.textViewProductName);
-                textViewFournName.setText("nom de utilisateur : "+ extras.getString("nomUser"));
-                TextView textViewFournTel = findViewById(R.id.textViewProductPrice);
-                textViewFournTel.setText("Prenom de utilisateur : "+extras.getString("prenomUser"));
-                TextView textViewFournisseurPrenome = findViewById(R.id.textViewProductDate);
-                textViewFournisseurPrenome.setText("Email de utilisateur : " + extras.getString("emailUser"));
-
             }
+
+            // Fournisseur details + User Details
+
+//            else if (extras.getString("FournisseurNom")!=null){
+//                TextView textViewFournName = findViewById(R.id.textViewProductName);
+//                textViewFournName.setText("Fournisseur Prenom : "+ extras.getString("FournisseurNom"));
+//                TextView textViewFournTel = findViewById(R.id.textViewProductPrice);
+//                textViewFournTel.setText("Telephone : "+extras.getString("FournisseurTelephone"));
+//                TextView textViefwFournisseurPrenome = findViewById(R.id.textViewProductDate);
+//                textViewFournisseurPrenome.setText("Fournisseur Nom: " + extras.getString("FournisseurPrenom"));
+//
+//            } else if (extras.getString("nomUser")!=null) {
+//                TextView textViewFournName = findViewById(R.id.textViewProductName);
+//                textViewFournName.setText("nom de utilisateur : "+ extras.getString("nomUser"));
+//                TextView textViewFournTel = findViewById(R.id.textViewProductPrice);
+//                textViewFournTel.setText("Prenom de utilisateur : "+extras.getString("prenomUser"));
+//                TextView textViewFournisseurPrenome = findViewById(R.id.textViewProductDate);
+//                textViewFournisseurPrenome.setText("Email de utilisateur : " + extras.getString("emailUser"));
+//
+//            }
         }
         backbtn = findViewById(R.id.backbtn);
 
@@ -100,11 +108,13 @@ public class ProductDetail extends AppCompatActivity {
             public void onClick(View v) {
                 Bundle extras = getIntent().getExtras();
                 String productID = extras.getString("productId");
-                if (!Name.equals("") && !fourn2.equals("") && !datep.equals("")
-                && !price.equals("")
-                ){
-                    Handler handler = new Handler(Looper.getMainLooper());
-                    handler.post(new Runnable() {
+                if (!Name.getText().toString().isEmpty() && !fourn2.getText().toString().isEmpty() && !datep.getText().toString().isEmpty()
+                && !price.getText().toString().isEmpty() && !margep.getText().toString().isEmpty()
+                )
+                {
+
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        handler.post(new Runnable() {
                         @Override
                         public void run() {
                             String[] field = new String[6];
@@ -122,16 +132,19 @@ public class ProductDetail extends AppCompatActivity {
                             data[3] = String.valueOf(datep.getText());
                             data[4] = String.valueOf(margep.getText());
                             data[5] = String.valueOf(fourn2.getText());
+                            Log.d("", "Name = " + Name.getText() + " price = " + price.getText());
+                            Log.d("", "datep = " + datep.getText() + " margep = " + margep.getText());
+                            Log.d("", "fourn2 = " + fourn2.getText());
                             PutData putData = new PutData("https://ftapp.finesttechnology.ma/Loginregister/updateProd.php", "POST", field, data);
-                            if (putData.startPut()){
-                                if (putData.onComplete()){
+                            if (putData.startPut()) {
+                                if (putData.onComplete()) {
                                     String res = putData.getResult();
-                                    if (res.equals("Updated Success")){
-                                        startActivity(new Intent(getApplicationContext(),ProductList.class));
+                                    if (res.equals("Updated Success")) {
+                                        startActivity(new Intent(getApplicationContext(), ProductList.class));
                                         finish();
-                                        Toast.makeText(getApplicationContext(),"Update Success",Toast.LENGTH_SHORT).show();
-                                    }else{
-                                        Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Update Success", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }

@@ -18,13 +18,12 @@ public class FournisseurDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fournisseur_detail);
-//
+
         Nom=findViewById(R.id.EditNom);
         Prenom=findViewById(R.id.EditPrenom);
         Tele=findViewById(R.id.EditTele);
 
         Button Backbtn;
-        Backbtn=findViewById(R.id.backbtnFour);
 
         // Retrieve extras
         Bundle extras = getIntent().getExtras();

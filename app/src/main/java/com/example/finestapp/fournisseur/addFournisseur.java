@@ -62,8 +62,8 @@ public class addFournisseur extends AppCompatActivity {
                             data[1] = Prenom;
                             data[2] = Tel;
                             //Adresse IP Local
-//                            PutData putData = new PutData("http://192.168.11.66/Loginregister/addproduct.php", "POST", field, data);
-//                            //Adresse IP Cloud
+//                          PutData putData = new PutData("http://192.168.11.66/Loginregister/addproduct.php", "POST", field, data);
+//                          //Adresse IP Cloud
                             PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/AddSupply.php", "POST", field, data);
 
 
