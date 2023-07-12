@@ -36,7 +36,8 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/name"
+                android:id="@+id/editname"
+                android:singleLine="true"
                 android:background="@drawable/border"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
@@ -47,9 +48,10 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/prenomtxt"
+                android:id="@+id/editprice"
                 android:background="@drawable/border"
                 android:layout_marginTop="20dp"
+                android:maxLength="4"
                 android:padding="8dp"
                 android:hint="Product Price"
                 android:inputType="number"
@@ -60,17 +62,18 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/teltxt"
+                android:id="@+id/editmarge"
                 android:background="@drawable/border"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:hint="Product Marge"
+                android:maxLength="3"
                 android:inputType="number"
                 android:textColor="@color/black"
                 android:drawablePadding="8dp"/>
 
             <EditText
-                android:id="@+id/fournisseur"
+                android:id="@+id/editfournisseur"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
