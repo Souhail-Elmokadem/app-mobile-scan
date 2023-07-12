@@ -13,16 +13,23 @@ public class Item {
         this.price = price;
     }
 
-
-
-    public Item(String idprod, String name, String price, String date, String marge, String fournisseurName){
-        this.idprod=idprod;
+    public Item(String name, String price, String date, String marge, String fournisseurName){
         this.name = name;
         this.price = price;
         this.date = date;
         this.marge = marge;
         this.fournisseurName = fournisseurName;
     }
+
+    public Item(String idprod, String name, String price, String date, String marge, String fournisseurName){
+        this.idprod = idprod;
+        this.name = name;
+        this.price = price;
+        this.date = date;
+        this.marge = marge;
+        this.fournisseurName = fournisseurName;
+    }
+
 
     public String getId() { return this.idprod; }
     public String getName() {
@@ -46,4 +53,4 @@ public class Item {
     }
 }
 
-
+//pushing project

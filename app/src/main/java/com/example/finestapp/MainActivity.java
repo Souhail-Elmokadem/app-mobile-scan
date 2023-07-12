@@ -12,10 +12,6 @@ import com.example.finestapp.user.Login;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button listbutton;
-    private Button login;
-    private Button register;
-
 //    private SharedPreferences sharedPreferences;
 //    private static final String SHARED_PREF_NAME = "your_shared_pref";
 //    private static final String KEY_USERNAME = "username";
@@ -34,12 +30,10 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable(){
             @Override
             public void run() {
-
                 Intent mainIntent = new Intent(MainActivity.this,Login.class);
                 MainActivity.this.startActivity(mainIntent);
                 MainActivity.this.finish();
             }
         }, 2000);
-
     }
 }
