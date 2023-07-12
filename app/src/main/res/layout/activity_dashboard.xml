@@ -4,17 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context=".Dashboard"
-    android:background="@drawable/loginbkg2"
-    >
+    android:orientation="vertical"
+    tools:context=".Dashboard">
 
+
+    <RelativeLayout
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@drawable/border"
+        android:padding="4dp">
+
+        <!-- Search Button -->
+        <ImageButton
+            android:id="@+id/searchButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/border" />
+    </RelativeLayout>
 
     <TableLayout
+        android:gravity="center"
         android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:padding="10dp"
         android:stretchColumns="*">
 
@@ -28,8 +44,7 @@
                 android:id="@+id/profile_user"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:textAlignment="textEnd"
-                app:srcCompat="@drawable/profile_icon" />
+                android:textAlignment="textEnd"/>
         </TableRow>
 
         <androidx.constraintlayout.widget.Guideline
@@ -49,14 +64,13 @@
                 android:id="@+id/productbtn"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                app:srcCompat="@drawable/big_logo_products" />
+                app:srcCompat="@drawable/big_logo_products"/>
 
             <ImageView
                 android:id="@+id/fournisseurbtn"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                app:srcCompat="@drawable/big_logo_fournisseurs" />
-
+                app:srcCompat="@drawable/big_logo_fournisseurs"/>
         </TableRow>
 
         <TableRow
@@ -77,6 +91,11 @@
                 app:srcCompat="@drawable/big_logo_scan" />
         </TableRow>
     </TableLayout>
+
+
+
+
+
 
 
 </LinearLayout>
