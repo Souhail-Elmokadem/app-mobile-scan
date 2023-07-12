@@ -15,7 +15,6 @@ import com.example.finestapp.R;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class AddProduct extends AppCompatActivity {
-
     private Button cancel,addbtn;
     EditText name,price,marge,fournisseur;
     @Override
@@ -33,7 +32,9 @@ public class AddProduct extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent intent = new Intent(getApplicationContext(),ProductList.class);
+                startActivity(intent);
+                finish();
             }
         });
         addbtn.setOnClickListener(new View.OnClickListener() {

@@ -189,6 +189,7 @@ public class ProductList extends AppCompatActivity {
             Toast.makeText(this, "Add Product", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ProductList.this, AddProduct.class);
             startActivity(intent);
+            finish();
             return true;
         }else if (id == R.id.scan) {
             Toast.makeText(this, "Scan Product", Toast.LENGTH_SHORT).show();
