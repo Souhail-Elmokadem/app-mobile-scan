@@ -27,7 +27,7 @@ public class ProductDetail extends AppCompatActivity {
     private TextView productNameTextView;
     private TextView productPriceTextView;
     Button savebtn;
-    EditText Name,price,datep,fourn2,margep;
+    EditText name,price,date,fournisseur,marge;
     Button backbtn;
     AlertDialog.Builder alertDialog;
 
@@ -37,11 +37,11 @@ public class ProductDetail extends AppCompatActivity {
         setContentView(R.layout.activity_product_detail);
         // textbox product details pour edit btn
 
-        Name = findViewById(R.id.name2);
+        name = findViewById(R.id.editname);
         price = findViewById(R.id.editprice);
-        datep = findViewById(R.id.editdate);
-        margep = findViewById(R.id.editmarge);
-        fourn2 = findViewById(R.id.fournisseur2);
+        date = findViewById(R.id.editdate);
+        marge = findViewById(R.id.editmarge);
+        fournisseur = findViewById(R.id.editfournisseur);
         backbtn = findViewById(R.id.backbtn);
         savebtn = findViewById(R.id.savebtn);
         // Retrieve extras
@@ -101,9 +101,11 @@ public class ProductDetail extends AppCompatActivity {
             public void onClick(View v) {
                 Bundle extras = getIntent().getExtras();
                 String productID = extras.getString("productId");
-                if (!Name.equals("") && !fourn2.equals("") && !datep.equals("")
-                && !price.equals("")
+                if (name.getText().toString().trim().length() > 0 && price.getText().toString().trim().length() > 0 &&
+                       date. getText().toString().trim().length() > 0 && marge.getText().toString().trim().length() > 0
+                        && fournisseur.getText().toString().trim().length()>0
                 ){
+
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override
@@ -118,11 +120,11 @@ public class ProductDetail extends AppCompatActivity {
                             //Creating array for data
                             String[] data = new String[6];
                             data[0] = productID;
-                            data[1] = String.valueOf(Name.getText());
+                            data[1] = String.valueOf(name.getText());
                             data[2] = String.valueOf(price.getText());
-                            data[3] = String.valueOf(datep.getText());
-                            data[4] = String.valueOf(margep.getText());
-                            data[5] = String.valueOf(fourn2.getText());
+                            data[3] = String.valueOf(date.getText());
+                            data[4] = String.valueOf(marge.getText());
+                            data[5] = String.valueOf(fournisseur.getText());
                             PutData putData = new PutData("https://ftapp.finesttechnology.ma/Loginregister/updateProd.php", "POST", field, data);
                             if (putData.startPut()){
                                 if (putData.onComplete()){
@@ -157,16 +159,16 @@ public class ProductDetail extends AppCompatActivity {
             String fournisseurName = extras.getString("productfourn");
             backbtn = findViewById(R.id.backbtn);
             backbtn.setText("Cancel");
-        Name.setVisibility(View.VISIBLE);
-        Name.setText(productName);
+        name.setVisibility(View.VISIBLE);
+        name.setText(productName);
         price.setVisibility(View.VISIBLE);
         price.setText(productPrice);
-        datep.setVisibility(View.VISIBLE);
-        datep.setText(productDate);
-        margep.setVisibility(View.VISIBLE);
-        margep.setText(productMarge);
-        fourn2.setVisibility(View.VISIBLE);
-        fourn2.setText(fournisseurName);
+        date.setVisibility(View.GONE);
+        date.setText(productDate);
+        marge.setVisibility(View.VISIBLE);
+        marge.setText(productMarge);
+        fournisseur.setVisibility(View.VISIBLE);
+        fournisseur.setText(fournisseurName);
         TextView textViewProductName = findViewById(R.id.textViewProductName);
         textViewProductName.setVisibility(View.GONE);
         TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
