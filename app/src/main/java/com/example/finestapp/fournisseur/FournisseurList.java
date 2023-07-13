@@ -85,11 +85,14 @@ public class FournisseurList extends AppCompatActivity {
                 String FournisseurNom = selectedItem.getNom();
                 String FournisseurTelephone = selectedItem.getTelephone();
                 String FournusseurPrenom = selectedItem.getPrenom();
-                Intent intent = new Intent(FournisseurList.this, ProductDetail.class);
+                String fournisseurid = selectedItem.getFournisseurid();
+                Intent intent = new Intent(FournisseurList.this, FournisseurDetail.class);
                 intent.putExtra("FournisseurNom", FournisseurNom);
                 intent.putExtra("FournisseurTelephone", FournisseurTelephone);
                 intent.putExtra("FournisseurPrenom", FournusseurPrenom);
+                intent.putExtra("fournisseurid",fournisseurid);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -136,12 +139,12 @@ public class FournisseurList extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(response.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-
+                    String fournisseurid = jsonObject.getString("idFour");
                     String fournisseurNom = jsonObject.getString("NomFour");
                     String fournisseurPrenom = jsonObject.getString("PrenomFour");
                     String fournisseurTelephone = jsonObject.getString("TelFour");
 
-                    Fournisseur fournisseur = new Fournisseur(fournisseurNom,fournisseurPrenom, fournisseurTelephone);
+                    Fournisseur fournisseur = new Fournisseur(fournisseurid,fournisseurNom,fournisseurPrenom, fournisseurTelephone);
                     resultList.add(fournisseur);
                 }
 
