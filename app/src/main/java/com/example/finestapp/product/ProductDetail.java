@@ -51,8 +51,8 @@ public class ProductDetail extends AppCompatActivity {
                 String productPrice = extras.getString("productPrice");
                 String productDate = extras.getString("productDate");
                 String productMarge = extras.getString("productMarge");
-                String fournisseurName = extras.getString("productfourn");
-
+                String fournisseurid = extras.getString("productfourn");
+                String fournisseurName = extras.getString("FournisseurName");
                 // Set values to TextView elements
                 TextView textViewProductName = findViewById(R.id.textViewProductName);
                 textViewProductName.setText("Product Name: " + productName);
@@ -154,7 +154,7 @@ public class ProductDetail extends AppCompatActivity {
             String productPrice = extras.getString("productPrice");
             String productDate = extras.getString("productDate");
             String productMarge = extras.getString("productMarge");
-            String fournisseurName = extras.getString("productfourn");
+            String fournisseurid = extras.getString("productfourn");
             backbtn = findViewById(R.id.backbtn);
             backbtn.setText("Cancel");
         name.setVisibility(View.VISIBLE);
@@ -166,7 +166,7 @@ public class ProductDetail extends AppCompatActivity {
         marge.setVisibility(View.VISIBLE);
         marge.setText(productMarge);
         fournisseur.setVisibility(View.VISIBLE);
-        fournisseur.setText(fournisseurName);
+        fournisseur.setText(fournisseurid);
         TextView textViewProductName = findViewById(R.id.textViewProductName);
         textViewProductName.setVisibility(View.GONE);
         TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
