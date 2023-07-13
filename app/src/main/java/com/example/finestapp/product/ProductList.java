@@ -98,6 +98,7 @@ public class ProductList extends AppCompatActivity {
                 intent.putExtra("productName", productName);
                 intent.putExtra("productPrice", productPrice);
                 startActivity(intent);
+                finish();
             }
         });
     }
