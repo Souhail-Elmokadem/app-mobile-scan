@@ -88,8 +88,9 @@ public class ProductList extends AppCompatActivity {
                 String productPrice = selectedItem.getPrice();
                 String productDate = selectedItem.getDate();
                 String productMarge = selectedItem.getMarge();
-                String productfourn = selectedItem.getFournisseurName();
+                String productfourn = selectedItem.getIdFour();
                 String productId = selectedItem.getId();
+                String productfourname = selectedItem.getFournisseurName();
                 Intent intent = new Intent(ProductList.this, ProductDetail.class);
                 intent.putExtra("productId",productId);
                 intent.putExtra("productfourn",productfourn);
@@ -97,7 +98,9 @@ public class ProductList extends AppCompatActivity {
                 intent.putExtra("productDate",productDate);
                 intent.putExtra("productName", productName);
                 intent.putExtra("productPrice", productPrice);
+                intent.putExtra("FournisseurName",productfourname);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -149,8 +152,9 @@ public class ProductList extends AppCompatActivity {
                     String productdate = jsonObject.getString("dateProd");
                     String productMarge = jsonObject.getString("MargeProd");
                     String productFourn = jsonObject.getString("idFour");
+                    String productFourName = jsonObject.getString("FournisseurName");
                     // Item item = new Item(productName, productPrice);
-                    Item item = new Item(productId, productName, productPrice,productdate,productMarge,productFourn);
+                    Item item = new Item(productId, productName, productPrice,productdate,productMarge,productFourName,productFourn);
                     resultList.add(item);
                 }
 
