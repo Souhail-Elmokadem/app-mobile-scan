@@ -170,11 +170,14 @@ public class FournisseurDetail extends AppCompatActivity {
         // view data
         Bundle extras = getIntent().getExtras();
         TextView textViewFournName = findViewById(R.id.textViewFournisseurNom);
+        textViewFournName.setVisibility(View.VISIBLE);
         textViewFournName.setText("Nom : "+ extras.getString("FournisseurNom"));
         TextView textViewFournTel = findViewById(R.id.textViewFournisseurTele);
+        textViewFournTel.setVisibility(View.VISIBLE);
         TextView textViewFournisseurPrenome = findViewById(R.id.textViewFournisseurPrenom);
         textViewFournisseurPrenome.setText("Prenom: " + extras.getString("FournisseurPrenom"));
         textViewFournTel.setText("Telephone : "+extras.getString("FournisseurTelephone"));
+        textViewFournisseurPrenome.setVisibility(View.VISIBLE);
 
 
         // end view

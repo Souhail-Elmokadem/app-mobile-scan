@@ -55,7 +55,8 @@
         android:layout_height="wrap_content"
         android:hint="Nom"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/textViewFournisseurPrenom"
@@ -63,7 +64,8 @@
         android:layout_height="wrap_content"
         android:hint="Prenom"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/textViewFournisseurTele"
@@ -71,7 +73,8 @@
         android:layout_height="wrap_content"
         android:hint="Telephone"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="visible" />
 
     <RelativeLayout
         android:layout_width="fill_parent"

@@ -12,9 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.finestapp.R;
+import com.example.finestapp.fournisseur.Fournisseur;
 import com.example.finestapp.product.ProductDetail;
 
 import org.json.JSONArray;
@@ -31,7 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserList extends AppCompatActivity {
-
+    private SearchView searchView;
+    private List<User> originalItemList;
     private static final String TAG = "UserList";
     private static final String PHP_SCRIPT_URL = "http://ftapp.finesttechnology.ma/Loginregister/ListUser.php";
     private ListView listView;
@@ -46,6 +49,26 @@ public class UserList extends AppCompatActivity {
         listView = findViewById(R.id.subListView);
         adapter = new UserListAdapter(this,R.layout.list_user_layout, new ArrayList<>());
         listView.setAdapter(adapter);
+        searchView = findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterItems(newText);
+                return true;
+            }
+        });
+
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setIconified(false);
+            }
+        });
 
 
         UserListAsyncTask UserListAsyncTask = new UserListAsyncTask();
@@ -66,7 +89,20 @@ public class UserList extends AppCompatActivity {
             }
         });
     }
-
+    private void filterItems(String query) {
+        List<User> filteredList = new ArrayList<>();
+        for (User user : originalItemList) {
+            String nom = user.getNom().toLowerCase();
+            String prenom = user.getPrenom().toLowerCase();
+            query = query.toLowerCase();
+            if (nom.startsWith(query) || prenom.startsWith(query)) {
+                filteredList.add(user);
+            }
+        }
+        adapter.clear();
+        adapter.addAll(filteredList);
+        adapter.notifyDataSetChanged();
+    }
     private class UserListAsyncTask extends AsyncTask<Void, Void, List<User>> {
         @Override
         protected List<User> doInBackground(Void... voids) {
@@ -100,6 +136,7 @@ public class UserList extends AppCompatActivity {
                     String prenomUser = jsonObject.getString("PrenomUser");
                     String email = jsonObject.getString("EmailUser");
 
+
                     User users = new User(nomUser, prenomUser,email);
                     resultList.add(users);
                 }
@@ -112,6 +149,7 @@ public class UserList extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(List<User> resultList) {
+            originalItemList = resultList;
             // Process the retrieved data (resultList)
             Toast.makeText(UserList.this, "Received data: " + resultList.size() + " items", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "Received data: " + resultList.size() + " items");

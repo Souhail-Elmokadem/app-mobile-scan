@@ -44,10 +44,13 @@ public class ProductDetail extends AppCompatActivity {
         fournisseur = findViewById(R.id.editfournisseur);
         backbtn = findViewById(R.id.backbtn);
         savebtn = findViewById(R.id.savebtn);
+
+
         // Retrieve extras
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             if (extras.getString("productName")!=null && extras.getString("productMarge")!=null){
+
                 String productName = extras.getString("productName");
                 String productPrice = extras.getString("productPrice");
                 String productDate = extras.getString("productDate");

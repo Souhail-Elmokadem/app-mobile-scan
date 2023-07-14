@@ -9,20 +9,33 @@ import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.finestapp.product.Item;
 import com.example.finestapp.product.ProductDetail;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 
 public class Scancamera extends AppCompatActivity {
 
@@ -32,6 +45,7 @@ public class Scancamera extends AppCompatActivity {
     private CameraSource cameraSource;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     private ToneGenerator toneGen1;
+    private static final String Url_PHP_Product = "https://ftapp.finesttechnology.ma/Loginregister/getProductByBarcode.php";
     private TextView barcodeText;
     private String barcodeData;
     private Button backbtn;
@@ -115,36 +129,94 @@ public class Scancamera extends AppCompatActivity {
                         barcodeData = barcode.email.address;
                     } else {
                         barcodeData = barcode.displayValue;
-                        barcodeText.setText(barcodeData);
+                      //  barcodeText.setText(barcodeData);
                         toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
-                            Intent intent = new Intent(Scancamera.this, ProductDetail.class);
-                            intent.putExtra("productId", barcodeData);
-                            startActivity(intent);
-                            finish();
+                        verife_CodeBarre_Produit(barcodeData);
 
-//                        cameraSource.stop();
-//                        barcodeDetector.release();
+
+
                     }
 
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            barcodeText.setText(barcodeData);
-//                            toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
-//                            Intent intent = new Intent(Scancamera.this, ProductDetail.class);
-//                            intent.putExtra("productId", barcodeData);
-//                            startActivity(intent);
-//                            isProcessingBarcode = false;
-//                        }
-//                    });
-                    // Stop the camera and barcode detection after the first barcode is detected
-//                    cameraSource.stop();
-//                    barcodeDetector.release();
+
 
                 }
             }
         });
     }
+
+    private boolean verife_CodeBarre_Produit(String barecode) {
+
+        // this code will be exist after condition
+
+        // fin code
+        ArrayList<Item> resultList = new ArrayList<>();
+
+        try {
+            URL url = new URL(Url_PHP_Product);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            InputStream inputStream = connection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder response = new StringBuilder();
+            String line;
+            boolean status=false;
+            while ((line = bufferedReader.readLine()) != null) {
+                response.append(line);
+            }
+
+            bufferedReader.close();
+            inputStream.close();
+            connection.disconnect();
+
+            // Parse the JSON response
+            JSONArray jsonArray = new JSONArray(response.toString());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                if(jsonObject.getString("Lebelle").equals(barecode)){
+                    String productId = jsonObject.getString("idProd");
+                    String productName = jsonObject.getString("NomProd");
+                    String productPrice = jsonObject.getString("PrixAchat");
+                    String productdate = jsonObject.getString("dateProd");
+                    String productMarge = jsonObject.getString("MargeProd");
+                    String productFourn = jsonObject.getString("idFour");
+                    String productFourName = jsonObject.getString("FournisseurName");
+                    // Item item = new Item(productName, productPrice);
+                    Item item = new Item(productId, productName, productPrice,productdate,productMarge,productFourName,productFourn);
+                    resultList.add(item);
+
+                    Intent intent = new Intent(Scancamera.this, ProductDetail.class);
+                    intent.putExtra("productId",productId);
+                    intent.putExtra("productfourn",productFourn);
+                    intent.putExtra("productMarge",productMarge);
+                    intent.putExtra("productDate",productdate);
+                    intent.putExtra("productName", productName);
+                    intent.putExtra("productPrice", productPrice);
+                    intent.putExtra("FournisseurName",productFourName);
+                    startActivity(intent);
+                    finish();
+                    status=true;
+                    barcodeText.setVisibility(View.GONE);
+
+                }else {
+                   barcodeText.setText("Codebar Not Found ");
+                }
+
+
+            }
+
+
+
+        } catch (IOException | JSONException e) {
+            Log.e(resultList.toString(), "Error retrieving data: " + e.getMessage());
+        }
+
+
+
+
+        return true;
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
