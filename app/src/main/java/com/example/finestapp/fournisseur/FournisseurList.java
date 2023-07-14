@@ -92,6 +92,7 @@ public class FournisseurList extends AppCompatActivity {
                 intent.putExtra("FournisseurPrenom", FournusseurPrenom);
                 intent.putExtra("fournisseurid",fournisseurid);
                 startActivity(intent);
+                finish();
             }
         });
 

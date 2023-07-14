@@ -69,10 +69,6 @@ public class FournisseurDetail extends AppCompatActivity {
             savebtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
-
-
                     String fournisseurid = getIntent().getExtras().getString("fournisseurid");
                     if (editFournName.getText().toString().trim().length()>0
                             && editFournTel.getText().toString().trim().length()>0){
@@ -112,6 +108,7 @@ public class FournisseurDetail extends AppCompatActivity {
                     }
                 }
             });
+
         } else if (item.getItemId()==R.id.deletebtn) {
             alertdialog = new AlertDialog.Builder(FournisseurDetail.this);
             alertdialog.setTitle("Suppression")

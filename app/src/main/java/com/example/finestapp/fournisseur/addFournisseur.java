@@ -86,6 +86,7 @@ public class addFournisseur extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Remplire tout les champs vide",Toast.LENGTH_SHORT).show();
                 }
             }
+
         });
     }
     @Override
