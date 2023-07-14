@@ -203,6 +203,7 @@ public class ProductList extends AppCompatActivity {
             return true;
         }else if (id == R.id.logoutbtn) {
             Login.sharedPreferences.edit().remove("state").commit();
+
             Intent intent = new Intent(ProductList.this, MainActivity.class);
             startActivity(intent);
             finish();

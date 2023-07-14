@@ -1,56 +1,186 @@
 package com.example.finestapp.fournisseur;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.finestapp.R;
+import com.google.protobuf.Value;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class FournisseurDetail extends AppCompatActivity {
 
-    EditText Nom,Prenom,Tele;
+    AlertDialog.Builder alertdialog;
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.navdetail,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    EditText editFournName,editFournPrenom,editFournTel;
+    Button savebtn,backbtn;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId()==R.id.editbtn){
+
+            editFournName = findViewById(R.id.EditNom);
+            editFournPrenom = findViewById(R.id.EditPrenom);
+            editFournTel = findViewById(R.id.EditTele);
+            savebtn =findViewById(R.id.savebtn);
+            savebtn.setVisibility(View.VISIBLE);
+//
+//
+            TextView textViewFournName = findViewById(R.id.textViewFournisseurNom) ;
+            textViewFournName.setVisibility(View.GONE);
+            TextView textViewFournTel = findViewById(R.id.textViewFournisseurPrenom);
+            textViewFournTel.setVisibility(View.GONE);
+            TextView textViewFournisseurPrenome = findViewById(R.id.textViewFournisseurTele);
+            textViewFournisseurPrenome.setVisibility(View.GONE);
+
+
+            editFournName.setVisibility(View.VISIBLE);
+            editFournPrenom.setVisibility(View.VISIBLE);
+            editFournTel.setVisibility(View.VISIBLE);
+            editFournTel.setText(getIntent().getExtras().getString("FournisseurTelephone"));
+            editFournName.setText(getIntent().getExtras().getString("FournisseurNom"));
+            editFournPrenom.setText(getIntent().getExtras().getString("FournisseurPrenom"));
+
+
+
+            savebtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+
+
+                    String fournisseurid = getIntent().getExtras().getString("fournisseurid");
+                    if (editFournName.getText().toString().trim().length()>0
+                            && editFournTel.getText().toString().trim().length()>0){
+                        Handler handler = new Handler();
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                String[] field = new String[4];
+                                field[0] = "idFour";
+                                field[1] = "NomFour";
+                                field[2] = "PrenomFour";
+                                field[3] = "TelFour";
+                                //Creating array for data
+                                String[] data = new String[4];
+                                data[0] = fournisseurid;
+                                data[1] = String.valueOf(editFournName.getText());
+                                data[2] = String.valueOf(editFournPrenom.getText());
+                                data[3] = String.valueOf(editFournTel.getText());
+                                PutData putData = new PutData("https://ftapp.finesttechnology.ma/Loginregister/updateFour.php","POST",field,data);
+                                if (putData.startPut()){
+                                    if (putData.onComplete()){
+                                        String res = putData.getResult();
+                                        if (res.equals("Updated Success")){
+                                            startActivity(new Intent(getApplicationContext(),FournisseurList.class));
+                                            finish();
+                                            Toast.makeText(getApplicationContext(),"Update Success",Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+
+                            }
+                        });
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Remplire tous les champs vide",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else if (item.getItemId()==R.id.deletebtn) {
+            alertdialog = new AlertDialog.Builder(FournisseurDetail.this);
+            alertdialog.setTitle("Suppression")
+                    .setMessage("Are you Sure ?")
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Handler handler = new Handler();
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    String[] field = new String[1];
+                                    field[0] = "idFour";
+                                    String[] data = new String[1];
+                                    data[0] = getIntent().getExtras().getString("fournisseurid");
+
+                                    PutData putData = new PutData("https://ftapp.finesttechnology.ma/Loginregister/deletefourn.php","POST",field,data);
+                                    if (putData.startPut()){
+                                        if (putData.onComplete()){
+                                            String res = putData.getResult();
+                                            if(res.equals("fourn deleted successfully.")){
+                                                startActivity(new Intent(getApplicationContext(),FournisseurList.class));
+                                                finish();
+                                                Toast.makeText(getApplicationContext(),"Deleted Success",Toast.LENGTH_SHORT).show();
+                                            }else {
+                                                Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    });
+            AlertDialog dialog = alertdialog.create();
+            dialog.show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fournisseur_detail);
-//
-        Nom=findViewById(R.id.EditNom);
-        Prenom=findViewById(R.id.EditPrenom);
-        Tele=findViewById(R.id.EditTele);
+        backbtn = findViewById(R.id.backbtnFour);
 
-        Button Backbtn;
-        Backbtn=findViewById(R.id.backbtnFour);
-
-        // Retrieve extras
-        Bundle extras = getIntent().getExtras();
-        if (extras !=null) {
-            String SupplyNom = extras.getString("FournisseurNom");
-            String SupplyPrenom = extras.getString("FournisseurPrenom");
-            String SupplyTele = extras.getString("FournisseurTelephone");
-
-            // Set values to TextView elements
-            TextView textViewFournisseurNom = findViewById(R.id.textViewFournisseurNom);
-            textViewFournisseurNom.setText("First Name: " + SupplyNom);
-
-            TextView textViewFournisseurPrenom = findViewById(R.id.textViewFournisseurPrenom);
-            textViewFournisseurPrenom.setText("Last Price: " + SupplyPrenom );
-
-            TextView textViewFournisseurTele = findViewById(R.id.textViewFournisseurTele);
-            textViewFournisseurTele.setText("Phone: " + SupplyTele);
-        }
-
-        Backbtn = findViewById(R.id.backbtnFour);
-
-        Backbtn.setOnClickListener(new View.OnClickListener() {
+        backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+                finish();
             }
         });
+        // view data
+        Bundle extras = getIntent().getExtras();
+        TextView textViewFournName = findViewById(R.id.textViewFournisseurNom);
+        textViewFournName.setText("Nom : "+ extras.getString("FournisseurNom"));
+        TextView textViewFournTel = findViewById(R.id.textViewFournisseurTele);
+        TextView textViewFournisseurPrenome = findViewById(R.id.textViewFournisseurPrenom);
+        textViewFournisseurPrenome.setText("Prenom: " + extras.getString("FournisseurPrenom"));
+        textViewFournTel.setText("Telephone : "+extras.getString("FournisseurTelephone"));
+
+
+        // end view
+
     }
 }

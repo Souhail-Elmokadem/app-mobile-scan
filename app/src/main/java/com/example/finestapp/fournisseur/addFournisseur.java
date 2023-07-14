@@ -47,7 +47,7 @@ public class addFournisseur extends AppCompatActivity {
                 Nom = String.valueOf(nom.getText());
                 Prenom = String.valueOf(prenom.getText());
                 Tel = String.valueOf(tel.getText());
-                if(!nom.equals("") && !prenom.equals("") && !tel.equals("")){
+                if(nom.getText().toString().trim().length()>0 && tel.getText().toString().trim().length()>0){
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override
@@ -62,8 +62,8 @@ public class addFournisseur extends AppCompatActivity {
                             data[1] = Prenom;
                             data[2] = Tel;
                             //Adresse IP Local
-//                            PutData putData = new PutData("http://192.168.11.66/Loginregister/addproduct.php", "POST", field, data);
-//                            //Adresse IP Cloud
+//                          PutData putData = new PutData("http://192.168.11.66/Loginregister/addproduct.php", "POST", field, data);
+//                          //Adresse IP Cloud
                             PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/AddSupply.php", "POST", field, data);
 
 

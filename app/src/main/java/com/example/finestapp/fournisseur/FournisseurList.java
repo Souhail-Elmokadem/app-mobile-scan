@@ -85,10 +85,12 @@ public class FournisseurList extends AppCompatActivity {
                 String FournisseurNom = selectedItem.getNom();
                 String FournisseurTelephone = selectedItem.getTelephone();
                 String FournusseurPrenom = selectedItem.getPrenom();
-                Intent intent = new Intent(FournisseurList.this, ProductDetail.class);
+                String fournisseurid = selectedItem.getId();
+                Intent intent = new Intent(FournisseurList.this, FournisseurDetail.class);
                 intent.putExtra("FournisseurNom", FournisseurNom);
                 intent.putExtra("FournisseurTelephone", FournisseurTelephone);
                 intent.putExtra("FournisseurPrenom", FournusseurPrenom);
+                intent.putExtra("fournisseurid",fournisseurid);
                 startActivity(intent);
             }
         });
@@ -137,11 +139,12 @@ public class FournisseurList extends AppCompatActivity {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+                    String fournisseurId = jsonObject.getString("idFour");
                     String fournisseurNom = jsonObject.getString("NomFour");
                     String fournisseurPrenom = jsonObject.getString("PrenomFour");
                     String fournisseurTelephone = jsonObject.getString("TelFour");
 
-                    Fournisseur fournisseur = new Fournisseur(fournisseurNom,fournisseurPrenom, fournisseurTelephone);
+                    Fournisseur fournisseur = new Fournisseur(fournisseurId, fournisseurNom,fournisseurPrenom, fournisseurTelephone);
                     resultList.add(fournisseur);
                 }
 
@@ -170,6 +173,7 @@ public class FournisseurList extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.addfourn){
             startActivity(new Intent(getApplicationContext(),addFournisseur.class));
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
