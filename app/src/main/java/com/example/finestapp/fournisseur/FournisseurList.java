@@ -137,11 +137,12 @@ public class FournisseurList extends AppCompatActivity {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+                    String fournisseurId = jsonObject.getString("idFour");
                     String fournisseurNom = jsonObject.getString("NomFour");
                     String fournisseurPrenom = jsonObject.getString("PrenomFour");
                     String fournisseurTelephone = jsonObject.getString("TelFour");
 
-                    Fournisseur fournisseur = new Fournisseur(fournisseurNom,fournisseurPrenom, fournisseurTelephone);
+                    Fournisseur fournisseur = new Fournisseur(fournisseurId, fournisseurNom,fournisseurPrenom, fournisseurTelephone);
                     resultList.add(fournisseur);
                 }
 
@@ -170,6 +171,7 @@ public class FournisseurList extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.addfourn){
             startActivity(new Intent(getApplicationContext(),addFournisseur.class));
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

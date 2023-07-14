@@ -6,29 +6,111 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.finestapp.R;
+import com.example.finestapp.fournisseur.Fournisseur;
+import com.example.finestapp.fournisseur.FournisseurList;
+import com.mysql.cj.xdevapi.JsonArray;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class AddProduct extends AppCompatActivity {
     private Button cancel,addbtn;
-    EditText name,price,marge,fournisseur;
+    EditText name,price,marge;
+
+    Spinner spinnerFournisseur;
+
+    //ArrayList to hold the list of Fournisseur objects
+    ArrayList<Fournisseur> fournisseurList = new ArrayList<>();
+
+    //Adapter for Fournisseur objects, set to null by default bc it will be populated later
+    ArrayAdapter<Fournisseur> fournisseurAdapter;
+
+    //used by Volley library to manage the network requests
+    RequestQueue requestQueue;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
 
 
+        requestQueue = Volley.newRequestQueue(this);
+        spinnerFournisseur = findViewById(R.id.spinnerFournisseur);
+        fournisseurList = new ArrayList<>();
+
+
+        String URL = "http://ftapp.finesttechnology.ma/Loginregister/SpinnerFetcher.php";
+
+
+        //fetch data from the specified URL, It makes a POST request with no request body (null)
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("fournisseur");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String fournisseurID = jsonObject.optString("idFour");
+                        String fournisseurNom = jsonObject.optString("nomFour");
+                        String fournisseurPrenom = jsonObject.optString("prenomFour");
+
+                        Fournisseur fournisseur = new Fournisseur(fournisseurID, fournisseurNom, fournisseurPrenom, "");
+                        fournisseurList.add(fournisseur);
+
+                    }Log.d("Spinner Items",fournisseurList.toString());
+
+
+                    //ArrayAdapter is created with the fournisseurList as the data source
+                    //the layout in this line is for each item in the spinner.
+                    fournisseurAdapter = new ArrayAdapter<>(AddProduct.this, android.R.layout.simple_spinner_item, fournisseurList);
+
+                    //the layout for the dropdown items in the spinner.
+                    fournisseurAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerFournisseur.setAdapter(fournisseurAdapter);
+
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            //error responses from the network request and provides appropriate feedback
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String errorMessage = error.getMessage();
+                Log.e("AddProduct", "Error: " + errorMessage);
+                Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         cancel = findViewById(R.id.cancel);
         addbtn = findViewById(R.id.addbtn);
         name = findViewById(R.id.editname);
         price = findViewById(R.id.editprice);
         marge = findViewById(R.id.editmarge);
-        fournisseur = findViewById(R.id.editfournisseur);
+
+
+        //Cancel Action
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,15 +119,22 @@ public class AddProduct extends AppCompatActivity {
                 finish();
             }
         });
+
+        //Add New Product
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Name,Price,Marge,Fournisseur;
+                String Name,Price,Marge;
+
+                Fournisseur selectedFournisseur = (Fournisseur) spinnerFournisseur.getSelectedItem();
+                String selectedFournisseurId = selectedFournisseur.getId();
+
+
                 Name = String.valueOf(name.getText());
                 Price = String.valueOf(price.getText());
                 Marge = String.valueOf(marge.getText());
-                Fournisseur = String.valueOf(fournisseur.getText());
-                if(!Name.equals("") && !Price.equals("") && !Marge.equals("") && !Fournisseur.equals("")){
+
+                if(!Name.equals("") && !Price.equals("") && !Marge.equals("")){
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override
@@ -60,7 +149,7 @@ public class AddProduct extends AppCompatActivity {
                             data[0] = Name;
                             data[1] = Price;
                             data[2] = Marge;
-                            data[3] = Fournisseur;
+                            data[3] = selectedFournisseurId;
                             //Adresse IP Local
     //                        PutData putData = new PutData("http://192.168.11.66/Loginregister/addproduct.php", "POST", field, data);
 //                            //Adresse IP Cloud
@@ -87,6 +176,8 @@ public class AddProduct extends AppCompatActivity {
                 }
             }
         });
+
+        requestQueue.add(jsonObjectRequest);
 
     }
     @Override

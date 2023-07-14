@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".product.AddProduct"
     android:gravity="center"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -72,19 +73,17 @@
                 android:textColor="@color/black"
                 android:drawablePadding="8dp"/>
 
-            <EditText
-                android:id="@+id/editfournisseur"
+            <Spinner
+                android:id="@+id/spinnerFournisseur"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/border"
                 android:drawablePadding="8dp"
-                android:hint="fournisseur"
                 android:inputType="number"
                 android:padding="8dp"
                 android:textColor="@color/black" />
 
-    <Button
+            <Button
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="ADD"

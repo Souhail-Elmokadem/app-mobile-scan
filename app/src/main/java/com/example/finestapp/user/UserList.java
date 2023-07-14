@@ -134,6 +134,7 @@ public class UserList extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.addfourn){
             startActivity(new Intent(getApplicationContext(),Adduser.class));
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
