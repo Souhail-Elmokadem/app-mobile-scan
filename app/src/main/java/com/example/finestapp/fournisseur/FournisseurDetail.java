@@ -181,6 +181,6 @@ public class FournisseurDetail extends AppCompatActivity {
 
 
         // end view
-
+//
     }
 }

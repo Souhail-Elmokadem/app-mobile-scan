@@ -168,7 +168,7 @@ public class FournisseurList extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }
     }
-
+//
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

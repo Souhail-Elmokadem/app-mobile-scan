@@ -56,6 +56,7 @@
         android:hint="Nom"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"
+        
         android:visibility="visible" />
 
     <TextView
