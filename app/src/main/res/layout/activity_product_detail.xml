@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".product.ProductDetail"
+    android:background="@color/white"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -42,7 +43,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/border"
         android:drawablePadding="8dp"
-        android:hint="Product Marge"
+        android:hint="Product Date"
         android:inputType="number"
         android:padding="8dp"
         android:textColor="@color/black"
@@ -88,6 +89,7 @@
         android:id="@+id/textViewProductName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"/>
 
@@ -95,6 +97,7 @@
         android:id="@+id/textViewProductPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"/>
 
@@ -102,6 +105,7 @@
         android:id="@+id/textViewProductDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"/>
 
@@ -109,6 +113,7 @@
         android:id="@+id/textViewProductMarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"/>
 
@@ -116,6 +121,7 @@
         android:id="@+id/textViewFournisseurName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"/>
 
