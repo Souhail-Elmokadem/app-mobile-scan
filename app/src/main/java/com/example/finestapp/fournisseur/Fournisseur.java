@@ -1,5 +1,7 @@
 package com.example.finestapp.fournisseur;
 
+import androidx.annotation.NonNull;
+
 public class Fournisseur {
     private  String fournisseurid;
     private String nom;
@@ -14,7 +16,7 @@ public class Fournisseur {
         this.telephone = telephone;
     }
 
-    public String getFournisseurid() {
+    public String getId() {
         return fournisseurid;
     }
 
@@ -28,5 +30,11 @@ public class Fournisseur {
 
     public String getTelephone() {
         return telephone;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return nom+" "+prenom;
     }
 }

@@ -17,7 +17,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/border"
         android:drawablePadding="8dp"
-        android:hint="Product Name"
+        android:hint="Nom"
         android:padding="8dp"
         android:textColor="@color/black"
         android:visibility="gone" />
@@ -29,8 +29,8 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/border"
         android:drawablePadding="8dp"
-        android:hint="Product Price"
-        android:inputType="number"
+        android:hint="Prenom"
+        android:inputType="textShortMessage"
         android:padding="8dp"
         android:textColor="@color/black"
         android:visibility="gone" />
@@ -42,7 +42,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/border"
         android:drawablePadding="8dp"
-        android:hint="Product Marge"
+        android:hint="Tele"
         android:inputType="number"
         android:padding="8dp"
         android:textColor="@color/black"
@@ -53,22 +53,25 @@
         android:id="@+id/textViewFournisseurNom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Nom"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewFournisseurPrenom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Prenom"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewFournisseurTele"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Tele"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:layout_width="fill_parent"

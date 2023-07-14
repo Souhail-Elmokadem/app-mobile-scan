@@ -5,8 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
-    tools:context=".Dashboard">
+    android:background="@drawable/loginbk"
+    tools:context=".Dashboard"
+
+    >
 
 
     <RelativeLayout

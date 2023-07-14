@@ -47,7 +47,7 @@ public class addFournisseur extends AppCompatActivity {
                 Nom = String.valueOf(nom.getText());
                 Prenom = String.valueOf(prenom.getText());
                 Tel = String.valueOf(tel.getText());
-                if(!nom.equals("") && !prenom.equals("") && !tel.equals("")){
+                if(nom.getText().toString().trim().length()>0 && tel.getText().toString().trim().length()>0){
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override
