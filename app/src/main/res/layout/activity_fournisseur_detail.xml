@@ -42,7 +42,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/border"
         android:drawablePadding="8dp"
-        android:hint="Tele"
+        android:hint="Telephone"
         android:inputType="number"
         android:padding="8dp"
         android:textColor="@color/black"
@@ -69,7 +69,7 @@
         android:id="@+id/textViewFournisseurTele"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tele"
+        android:hint="Telephone"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold" />
 
