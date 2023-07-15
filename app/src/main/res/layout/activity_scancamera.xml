@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Scancamera"
-    android:background="@color/white"
+    android:background="#8CC0DE"
     android:orientation="vertical">
 
     <SurfaceView
@@ -16,15 +16,25 @@
         android:layout_gravity="center">
     </SurfaceView>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:max="5"
+        android:progress="0"
+        android:progressDrawable="@drawable/progressbar"/>
+
     <TextView
         android:id="@+id/barcodeText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Find a Code To Scan"
-        android:textColor="@color/black"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:textColor="@color/white"
+        android:text="Barcode Text"/>
 
     <RelativeLayout
         android:padding="20dp"

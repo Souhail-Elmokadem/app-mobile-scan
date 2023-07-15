@@ -9,12 +9,14 @@ import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +51,9 @@ public class Scancamera extends AppCompatActivity {
     private TextView barcodeText;
     private String barcodeData;
     private Button backbtn;
+    private ProgressBar progressBar;
+    private CountDownTimer timer;
+    private static final int TIMER_DURATION = 5000; // 5 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,10 @@ public class Scancamera extends AppCompatActivity {
         surfaceView = findViewById(R.id.surface_view);
 
         backbtn = findViewById(R.id.backbtn);
+
+        progressBar = findViewById(R.id.progressBar);
+
+        timer = createTimer(TIMER_DURATION);
 
         initialiseDetectorsAndSources();
         backbtn.setOnClickListener(new View.OnClickListener() {
@@ -95,12 +104,9 @@ public class Scancamera extends AppCompatActivity {
                         ActivityCompat.requestPermissions(Scancamera.this, new
                                 String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-
             }
 
             @Override
@@ -129,28 +135,45 @@ public class Scancamera extends AppCompatActivity {
                         barcodeData = barcode.email.address;
                     } else {
                         barcodeData = barcode.displayValue;
-                      //  barcodeText.setText(barcodeData);
+                        //  barcodeText.setText(barcodeData);
                         toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
                         verife_CodeBarre_Produit(barcodeData);
 
-
+                        // Start the timer and show the progress bar
+                        timer.start();
 
                     }
-
-
-
                 }
             }
         });
     }
 
+    private CountDownTimer createTimer(long duration) {
+        return new CountDownTimer(duration, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // Update the progress bar based on the remaining time
+                int progress = (int) (millisUntilFinished / 1000);
+                progressBar.setProgress(progress);
+            }
+
+            @Override
+            public void onFinish() {
+                // Timer finished, reset the progress bar and allow scanning again
+                progressBar.setProgress(0);
+                isProcessingBarcode = false;
+
+                // Reset the timer
+                timer.cancel();
+                timer = createTimer(TIMER_DURATION);
+            }
+        };
+    }
+
     private boolean verife_CodeBarre_Produit(String barecode) {
 
-        // this code will be exist after condition
-
-        // fin code
         ArrayList<Item> resultList = new ArrayList<>();
-
+        boolean status = false;
         try {
             URL url = new URL(Url_PHP_Product);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -159,7 +182,8 @@ public class Scancamera extends AppCompatActivity {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             StringBuilder response = new StringBuilder();
             String line;
-            boolean status=false;
+
+
             while ((line = bufferedReader.readLine()) != null) {
                 response.append(line);
             }
@@ -193,19 +217,15 @@ public class Scancamera extends AppCompatActivity {
                     intent.putExtra("productName", productName);
                     intent.putExtra("productPrice", productPrice);
                     intent.putExtra("FournisseurName",productFourName);
+
                     startActivity(intent);
                     finish();
-                    status=true;
-                    barcodeText.setVisibility(View.GONE);
+                    status = true;
 
                 }else {
-                   barcodeText.setText("Codebar Not Found ");
+                    barcodeText.setText("Codebar Not Found");
                 }
-
-
             }
-
-
 
         } catch (IOException | JSONException e) {
             Log.e(resultList.toString(), "Error retrieving data: " + e.getMessage());
