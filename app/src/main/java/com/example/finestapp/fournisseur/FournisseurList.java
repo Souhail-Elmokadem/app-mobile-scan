@@ -84,12 +84,12 @@ public class FournisseurList extends AppCompatActivity {
                 Fournisseur selectedItem = adapter.getItem(position);
                 String FournisseurNom = selectedItem.getNom();
                 String FournisseurTelephone = selectedItem.getTelephone();
-                String FournusseurPrenom = selectedItem.getPrenom();
+                String FournisseurPrenom = selectedItem.getPrenom();
                 String fournisseurid = selectedItem.getId();
                 Intent intent = new Intent(FournisseurList.this, FournisseurDetail.class);
                 intent.putExtra("FournisseurNom", FournisseurNom);
                 intent.putExtra("FournisseurTelephone", FournisseurTelephone);
-                intent.putExtra("FournisseurPrenom", FournusseurPrenom);
+                intent.putExtra("FournisseurPrenom", FournisseurPrenom);
                 intent.putExtra("fournisseurid",fournisseurid);
                 startActivity(intent);
                 finish();
