@@ -5,9 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".product.ProductDetail"
-    android:background="@color/white"
+    android:background="#8CC0DE"
     android:orientation="vertical"
     android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:padding="24dp"
+        android:backgroundTint="#1D5B79"
+        android:background="@drawable/border"
+        android:visibility="gone">
 
     <EditText
         android:id="@+id/editname"
@@ -18,9 +29,9 @@
         android:background="@drawable/border"
         android:drawablePadding="8dp"
         android:hint="Product Name"
+        android:textColorHint="@color/white"
         android:padding="8dp"
-        android:textColor="@color/black"
-        android:visibility="gone"/>
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/editprice"
@@ -30,11 +41,11 @@
         android:background="@drawable/border"
         android:drawablePadding="8dp"
         android:hint="Product Price"
+        android:textColorHint="@color/white"
         android:inputType="number"
         android:maxLength="4"
         android:padding="8dp"
-        android:textColor="@color/black"
-        android:visibility="gone" />
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/editdate"
@@ -44,10 +55,10 @@
         android:background="@drawable/border"
         android:drawablePadding="8dp"
         android:hint="Product Date"
+        android:textColorHint="@color/white"
         android:inputType="number"
         android:padding="8dp"
-        android:textColor="@color/black"
-        android:visibility="gone" />
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/editmarge"
@@ -57,92 +68,109 @@
         android:background="@drawable/border"
         android:drawablePadding="8dp"
         android:hint="Product Marge"
+        android:textColorHint="@color/white"
         android:maxLength="3"
         android:inputType="number"
         android:padding="8dp"
-        android:textColor="@color/black"
-        android:visibility="gone" />
+        android:textColor="@color/white"/>
 
-    <EditText
+    <Spinner
         android:id="@+id/editfournisseur"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/border"
         android:drawablePadding="8dp"
         android:hint="fournisseur"
         android:inputType="number"
         android:padding="8dp"
-        android:textColor="@color/black"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/useridtext2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="36sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textViewProductName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/textViewProductPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/textViewProductDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/textViewProductMarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/textViewFournisseurName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold"/>
-
-    <RelativeLayout
-         android:layout_width="fill_parent"
-         android:layout_height="fill_parent"
-        android:gravity="bottom">
+        android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/savebtn"
             android:padding="20dp"
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#8EAC50"
-            android:visibility="gone"
-            android:text="Save" />
+            android:text="Save"
+            app:cornerRadius="20dp" />
+        <Button
+            android:id="@+id/cancelbtn"
+            android:padding="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F1C93B"
+            android:text="discard"
+            app:cornerRadius="20dp" />
+    </LinearLayout>
+
+            <!--TEXT VIEWS FOR DETAILS-->
+
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/textViewProductName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="NAME"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/textViewProductPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="PRICE"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/textViewProductDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="DATE"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/textViewProductMarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="MARGE"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/textViewFournisseurName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="SUPPLIER"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textStyle="bold"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="bottom">
 
         <Button
             android:id="@+id/backbtn"
             android:padding="20dp"
-            android:layout_below="@id/savebtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#E76161"
