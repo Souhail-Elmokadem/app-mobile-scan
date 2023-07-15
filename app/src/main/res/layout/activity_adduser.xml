@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".user.Adduser"
     android:gravity="center"
-    android:background="@color/white"
+    android:background="#8CC0DE"
     android:orientation="vertical">
 
 
