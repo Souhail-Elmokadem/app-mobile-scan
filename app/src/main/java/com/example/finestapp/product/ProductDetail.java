@@ -1,4 +1,6 @@
 package com.example.finestapp.product;
+import static com.example.finestapp.Server.Url;
+
 import android.content.DialogInterface;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -38,8 +40,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
+import com.example.finestapp.Server;
 public class ProductDetail extends AppCompatActivity {
+
+
+
     private ArrayList<Fournisseur> fournisseurList;
     private ArrayAdapter<Fournisseur> fournisseurAdapter;
     Button savebtn, cancelbtn, backbtn;
@@ -69,7 +74,7 @@ public class ProductDetail extends AppCompatActivity {
         cancelbtn = findViewById(R.id.cancelbtn);
 
 
-        String URL = "http://ftapp.finesttechnology.ma/Loginregister/SpinnerFetcher.php";
+        String URL = Server.Url+"/Loginregister/SpinnerFetcher.php";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -194,7 +199,8 @@ public class ProductDetail extends AppCompatActivity {
                             data[5] = selectedFournisseurId;
 
 
-                            PutData putData = new PutData("https://ftapp.finesttechnology.ma/Loginregister/updateProd.php", "POST", field, data);
+
+                            PutData putData = new PutData(Server.Url+"/Loginregister/updateProd.php", "POST", field, data);
                             if (putData.startPut()){
                                 if (putData.onComplete()){
                                     String res = putData.getResult();
@@ -284,7 +290,7 @@ public class ProductDetail extends AppCompatActivity {
                             field[0] = "idProd";
                             String[] data = new String[1];
                             data[0] = getIntent().getExtras().getString("productId");
-                            PutData putData = new PutData("https://ftapp.finesttechnology.ma/Loginregister/deleteProd.php", "POST", field, data);
+                            PutData putData = new PutData(Server.Url+"/Loginregister/deleteProd.php", "POST", field, data);
                             if (putData.startPut()){
                                 if (putData.onComplete()){
                                     String res = putData.getResult();

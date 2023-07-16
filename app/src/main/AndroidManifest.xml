@@ -22,10 +22,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".user.Detail_user"
+            android:exported="false"
+            android:label="Detail User"
+            />
+        <activity
             android:name=".fournisseur.FournisseurDetail"
             android:exported="false"
-            android:label="Fournisseur Detail"
-            />
+            android:label="Fournisseur Detail" />
         <activity
             android:name=".user.Adduser"
             android:exported="false"

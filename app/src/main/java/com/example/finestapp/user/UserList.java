@@ -31,12 +31,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.example.finestapp.Server;
 public class UserList extends AppCompatActivity {
     private SearchView searchView;
     private List<User> originalItemList;
     private static final String TAG = "UserList";
-    private static final String PHP_SCRIPT_URL = "http://ftapp.finesttechnology.ma/Loginregister/ListUser.php";
+    private String Server= com.example.finestapp.Server.Url;
+    String PHP_SCRIPT_URL = Server+"/Loginregister/ListUser.php";
     private ListView listView;
     private UserListAdapter adapter;
 
@@ -82,11 +83,16 @@ public class UserList extends AppCompatActivity {
                 String nomUser = selectedItem.getNom();
                 String prenomUser = selectedItem.getPrenom();
                 String emailUser = selectedItem.getEmail();
-                Intent intent = new Intent(UserList.this, ProductDetail.class);
+                String telUser = selectedItem.getTelephone();
+                String idUser = selectedItem.getIdUser();
+                Intent intent = new Intent(UserList.this, Detail_user.class);
+                intent.putExtra("telUser",telUser);
                 intent.putExtra("nomUser", nomUser);
                 intent.putExtra("prenomUser", prenomUser);
                 intent.putExtra("emailUser",emailUser);
+                intent.putExtra("idUser",idUser);
                 startActivity(intent);
+               // finish();
             }
         });
     }
@@ -134,12 +140,12 @@ public class UserList extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(response.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-
+                    String idUser = jsonObject.getString("idUser");
                     String nomUser = jsonObject.getString("NomUser");
                     String prenomUser = jsonObject.getString("PrenomUser");
                     String email = jsonObject.getString("EmailUser");
-
-                    User users = new User(nomUser, prenomUser,email);
+                    String telephone =jsonObject.getString("telUser");
+                    User users = new User(idUser,nomUser, prenomUser,email,telephone);
                     resultList.add(users);
                 }
 
