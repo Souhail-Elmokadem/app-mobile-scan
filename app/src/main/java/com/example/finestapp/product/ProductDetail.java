@@ -8,28 +8,46 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.finestapp.MainActivity;
 import com.example.finestapp.R;
 import com.example.finestapp.Scancamera;
+import com.example.finestapp.fournisseur.Fournisseur;
 import com.example.finestapp.user.Login;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
-public class ProductDetail extends AppCompatActivity {
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    private TextView productNameTextView;
-    private TextView productPriceTextView;
-    Button savebtn;
-    EditText name,price,date,fournisseur,marge;
-    Button backbtn;
+import java.util.ArrayList;
+
+public class ProductDetail extends AppCompatActivity {
+    private ArrayList<Fournisseur> fournisseurList;
+    private ArrayAdapter<Fournisseur> fournisseurAdapter;
+    Button savebtn, cancelbtn, backbtn;
+    EditText name,price,date,marge;
+    RequestQueue requestQueue;
+    Spinner fournisseurSpinner;
     AlertDialog.Builder alertDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +59,55 @@ public class ProductDetail extends AppCompatActivity {
         price = findViewById(R.id.editprice);
         date = findViewById(R.id.editdate);
         marge = findViewById(R.id.editmarge);
-        fournisseur = findViewById(R.id.editfournisseur);
+
+        requestQueue = Volley.newRequestQueue(this);
+        fournisseurSpinner = findViewById(R.id.editfournisseur);
+        fournisseurList = new ArrayList<>();
+
         backbtn = findViewById(R.id.backbtn);
         savebtn = findViewById(R.id.savebtn);
+        cancelbtn = findViewById(R.id.cancelbtn);
+
+
+        String URL = "http://ftapp.finesttechnology.ma/Loginregister/SpinnerFetcher.php";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("fournisseur");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String fournisseurID = jsonObject.optString("idFour");
+                        String fournisseurNom = jsonObject.optString("nomFour");
+                        String fournisseurPrenom = jsonObject.optString("prenomFour");
+
+                        Fournisseur fournisseur = new Fournisseur(fournisseurID, fournisseurNom, fournisseurPrenom, "");
+                        fournisseurList.add(fournisseur);
+                    }
+
+                    fournisseurAdapter = new ArrayAdapter<>(ProductDetail.this, android.R.layout.simple_spinner_item, fournisseurList);
+                    fournisseurAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    fournisseurSpinner.setAdapter(fournisseurAdapter);
+
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String errorMessage = error.getMessage();
+                Log.e("ProductDetail", "Error: " + errorMessage);
+                Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         // Retrieve extras
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             if (extras.getString("productName")!=null && extras.getString("productMarge")!=null){
-
                 String productName = extras.getString("productName");
                 String productPrice = extras.getString("productPrice");
                 String productDate = extras.getString("productDate");
@@ -72,22 +129,6 @@ public class ProductDetail extends AppCompatActivity {
 
                 TextView textViewFournisseurName = findViewById(R.id.textViewFournisseurName);
                 textViewFournisseurName.setText("Fournisseur Name: " + fournisseurName);
-            }else if (extras.getString("FournisseurNom")!=null){
-                TextView textViewFournName = findViewById(R.id.textViewProductName);
-                textViewFournName.setText("Fournisseur Prenom : "+ extras.getString("FournisseurNom"));
-                TextView textViewFournTel = findViewById(R.id.textViewProductPrice);
-                textViewFournTel.setText("Telephone : "+extras.getString("FournisseurTelephone"));
-                TextView textViewFournisseurPrenome = findViewById(R.id.textViewProductDate);
-                textViewFournisseurPrenome.setText("Fournisseur Nom: " + extras.getString("FournisseurPrenom"));
-
-            } else if (extras.getString("nomUser")!=null) {
-                TextView textViewFournName = findViewById(R.id.textViewProductName);
-                textViewFournName.setText("nom de utilisateur : "+ extras.getString("nomUser"));
-                TextView textViewFournTel = findViewById(R.id.textViewProductPrice);
-                textViewFournTel.setText("Prenom de utilisateur : "+extras.getString("prenomUser"));
-                TextView textViewFournisseurPrenome = findViewById(R.id.textViewProductDate);
-                textViewFournisseurPrenome.setText("Email de utilisateur : " + extras.getString("emailUser"));
-
             }
         }
         backbtn = findViewById(R.id.backbtn);
@@ -99,6 +140,26 @@ public class ProductDetail extends AppCompatActivity {
             }
         });
 
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout linearLayout = findViewById(R.id.linear);
+                linearLayout.setVisibility(View.GONE);
+
+                TextView textViewProductName = findViewById(R.id.textViewProductName);
+                TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
+                TextView textViewProductDate = findViewById(R.id.textViewProductDate);
+                TextView textViewProductMarge = findViewById(R.id.textViewProductMarge);
+                TextView textViewFournisseurName = findViewById(R.id.textViewFournisseurName);
+
+                textViewProductName.setVisibility(View.VISIBLE);
+                textViewProductPrice.setVisibility(View.VISIBLE);
+                textViewProductDate.setVisibility(View.VISIBLE);
+                textViewProductMarge.setVisibility(View.VISIBLE);
+                textViewFournisseurName.setVisibility(View.VISIBLE);
+            }
+        });
+
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,7 +167,6 @@ public class ProductDetail extends AppCompatActivity {
                 String productID = extras.getString("productId");
                 if (name.getText().toString().trim().length() > 0 && price.getText().toString().trim().length() > 0 &&
                        date. getText().toString().trim().length() > 0 && marge.getText().toString().trim().length() > 0
-                        && fournisseur.getText().toString().trim().length()>0
                 ){
 
                     Handler handler = new Handler(Looper.getMainLooper());
@@ -120,6 +180,7 @@ public class ProductDetail extends AppCompatActivity {
                             field[3] = "dateProd";
                             field[4] = "MargeProd";
                             field[5] = "idFour";
+
                             //Creating array for data
                             String[] data = new String[6];
                             data[0] = productID;
@@ -127,7 +188,12 @@ public class ProductDetail extends AppCompatActivity {
                             data[2] = String.valueOf(price.getText());
                             data[3] = String.valueOf(date.getText());
                             data[4] = String.valueOf(marge.getText());
-                            data[5] = String.valueOf(fournisseur.getText());
+
+                            Fournisseur selectedFournisseur = (Fournisseur) fournisseurSpinner.getSelectedItem();
+                            String selectedFournisseurId = selectedFournisseur.getId();
+                            data[5] = selectedFournisseurId;
+
+
                             PutData putData = new PutData("https://ftapp.finesttechnology.ma/Loginregister/updateProd.php", "POST", field, data);
                             if (putData.startPut()){
                                 if (putData.onComplete()){
@@ -149,6 +215,7 @@ public class ProductDetail extends AppCompatActivity {
                 }
             }
         });
+        requestQueue.add(jsonObjectRequest);
     }
 
     @Override
@@ -162,16 +229,34 @@ public class ProductDetail extends AppCompatActivity {
             String fournisseurid = extras.getString("productfourn");
             backbtn = findViewById(R.id.backbtn);
             backbtn.setText("Cancel");
-        name.setVisibility(View.VISIBLE);
+
+            LinearLayout linear = findViewById(R.id.linear);
+
+
         name.setText(productName);
-        price.setVisibility(View.VISIBLE);
         price.setText(productPrice);
         date.setVisibility(View.GONE);
         date.setText(productDate);
-        marge.setVisibility(View.VISIBLE);
         marge.setText(productMarge);
-        fournisseur.setVisibility(View.VISIBLE);
-        fournisseur.setText(fournisseurid);
+
+        linear.setVisibility(View.VISIBLE);
+
+            // Find the position of the selected fournisseur in the fournisseurList
+            int selectedFournisseurPosition = -1;
+            for (int i = 0; i < fournisseurList.size(); i++) {
+                Fournisseur fournisseur = fournisseurList.get(i);
+                if (fournisseur.getId().equals(fournisseurid)) {
+                    selectedFournisseurPosition = i;
+                    break;
+                }
+            }
+
+            // Set the selected fournisseur in the spinner
+            if (selectedFournisseurPosition != -1) {
+                fournisseurSpinner.setSelection(selectedFournisseurPosition);
+            }
+
+
         TextView textViewProductName = findViewById(R.id.textViewProductName);
         textViewProductName.setVisibility(View.GONE);
         TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);

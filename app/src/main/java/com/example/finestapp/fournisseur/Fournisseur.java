@@ -8,7 +8,7 @@ public class Fournisseur {
     private String prenom;
     private String telephone;
 
-
+//
     public Fournisseur (String fournisseurid,String nom, String prenom, String telephone) {
         this.fournisseurid=fournisseurid;
         this.nom = nom;

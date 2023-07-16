@@ -49,6 +49,7 @@ public class UserList extends AppCompatActivity {
         listView = findViewById(R.id.subListView);
         adapter = new UserListAdapter(this,R.layout.list_user_layout, new ArrayList<>());
         listView.setAdapter(adapter);
+
         searchView = findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -89,6 +90,7 @@ public class UserList extends AppCompatActivity {
             }
         });
     }
+
     private void filterItems(String query) {
         List<User> filteredList = new ArrayList<>();
         for (User user : originalItemList) {
@@ -103,6 +105,7 @@ public class UserList extends AppCompatActivity {
         adapter.addAll(filteredList);
         adapter.notifyDataSetChanged();
     }
+
     private class UserListAsyncTask extends AsyncTask<Void, Void, List<User>> {
         @Override
         protected List<User> doInBackground(Void... voids) {
@@ -135,7 +138,6 @@ public class UserList extends AppCompatActivity {
                     String nomUser = jsonObject.getString("NomUser");
                     String prenomUser = jsonObject.getString("PrenomUser");
                     String email = jsonObject.getString("EmailUser");
-
 
                     User users = new User(nomUser, prenomUser,email);
                     resultList.add(users);

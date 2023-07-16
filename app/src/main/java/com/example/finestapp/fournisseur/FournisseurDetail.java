@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,12 +32,14 @@ public class FournisseurDetail extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
     EditText editFournName,editFournPrenom,editFournTel;
-    Button savebtn,backbtn;
+    Button savebtn,backbtn, cancelbtn;
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -46,7 +49,10 @@ public class FournisseurDetail extends AppCompatActivity {
             editFournPrenom = findViewById(R.id.EditPrenom);
             editFournTel = findViewById(R.id.EditTele);
             savebtn =findViewById(R.id.savebtn);
-            savebtn.setVisibility(View.VISIBLE);
+            cancelbtn = findViewById(R.id.cancelbtn);
+
+            LinearLayout linear = findViewById(R.id.linear);
+            linear.setVisibility(View.VISIBLE);
 //
 //
             TextView textViewFournName = findViewById(R.id.textViewFournisseurNom) ;
@@ -65,7 +71,21 @@ public class FournisseurDetail extends AppCompatActivity {
             editFournPrenom.setText(getIntent().getExtras().getString("FournisseurPrenom"));
 
 
+            cancelbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    linear.setVisibility(View.GONE);
 
+                    TextView textViewFournName = findViewById(R.id.textViewFournisseurNom) ;
+                    textViewFournName.setVisibility(View.VISIBLE);
+                    TextView textViewFournTel = findViewById(R.id.textViewFournisseurPrenom);
+                    textViewFournTel.setVisibility(View.VISIBLE);
+                    TextView textViewFournisseurPrenome = findViewById(R.id.textViewFournisseurTele);
+                    textViewFournisseurPrenome.setVisibility(View.VISIBLE);
+
+                    }
+                }
+            );
             savebtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -112,14 +132,14 @@ public class FournisseurDetail extends AppCompatActivity {
         } else if (item.getItemId()==R.id.deletebtn) {
             alertdialog = new AlertDialog.Builder(FournisseurDetail.this);
             alertdialog.setTitle("Suppression")
-                    .setMessage("Are you Sure ?")
+                    .setMessage("All products by this supplier will be deleted")
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             finish();
                         }
                     })
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("Delete Anyway", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Handler handler = new Handler();
@@ -138,7 +158,7 @@ public class FournisseurDetail extends AppCompatActivity {
                                             if(res.equals("fourn deleted successfully.")){
                                                 startActivity(new Intent(getApplicationContext(),FournisseurList.class));
                                                 finish();
-                                                Toast.makeText(getApplicationContext(),"Deleted Success",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(),"Supplier Deleted !",Toast.LENGTH_SHORT).show();
                                             }else {
                                                 Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
                                             }
@@ -181,6 +201,6 @@ public class FournisseurDetail extends AppCompatActivity {
 
 
         // end view
-
+//
     }
 }

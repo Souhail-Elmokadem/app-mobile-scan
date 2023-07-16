@@ -24,7 +24,7 @@ public class FournisseurListAdapter extends ArrayAdapter<Fournisseur> {
         this.context = context;
         this.resource = resource;
     }
-
+//
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
