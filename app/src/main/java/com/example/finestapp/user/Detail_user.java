@@ -14,18 +14,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finestapp.R;
 import com.example.finestapp.Server;
 import com.example.finestapp.product.ProductList;
+import com.google.android.material.snackbar.Snackbar;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class Detail_user extends AppCompatActivity {
     TextView  textViewUserNom,textViewUserPrenom,textViewUserEmail,TextViewUserTel;
     EditText editNomUser, editPrenomUser, editEmailUser,editTelUser;
     Button savebtn,backbtn;
+    LinearLayout layoutt;
     AlertDialog.Builder alertdialogue;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -198,6 +201,7 @@ public class Detail_user extends AppCompatActivity {
         Backbtnuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 onBackPressed();
             }
 

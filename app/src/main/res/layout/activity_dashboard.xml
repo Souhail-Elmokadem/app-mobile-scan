@@ -16,17 +16,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:background="@drawable/border"
+        android:background="@drawable/navbar_shape"
         android:padding="4dp">
 
         <!-- Search Button -->
-        <ImageButton
-            android:id="@+id/searchButton"
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="false"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:capitalize="characters"
+            android:fontFamily="@font/archivo_bold"
+            android:text="DASHBOARD"
+            android:textColor="#6D77FA"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/ProfileButton"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/border" />
+            android:background="@drawable/border"
+            android:padding="2dp"
+            app:srcCompat="@drawable/profile_icon" />
     </RelativeLayout>
 
     <TableLayout
@@ -96,7 +112,110 @@
     </TableLayout>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="-70dp"
+        android:background="@drawable/dashboard_navbar"
+        android:gravity="center"
+        android:padding="0dp"
+        android:paddingBottom="0dp">
 
+        <LinearLayout
+            android:id="@+id/layout_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="72dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/home" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Home"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_products"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="72dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/dolly_flatbed_svgrepo_com" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Products"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_supplier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+
+            android:layout_marginRight="15dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="72dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/personfournisseur" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Supplier"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="72dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/setting" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Settings"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+    </LinearLayout>
 
 
 
