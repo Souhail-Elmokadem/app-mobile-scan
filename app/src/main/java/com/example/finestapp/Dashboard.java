@@ -1,15 +1,13 @@
 package com.example.finestapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.fournisseur.FournisseurList;
 import com.example.finestapp.product.ProductList;
@@ -67,6 +65,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),ProductList.class));
+                finish();
 
             }
         });
@@ -75,6 +74,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),FournisseurList.class));
+                finish();
             }
         });
 
