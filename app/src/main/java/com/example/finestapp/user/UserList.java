@@ -11,12 +11,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.finestapp.R;
 import com.example.finestapp.fournisseur.Fournisseur;
+import com.example.finestapp.fournisseur.FournisseurList;
 import com.example.finestapp.product.ProductDetail;
 
 import org.json.JSONArray;
@@ -32,6 +34,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.finestapp.Server;
+import com.example.finestapp.product.ProductList;
+
 public class UserList extends AppCompatActivity {
     private SearchView searchView;
     private List<User> originalItemList;
@@ -40,6 +44,7 @@ public class UserList extends AppCompatActivity {
     String PHP_SCRIPT_URL = Server+"/Loginregister/ListUser.php";
     private ListView listView;
     private UserListAdapter adapter;
+    LinearLayout layout_home,layout_products,layout_supplier,layout_settings;
 
 
     @Override
@@ -47,6 +52,29 @@ public class UserList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
 
+        layout_home = findViewById(R.id.layout_home);
+        layout_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Home",Toast.LENGTH_SHORT).show();
+            }
+        });
+        layout_products = findViewById(R.id.layout_products);
+        layout_products.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ProductList.class));
+
+            }
+        });
+        layout_supplier = findViewById(R.id.layout_supplier);
+        layout_supplier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), FournisseurList.class));
+
+            }
+        });
         listView = findViewById(R.id.subListView);
         adapter = new UserListAdapter(this,R.layout.list_user_layout, new ArrayList<>());
         listView.setAdapter(adapter);
