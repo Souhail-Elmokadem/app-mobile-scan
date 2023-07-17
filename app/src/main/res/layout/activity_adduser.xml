@@ -48,6 +48,7 @@
                     android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
                     android:hint="Firstname"
+                    android:singleLine="true"
                     android:padding="8dp"
                     android:textColorHint="@color/white"
                     android:textColor="@color/white" />
@@ -62,6 +63,7 @@
                     android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
                     android:hint="Lastname"
+                    android:singleLine="true"
                     android:padding="8dp"
                     android:textColorHint="@color/white"
                     android:textColor="@color/white" />
@@ -75,6 +77,8 @@
                     android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
                     android:hint="Email"
+                    android:singleLine="true"
+                    android:inputType="textEmailAddress"
                     android:padding="8dp"
                     android:textColorHint="@color/white"
                     android:textColor="@color/white" />
@@ -89,6 +93,7 @@
                     android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
                     android:hint="Password"
+                    android:singleLine="true"
                     android:inputType="textPassword"
                     android:padding="8dp"
                     android:textColorHint="@color/white"
@@ -104,6 +109,7 @@
                     android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
                     android:hint="Telephone"
+                    android:singleLine="true"
                     android:inputType="phone|number"
                     android:maxLength="10"
                     android:padding="8dp"

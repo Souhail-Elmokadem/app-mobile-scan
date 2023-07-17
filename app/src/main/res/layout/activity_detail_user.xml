@@ -19,7 +19,7 @@
         android:padding="24dp"
         android:backgroundTint="#1D5B79"
         android:background="@drawable/border"
-        >
+        android:visibility="gone">
 
     <EditText
         android:id="@+id/editNomUser"
@@ -27,6 +27,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/border"
+        android:singleLine="true"
         android:drawablePadding="8dp"
         android:hint="Nom Utilisateur"
         android:textColorHint="@color/white"
@@ -41,6 +42,7 @@
         android:background="@drawable/border"
         android:drawablePadding="8dp"
         android:hint="Prenom Utilisateur"
+        android:singleLine="true"
         android:textColorHint="@color/white"
         android:inputType="text"
         android:padding="8dp"
@@ -54,8 +56,9 @@
         android:background="@drawable/border"
         android:drawablePadding="8dp"
         android:hint="Email Utilisateur"
+        android:singleLine="true"
         android:textColorHint="@color/white"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
         android:padding="8dp"
         android:textColor="@color/white"/>
 
@@ -68,6 +71,9 @@
         android:background="@drawable/border"
         android:drawablePadding="8dp"
         android:hint="Tel Utilisateur"
+        android:singleLine="true"
+        android:maxLength="10"
+        android:inputType="number"
         android:textColorHint="@color/white"
         android:padding="8dp"
         android:textColor="@color/white"/>
@@ -118,29 +124,45 @@
 
     <TextView
         android:id="@+id/textViewUserNom"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Nom User"
+        android:padding="24dp"
+        android:textColorHint="@color/white"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewUserPrenom"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Prenom User"
+        android:padding="24dp"
+        android:textColorHint="@color/white"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewUserEmail"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Email User"
+        android:padding="24dp"
+        android:textColorHint="@color/white"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewUserTel"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:hint="Telephone User"
+        android:textColorHint="@color/white"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold" />
 
