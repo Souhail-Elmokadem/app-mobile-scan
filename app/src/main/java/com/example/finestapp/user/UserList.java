@@ -11,11 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.finestapp.R;
-import com.example.finestapp.product.ProductDetail;
+import com.example.finestapp.fournisseur.FournisseurList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,12 +32,17 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserList extends AppCompatActivity {
+import com.example.finestapp.product.ProductList;
 
+public class UserList extends AppCompatActivity {
+    private SearchView searchView;
+    private List<User> originalItemList;
     private static final String TAG = "UserList";
-    private static final String PHP_SCRIPT_URL = "http://ftapp.finesttechnology.ma/Loginregister/ListUser.php";
+    private String Server= com.example.finestapp.Server.Url;
+    String PHP_SCRIPT_URL = Server+"/Loginregister/ListUser.php";
     private ListView listView;
     private UserListAdapter adapter;
+    LinearLayout layout_home,layout_products,layout_supplier,layout_settings;
 
 
     @Override
@@ -43,9 +50,53 @@ public class UserList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
 
+        layout_home = findViewById(R.id.layout_home);
+        layout_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Home",Toast.LENGTH_SHORT).show();
+            }
+        });
+        layout_products = findViewById(R.id.layout_products);
+        layout_products.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ProductList.class));
+
+            }
+        });
+        layout_supplier = findViewById(R.id.layout_supplier);
+        layout_supplier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), FournisseurList.class));
+
+            }
+        });
         listView = findViewById(R.id.subListView);
         adapter = new UserListAdapter(this,R.layout.list_user_layout, new ArrayList<>());
         listView.setAdapter(adapter);
+
+        searchView = findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterItems(newText);
+                return true;
+            }
+        });
+
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setIconified(false);
+            }
+        });
 
 
         UserListAsyncTask UserListAsyncTask = new UserListAsyncTask();
@@ -58,13 +109,34 @@ public class UserList extends AppCompatActivity {
                 String nomUser = selectedItem.getNom();
                 String prenomUser = selectedItem.getPrenom();
                 String emailUser = selectedItem.getEmail();
-                Intent intent = new Intent(UserList.this, ProductDetail.class);
+                String telUser = selectedItem.getTelephone();
+                String idUser = selectedItem.getIdUser();
+
+                Intent intent = new Intent(UserList.this, UserDetail.class);
+                intent.putExtra("telUser",telUser);
                 intent.putExtra("nomUser", nomUser);
                 intent.putExtra("prenomUser", prenomUser);
                 intent.putExtra("emailUser",emailUser);
+                intent.putExtra("idUser",idUser);
                 startActivity(intent);
+                finish();
             }
         });
+    }
+
+    private void filterItems(String query) {
+        List<User> filteredList = new ArrayList<>();
+        for (User user : originalItemList) {
+            String nom = user.getNom().toLowerCase();
+            String prenom = user.getPrenom().toLowerCase();
+            query = query.toLowerCase();
+            if (nom.startsWith(query) || prenom.startsWith(query)) {
+                filteredList.add(user);
+            }
+        }
+        adapter.clear();
+        adapter.addAll(filteredList);
+        adapter.notifyDataSetChanged();
     }
 
     private class UserListAsyncTask extends AsyncTask<Void, Void, List<User>> {
@@ -95,12 +167,12 @@ public class UserList extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(response.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-
+                    String idUser = jsonObject.getString("idUser");
                     String nomUser = jsonObject.getString("NomUser");
                     String prenomUser = jsonObject.getString("PrenomUser");
                     String email = jsonObject.getString("EmailUser");
-
-                    User users = new User(nomUser, prenomUser,email);
+                    String telephone =jsonObject.getString("telUser");
+                    User users = new User(idUser,nomUser, prenomUser,email,telephone);
                     resultList.add(users);
                 }
 
@@ -112,6 +184,7 @@ public class UserList extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(List<User> resultList) {
+            originalItemList = resultList;
             // Process the retrieved data (resultList)
             Toast.makeText(UserList.this, "Received data: " + resultList.size() + " items", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "Received data: " + resultList.size() + " items");

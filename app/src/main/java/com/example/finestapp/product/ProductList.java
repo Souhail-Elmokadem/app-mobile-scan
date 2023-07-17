@@ -11,10 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.finestapp.Dashboard;
+import com.example.finestapp.fournisseur.FournisseurList;
 import com.example.finestapp.user.Login;
 import com.example.finestapp.MainActivity;
 import com.example.finestapp.R;
@@ -44,6 +47,7 @@ public class ProductList extends AppCompatActivity {
     private ProductListAdapter adapter;
 
     private SharedPreferences sharedPreferences;
+    LinearLayout layout_home,layout_products,layout_supplier,layout_settings;
 
 
     @Override
@@ -51,6 +55,35 @@ public class ProductList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
 
+        //nav bar
+
+        layout_home = findViewById(R.id.layout_home);
+        layout_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               //
+                startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                finish();
+            }
+        });
+        layout_products = findViewById(R.id.layout_products);
+        layout_products.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Products",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        layout_supplier = findViewById(R.id.layout_supplier);
+        layout_supplier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), FournisseurList.class));
+                finish();
+            }
+        });
+
+        // end nav bar
 
         searchView = findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

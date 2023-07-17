@@ -65,7 +65,7 @@ public class addFournisseur extends AppCompatActivity {
 //                          PutData putData = new PutData("http://192.168.11.66/Loginregister/addproduct.php", "POST", field, data);
 //                          //Adresse IP Cloud
                             PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/AddSupply.php", "POST", field, data);
-
+//
 
                             if(putData.startPut()){
                                 if(putData.onComplete()){
