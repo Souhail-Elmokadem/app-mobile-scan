@@ -92,7 +92,7 @@ public class UserList extends AppCompatActivity {
                 intent.putExtra("emailUser",emailUser);
                 intent.putExtra("idUser",idUser);
                 startActivity(intent);
-               // finish();
+                finish();
             }
         });
     }
