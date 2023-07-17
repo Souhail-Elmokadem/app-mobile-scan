@@ -35,10 +35,10 @@
                     android:id="@+id/useridtext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Add Fournisseur"
+                    android:text="ADD FOURNISSEUR"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="36sp"
+                    android:textSize="34sp"
                     android:textStyle="bold" />
 
                 <EditText

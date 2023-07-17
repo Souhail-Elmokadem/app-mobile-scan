@@ -10,17 +10,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.finestapp.R;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class Adduser extends AppCompatActivity {
-
-
     EditText Prenom, Nom, Username, Password, Telephone;
     Button Register;
     ProgressBar progressBar;
+    RadioGroup roleRadioGroup;
+
 
     private Button leavebtn;
 
@@ -39,6 +41,8 @@ public class Adduser extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progress);
 
+        roleRadioGroup = findViewById(R.id.radioGroupRoles);
+
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,54 +54,68 @@ public class Adduser extends AppCompatActivity {
                 password = String.valueOf(Password.getText());
                 telephone = String.valueOf(Telephone.getText());
 
+                int selectedRoleId = roleRadioGroup.getCheckedRadioButtonId();
+                if (selectedRoleId == -1) {
+                    Toast.makeText(getApplicationContext(), "Please select a role", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                RadioButton selectedRoleRadioButton = findViewById(selectedRoleId);
+                String roleId = selectedRoleRadioButton.getTag().toString();
+
+
                 if(!prenom.equals("") && !nom.equals("") && !username.equals("") && !password.equals("") && !telephone.equals("")) {
                     progressBar.setVisibility(View.VISIBLE);
-                    //Start ProgressBar first (Set visibility VISIBLE)
-                    Handler handler = new Handler(Looper.getMainLooper());
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            //Starting Write and Read data with URL
-                            //Creating array for parameters
-                            String[] field = new String[5];
-                            field[0] = "NomUser";
-                            field[1] = "PrenomUser";
-                            field[2] = "EmailUser";
-                            field[3] = "PasswordUser";
-                            field[4] = "TelUser";
-                            //Creating array for data
-                            String[] data = new String[5];
-                            data[0] = prenom;
-                            data[1] = nom;
-                            data[2] = username;
-                            data[3] = password;
-                            data[4] = telephone;
 
-                            //The IP-Adress means that devices needs to be connected to the same WIFI network
-                            PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/signup.php", "POST", field, data);
-                            if (putData.startPut()) {
-                                if (putData.onComplete()) {
-                                    progressBar.setVisibility(View.GONE);
-                                    String result = putData.getResult();
-                                    //End ProgressBar (Set visibility to GONE)
-                                    if(result.equals("Sign Up Success")){
-                                        Intent intent = new Intent(getApplicationContext(), UserList.class);
-                                        startActivity(intent);
-                                        finish();
-                                        Toast.makeText(getApplicationContext(), "Account Created!", Toast.LENGTH_SHORT).show();
-                                    }else {
-                                        Toast.makeText(getApplicationContext(), "Error Creating Account !", Toast.LENGTH_SHORT).show();
+                        //Start ProgressBar first (Set visibility VISIBLE)
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                //Starting Write and Read data with URL
+                                //Creating array for parameters
+                                String[] field = new String[6];
+                                field[0] = "NomUser";
+                                field[1] = "PrenomUser";
+                                field[2] = "EmailUser";
+                                field[3] = "PasswordUser";
+                                field[4] = "TelUser";
+                                field[5] = "RoleId";
+
+                                //Creating array for data
+                                String[] data = new String[6];
+                                data[0] = prenom;
+                                data[1] = nom;
+                                data[2] = username;
+                                data[3] = password;
+                                data[4] = telephone;
+                                data[5] = roleId;
+
+
+                                //The IP-Adress means that devices needs to be connected to the same WIFI network
+                                PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/addUser.php", "POST", field, data);
+                                if (putData.startPut()) {
+                                    if (putData.onComplete()) {
+                                        progressBar.setVisibility(View.GONE);
+                                        String result = putData.getResult();
+                                        //End ProgressBar (Set visibility to GONE)
+                                        if (result.equals("User Added")) {
+                                            Intent intent = new Intent(getApplicationContext(), UserList.class);
+                                            startActivity(intent);
+                                            finish();
+                                            Toast.makeText(getApplicationContext(), "Account Created!", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "Error Creating Account !", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 }
+                                //End Write and Read data with URL
                             }
-                            //End Write and Read data with URL
-                        }
-                    });
+                        });
+                    } else {
+                        Toast.makeText(getApplicationContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else {
-                    Toast.makeText(getApplicationContext(), "All fields are required", Toast.LENGTH_SHORT).show();
-                }
-            }
         });
 
 

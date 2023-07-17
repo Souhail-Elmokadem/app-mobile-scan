@@ -17,9 +17,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.finestapp.R;
-import com.example.finestapp.fournisseur.Fournisseur;
 import com.example.finestapp.fournisseur.FournisseurList;
-import com.example.finestapp.product.ProductDetail;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +31,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import com.example.finestapp.Server;
+
 import com.example.finestapp.product.ProductList;
 
 public class UserList extends AppCompatActivity {
@@ -113,7 +111,8 @@ public class UserList extends AppCompatActivity {
                 String emailUser = selectedItem.getEmail();
                 String telUser = selectedItem.getTelephone();
                 String idUser = selectedItem.getIdUser();
-                Intent intent = new Intent(UserList.this, Detail_user.class);
+
+                Intent intent = new Intent(UserList.this, UserDetail.class);
                 intent.putExtra("telUser",telUser);
                 intent.putExtra("nomUser", nomUser);
                 intent.putExtra("prenomUser", prenomUser);

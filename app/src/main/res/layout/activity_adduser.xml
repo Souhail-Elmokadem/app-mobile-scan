@@ -15,7 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="20dp"
+
             app:cardElevation="20dp">
 
             <LinearLayout
@@ -23,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/border"
+                android:backgroundTint="#1D5B79"
                 android:orientation="vertical"
                 android:padding="24dp">
 
@@ -32,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:text="ADD USER"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="36sp"
                     android:textStyle="bold" />
 
@@ -40,13 +42,15 @@
                     android:id="@+id/prenomtxt"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/border"
                     android:drawableLeft="@drawable/baseline_person_24"
+                    android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
                     android:hint="Firstname"
                     android:padding="8dp"
-                    android:textColor="@color/black" />
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white" />
 
                 <EditText
                     android:id="@+id/nom"
@@ -55,11 +59,12 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/border"
                     android:drawableLeft="@drawable/baseline_person_24"
+                    android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
                     android:hint="Lastname"
                     android:padding="8dp"
-                    android:textColor="@color/black" />
-
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white" />
                 <EditText
                     android:id="@+id/username"
                     android:layout_width="match_parent"
@@ -67,10 +72,12 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/border"
                     android:drawableLeft="@drawable/baseline_alternate_email_24"
+                    android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
                     android:hint="Email"
                     android:padding="8dp"
-                    android:textColor="@color/black" />
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white" />
 
                 <EditText
                     android:id="@+id/password"
@@ -79,11 +86,13 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/border"
                     android:drawableLeft="@drawable/baseline_lock_24"
+                    android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:padding="8dp"
-                    android:textColor="@color/black" />
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white" />
 
                 <EditText
                     android:id="@+id/telephone"
@@ -92,13 +101,39 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/border"
                     android:drawableLeft="@drawable/baseline_local_phone_24"
+                    android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
                     android:hint="Telephone"
                     android:inputType="phone|number"
                     android:maxLength="10"
                     android:padding="8dp"
-                    android:textColor="@color/black" />
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white" />
 
+                <RadioGroup
+                    android:id="@+id/radioGroupRoles"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:padding="16dp">
+
+                    <RadioButton
+                        android:id="@+id/radioAdmin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Admin"
+                        android:tag="2"
+                        android:textColor="@color/white"/>
+
+                    <RadioButton
+                        android:id="@+id/radioVisitor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Visitor"
+                        android:tag="3"
+                        android:textColor="@color/white"/>
+                </RadioGroup>
 
                 <Button
                     android:id="@+id/registerbtn"
