@@ -136,8 +136,8 @@ public class ProductDetail extends AppCompatActivity {
                 textViewFournisseurName.setText("Fournisseur Name: " + fournisseurName);
             }
         }
-        backbtn = findViewById(R.id.backbtn);
 
+        backbtn = findViewById(R.id.backbtn);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

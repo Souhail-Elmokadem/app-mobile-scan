@@ -6,9 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#8CC0DE"
     android:padding="16dp"
-    tools:context=".user.Detail_user">
+    tools:context=".user.UserDetail">
 
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:padding="24dp"
+        android:backgroundTint="#1D5B79"
+        android:background="@drawable/border"
+        android:visibility="gone">
 
     <EditText
         android:id="@+id/editNomUser"
@@ -16,11 +27,12 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/border"
+        android:singleLine="true"
         android:drawablePadding="8dp"
         android:hint="Nom Utilisateur"
+        android:textColorHint="@color/white"
         android:padding="8dp"
-        android:textColor="@color/black"
-        android:visibility="gone" />
+        android:textColor="@color/white" />
 
     <EditText
         android:id="@+id/EditPrenomUser"
@@ -30,10 +42,11 @@
         android:background="@drawable/border"
         android:drawablePadding="8dp"
         android:hint="Prenom Utilisateur"
+        android:singleLine="true"
+        android:textColorHint="@color/white"
         android:inputType="text"
         android:padding="8dp"
-        android:textColor="@color/black"
-        android:visibility="gone" />
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/EditEmailUser"
@@ -43,10 +56,11 @@
         android:background="@drawable/border"
         android:drawablePadding="8dp"
         android:hint="Email Utilisateur"
-        android:inputType="text"
+        android:singleLine="true"
+        android:textColorHint="@color/white"
+        android:inputType="textEmailAddress"
         android:padding="8dp"
-        android:textColor="@color/black"
-        android:visibility="gone" />
+        android:textColor="@color/white"/>
 
 
     <EditText
@@ -57,35 +71,98 @@
         android:background="@drawable/border"
         android:drawablePadding="8dp"
         android:hint="Tel Utilisateur"
+        android:singleLine="true"
+        android:maxLength="10"
+        android:inputType="number"
+        android:textColorHint="@color/white"
         android:padding="8dp"
-        android:textColor="@color/black"
-        android:visibility="gone" />
+        android:textColor="@color/white"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupRoles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="16dp">
+
+            <RadioButton
+                android:id="@+id/radioAdmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Admin"
+                android:tag="2"
+                android:textColor="@color/white"/>
+
+            <RadioButton
+                android:id="@+id/radioVisitor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Visitor"
+                android:tag="3"
+                android:textColor="@color/white"/>
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/savebtn"
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#8EAC50"
+            android:text="Save"
+            app:cornerRadius="20dp" />
+        <Button
+            android:id="@+id/cancelbtn"
+            android:padding="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F1C93B"
+            android:text="discard"
+            app:cornerRadius="20dp" />
+</LinearLayout>
 
     <TextView
         android:id="@+id/textViewUserNom"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Nom User"
+        android:padding="24dp"
+        android:textColorHint="@color/white"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewUserPrenom"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Prenom User"
+        android:padding="24dp"
+        android:textColorHint="@color/white"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewUserEmail"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Email User"
+        android:padding="24dp"
+        android:textColorHint="@color/white"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewUserTel"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:hint="Telephone User"
+        android:textColorHint="@color/white"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold" />
 
@@ -95,22 +172,13 @@
         android:gravity="bottom">
 
         <Button
-            android:id="@+id/backbtnUser"
+            android:id="@+id/backbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/savebtn"
             android:backgroundTint="#E76161"
             android:padding="20dp"
             android:text="Back" />
 
-        <Button
-            android:id="@+id/savebtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#4CAF50"
-            android:padding="20dp"
-            android:text="Save"
-            android:visibility="gone" />
     </RelativeLayout>
 
 </LinearLayout>

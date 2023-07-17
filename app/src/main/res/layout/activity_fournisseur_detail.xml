@@ -28,9 +28,9 @@
         android:background="@drawable/border"
         android:drawablePadding="8dp"
         android:hint="Nom"
+        android:singleLine="true"
         android:padding="8dp"
-        android:textColor="@color/white"
-        android:visibility="gone" />
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/EditPrenom"
@@ -40,10 +40,9 @@
         android:background="@drawable/border"
         android:drawablePadding="8dp"
         android:hint="Prenom"
-        android:inputType="textShortMessage"
+        android:singleLine="true"
         android:padding="8dp"
-        android:textColor="@color/white"
-        android:visibility="gone" />
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/EditTele"
@@ -53,10 +52,11 @@
         android:background="@drawable/border"
         android:drawablePadding="8dp"
         android:hint="Telephone"
+        android:singleLine="true"
         android:inputType="number"
+        android:maxLength="10"
         android:padding="8dp"
-        android:textColor="@color/white"
-        android:visibility="gone" />
+        android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/savebtn"
@@ -129,7 +129,6 @@
             android:backgroundTint="#E76161"
             android:padding="15dp"
             android:text="Back"
-           android:layout_below="@+id/savebtn"
             />
 
     </RelativeLayout>

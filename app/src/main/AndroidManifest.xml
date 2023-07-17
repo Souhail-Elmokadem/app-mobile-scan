@@ -22,7 +22,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".user.Detail_user"
+            android:name=".user.UserDetail"
             android:exported="false"
             android:label="Detail User"
             />
