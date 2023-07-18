@@ -39,7 +39,10 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        checkSession();
+
+            checkSession();
+
+
     }
 
     private void checkSession() {
@@ -86,7 +89,7 @@ public class Login extends AppCompatActivity {
 
                 if(CheckBox.isChecked()==true) {
 
-                    checkboxStatus=true;
+                    sessionActivity.setIscheckBox(true);
 
                 }
                 String username, password;
@@ -125,10 +128,10 @@ public class Login extends AppCompatActivity {
                                         finish();
                                        // Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
                                         //session start
-                                        if (checkboxStatus){
+
                                             sessionActivity.saveSession(username,password);
 
-                                        }
+
                                         //moveToDashboard();
                                         //session end
                                       //Toast.makeText(getApplicationContext(),sharedPreferences.getString("isLoggedIn","false"),Toast.LENGTH_SHORT).show();

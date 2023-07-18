@@ -25,6 +25,10 @@
             android:name=".scanner.ScannerQr"
             android:exported="false" />
         <activity
+            android:name=".Setting"
+            android:exported="false"
+            android:label="Settings" />
+        <activity
             android:name=".user.UserDetail"
             android:exported="false"
             android:label="Detail User" />

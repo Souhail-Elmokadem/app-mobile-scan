@@ -8,7 +8,7 @@ public class SessionActivity {
     SharedPreferences.Editor editor;
     String shared_pref_name = "session";
 
-    private boolean isLoggedIn;
+    private boolean ischeckBox=false;
     private String Email;
     private String idUser;
 
@@ -25,16 +25,17 @@ public class SessionActivity {
     public String getSession(){
         return sharedPreferences.getString("session_email","null");
     }
-    public boolean isLoggedIn() {
-        return isLoggedIn;
+    public boolean isIscheckBox() {
+        return ischeckBox;
     }
 
-    public void setLoggedIn(boolean loggedIn) {
-        isLoggedIn = loggedIn;
+    public void setIscheckBox(boolean check) {
+
+        ischeckBox = check;
     }
 
-    public String getEmail() {
-        return Email;
+    public String getEmailSession() {
+        return sharedPreferences.getString("session_email","null");
     }
 
     public String getIdUser() {
@@ -51,4 +52,5 @@ public class SessionActivity {
         editor.remove("session_email");
         editor.commit();
     }
+
 }
