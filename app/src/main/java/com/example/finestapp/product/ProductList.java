@@ -1,9 +1,6 @@
 package com.example.finestapp.product;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,17 +8,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.finestapp.Dashboard;
-import com.example.finestapp.fournisseur.FournisseurList;
-import com.example.finestapp.user.Login;
-import com.example.finestapp.MainActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.finestapp.R;
-import com.example.finestapp.Scancamera;
+import com.example.finestapp.scanner.Scancamera;
+import com.example.finestapp.SessionActivity;
+import com.example.finestapp.user.Login;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,8 +42,8 @@ public class ProductList extends AppCompatActivity {
     private ListView listView;
     private ProductListAdapter adapter;
 
-    private SharedPreferences sharedPreferences;
-    LinearLayout layout_home,layout_products,layout_supplier,layout_settings;
+
+
 
 
     @Override
@@ -57,31 +53,7 @@ public class ProductList extends AppCompatActivity {
 
         //nav bar
 
-        layout_home = findViewById(R.id.layout_home);
-        layout_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               //
-                startActivity(new Intent(getApplicationContext(), Dashboard.class));
-                finish();
-            }
-        });
-        layout_products = findViewById(R.id.layout_products);
-        layout_products.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Products",Toast.LENGTH_SHORT).show();
 
-            }
-        });
-        layout_supplier = findViewById(R.id.layout_supplier);
-        layout_supplier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), FournisseurList.class));
-                finish();
-            }
-        });
 
         // end nav bar
 
@@ -137,8 +109,6 @@ public class ProductList extends AppCompatActivity {
             }
         });
     }
-
-
 
     private void filterItems(String query) {
         List<Item> filteredList = new ArrayList<>();
@@ -235,10 +205,9 @@ public class ProductList extends AppCompatActivity {
             startActivity(intent);
             return true;
         }else if (id == R.id.logoutbtn) {
-            Login.sharedPreferences.edit().remove("state").commit();
-
-            Intent intent = new Intent(ProductList.this, MainActivity.class);
-            startActivity(intent);
+            SessionActivity sessionActivity = new SessionActivity(ProductList.this);
+            sessionActivity.removeSession();
+            startActivity(new Intent(ProductList.this, Login.class));
             finish();
             return true;
         }

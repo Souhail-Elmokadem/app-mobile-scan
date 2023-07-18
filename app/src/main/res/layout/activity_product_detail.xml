@@ -109,55 +109,55 @@
 
 
     <TextView
-        android:layout_marginTop="20dp"
         android:id="@+id/textViewProductName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="NAME"
+        android:padding="24dp"
         android:gravity="center"
         android:textColor="@color/white"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"/>
 
     <TextView
-        android:layout_marginTop="20dp"
         android:id="@+id/textViewProductPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="PRICE"
+        android:padding="24dp"
         android:gravity="center"
         android:textColor="@color/white"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"/>
 
     <TextView
-        android:layout_marginTop="20dp"
         android:id="@+id/textViewProductDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="DATE"
+        android:padding="24dp"
         android:gravity="center"
         android:textColor="@color/white"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"/>
 
     <TextView
-        android:layout_marginTop="20dp"
         android:id="@+id/textViewProductMarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="MARGE"
+        android:padding="24dp"
         android:gravity="center"
         android:textColor="@color/white"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"/>
 
     <TextView
-        android:layout_marginTop="20dp"
         android:id="@+id/textViewFournisseurName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="SUPPLIER"
+        android:padding="24dp"
         android:gravity="center"
         android:textColor="@color/white"
         android:textAppearance="?android:textAppearanceLarge"

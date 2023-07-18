@@ -23,6 +23,8 @@ import com.android.volley.toolbox.Volley;
 import com.example.finestapp.R;
 import com.example.finestapp.fournisseur.Fournisseur;
 import com.example.finestapp.fournisseur.FournisseurList;
+import com.example.finestapp.scanner.Scancamera;
+import com.example.finestapp.scanner.ScannerQr;
 import com.mysql.cj.xdevapi.JsonArray;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -33,7 +35,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class AddProduct extends AppCompatActivity {
-    private Button cancel,addbtn;
+
+
+     Button cancel, addbtn, qrbtn;
     EditText name,price,marge;
 
     Spinner spinnerFournisseur;
@@ -52,6 +56,24 @@ public class AddProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+
+        qrbtn = findViewById(R.id.qrbtn);
+        qrbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // fournisseur
+                Fournisseur selectedFournisseur = (Fournisseur) spinnerFournisseur.getSelectedItem();
+                String selectedFournisseurId = selectedFournisseur.getId();
+
+                Intent intent = new Intent(getApplicationContext(), ScannerQr.class);
+                intent.putExtra("productMarge",marge.getText().toString());
+                intent.putExtra("productName", name.getText().toString());
+                intent.putExtra("productPrice",price.getText().toString() );
+                intent.putExtra("fournisseurid",selectedFournisseurId);
+                startActivity(intent);
+
+            }
+        });
 
 
         requestQueue = Volley.newRequestQueue(this);

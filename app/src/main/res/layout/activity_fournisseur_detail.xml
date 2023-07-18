@@ -80,12 +80,12 @@
     </LinearLayout>
 
     <TextView
-        android:layout_marginTop="20dp"
         android:id="@+id/textViewFournisseurNom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:hint="Nom"
+        android:padding="24dp"
         android:gravity="center"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"
@@ -93,24 +93,24 @@
         android:visibility="visible" />
 
     <TextView
-        android:layout_marginTop="20dp"
         android:id="@+id/textViewFournisseurPrenom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:hint="Prenom"
+        android:padding="24dp"
         android:gravity="center"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"
         android:visibility="visible" />
 
     <TextView
-        android:layout_marginTop="20dp"
         android:id="@+id/textViewFournisseurTele"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:hint="Telephone"
+        android:padding="24dp"
         android:gravity="center"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"

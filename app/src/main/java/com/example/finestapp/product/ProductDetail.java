@@ -1,5 +1,4 @@
 package com.example.finestapp.product;
-import static com.example.finestapp.Server.Url;
 
 import android.content.DialogInterface;
 import androidx.annotation.NonNull;
@@ -28,11 +27,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.finestapp.MainActivity;
 import com.example.finestapp.R;
-import com.example.finestapp.Scancamera;
 import com.example.finestapp.fournisseur.Fournisseur;
-import com.example.finestapp.user.Login;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONArray;
