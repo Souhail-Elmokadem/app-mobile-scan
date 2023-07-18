@@ -1,8 +1,5 @@
 package com.example.finestapp.fournisseur;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,16 +8,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.finestapp.Dashboard;
-import com.example.finestapp.product.Item;
-import com.example.finestapp.product.ProductDetail;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.finestapp.R;
-import com.example.finestapp.product.ProductList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,7 +43,7 @@ public class FournisseurList extends AppCompatActivity {
     private ListView listView;
     private FournisseurListAdapter adapter;
 
-    LinearLayout layout_home,layout_products,layout_supplier,layout_settings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,32 +51,6 @@ public class FournisseurList extends AppCompatActivity {
         setContentView(R.layout.activity_fournisseur_list);
 
         // start nav bar
-
-        layout_home = findViewById(R.id.layout_home);
-        layout_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               startActivity(new Intent(getApplicationContext(), Dashboard.class));
-               finish();
-            }
-        });
-        layout_products = findViewById(R.id.layout_products);
-        layout_products.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ProductList.class));
-                finish();
-
-            }
-        });
-        layout_supplier = findViewById(R.id.layout_supplier);
-        layout_supplier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               Toast.makeText(getApplicationContext(),"Fournisseur",Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
         // end bar
 
