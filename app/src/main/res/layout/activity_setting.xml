@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="match_parent">
+
+
+
+    <EditText
+        android:id="@+id/EditOldPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Old Password"
+        android:inputType="textPassword"/>
+
+    <EditText
+        android:id="@+id/EditNewPassword"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/EditOldPassword"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your New Password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/EditConfirmNewPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EditNewPassword"
+        android:layout_marginTop="5dp"
+        android:hint="Confirme Your New Password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/savebtnpass"
+        android:layout_width="249dp"
+        android:layout_height="109dp"
+        android:layout_below="@+id/EditConfirmNewPassword"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="169dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="471dp"
+        android:text="save" />
+
+    <Button
+        android:id="@+id/logoutbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="97dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="607dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="17dp"
+        android:text="Logout" />
+
+
+</RelativeLayout>

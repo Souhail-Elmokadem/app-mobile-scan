@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finestapp.fournisseur.FournisseurList;
@@ -17,7 +15,7 @@ import com.example.finestapp.user.UserList;
 
 public class Dashboard extends AppCompatActivity {
     LinearLayout layout_home,layout_products,layout_supplier,layout_settings;
-    ImageView fournisseur,product,scanbtn,userbtn;
+    ImageView fournisseur,product,scanbtn,userbtn,profilebtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +25,13 @@ public class Dashboard extends AppCompatActivity {
         scanbtn = findViewById(R.id.scanbtn);
         fournisseur = findViewById(R.id.fournisseurbtn);
         product = findViewById(R.id.productbtn);
+        profilebtn = findViewById(R.id.ProfileButton);
+        profilebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Setting.class));
+            }
+        });
         getSupportActionBar().hide();
         product.setOnClickListener(new View.OnClickListener() {
             @Override
