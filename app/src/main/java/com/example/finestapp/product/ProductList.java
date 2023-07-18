@@ -15,7 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.R;
-import com.example.finestapp.Scancamera;
+import com.example.finestapp.scanner.Scancamera;
 import com.example.finestapp.SessionActivity;
 import com.example.finestapp.user.Login;
 
@@ -109,8 +109,6 @@ public class ProductList extends AppCompatActivity {
             }
         });
     }
-
-
 
     private void filterItems(String query) {
         List<Item> filteredList = new ArrayList<>();

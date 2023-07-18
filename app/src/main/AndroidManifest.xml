@@ -22,10 +22,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".scanner.ScannerQr"
+            android:exported="false" />
+        <activity
             android:name=".user.UserDetail"
             android:exported="false"
-            android:label="Detail User"
-            />
+            android:label="Detail User" />
         <activity
             android:name=".fournisseur.FournisseurDetail"
             android:exported="false"
@@ -59,7 +61,7 @@
             android:exported="false"
             android:label="Add Product" />
         <activity
-            android:name=".Scancamera"
+            android:name=".scanner.Scancamera"
             android:exported="false"
             android:label="Code Scan" />
 
