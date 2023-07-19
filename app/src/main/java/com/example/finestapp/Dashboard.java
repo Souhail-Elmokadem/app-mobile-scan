@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.fournisseur.FournisseurList;
-import com.example.finestapp.product.ProductList;
+import com.example.finestapp.product.frag_products.ProductMain;
 import com.example.finestapp.scanner.Scancamera;
 import com.example.finestapp.user.UserList;
 
@@ -27,6 +27,7 @@ public class Dashboard extends AppCompatActivity {
         fournisseur = findViewById(R.id.fournisseurbtn);
         product = findViewById(R.id.productbtn);
         profilebtn = findViewById(R.id.ProfileButton);
+
         profilebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,7 +38,7 @@ public class Dashboard extends AppCompatActivity {
         product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProductList.class);
+                Intent intent = new Intent(getApplicationContext(), ProductMain.class);
                 startActivity(intent);
                 Toast.makeText(Dashboard.this, "product", Toast.LENGTH_SHORT).show();
             }
@@ -72,7 +73,7 @@ public class Dashboard extends AppCompatActivity {
         layout_products.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),ProductList.class));
+                startActivity(new Intent(getApplicationContext(), ProductMain.class));
                 finish();
 
             }

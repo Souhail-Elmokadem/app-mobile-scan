@@ -1,7 +1,5 @@
 package com.example.finestapp.product;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -22,10 +22,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finestapp.R;
 import com.example.finestapp.fournisseur.Fournisseur;
-import com.example.finestapp.fournisseur.FournisseurList;
-import com.example.finestapp.scanner.Scancamera;
+import com.example.finestapp.product.frag_products.ProductMain;
 import com.example.finestapp.scanner.ScannerQr;
-import com.mysql.cj.xdevapi.JsonArray;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONArray;
@@ -136,7 +134,7 @@ public class AddProduct extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ProductList.class);
+                Intent intent = new Intent(getApplicationContext(), ProductMain.class);
                 startActivity(intent);
                 finish();
             }
@@ -182,7 +180,7 @@ public class AddProduct extends AppCompatActivity {
                                 if(putData.onComplete()){
                                     String res = putData.getResult();
                                     if(res.equals("Add Success")){
-                                        Intent intent = new Intent(getApplicationContext(),ProductList.class);
+                                        Intent intent = new Intent(getApplicationContext(), ProductMain.class);
                                         startActivity(intent);
                                         finish();
                                         Toast.makeText(getApplicationContext(),"Product Added !",Toast.LENGTH_SHORT).show();

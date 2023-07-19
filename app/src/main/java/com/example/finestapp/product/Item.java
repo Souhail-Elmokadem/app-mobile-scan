@@ -7,7 +7,11 @@ public class Item {
     private String date;
     private String marge;
     private String fournisseurName;
+
     private String idFour;
+
+    // for product iptv
+    private String code;
 
     public Item(String name, String price) {
         this.name = name;
@@ -23,6 +27,7 @@ public class Item {
 
     }
 
+    // constructor used four products physique
     public Item(String idprod, String name, String price, String date, String marge, String fournisseurName,String idfour){
         this.idprod = idprod;
         this.name = name;
@@ -31,6 +36,12 @@ public class Item {
         this.marge = marge;
         this.fournisseurName = fournisseurName;
         this.idFour=idfour;
+    }
+    // constructor used for iptv products
+    public Item(String idprod,String name,String CodeProd){
+        this.idprod=idprod;
+        this.name=name;
+        this.code=CodeProd;
     }
 
 
@@ -45,6 +56,10 @@ public class Item {
 
     public String getDate() {
         return date;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public String getMarge() {
