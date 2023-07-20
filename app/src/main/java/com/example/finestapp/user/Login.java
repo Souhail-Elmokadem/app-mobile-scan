@@ -35,7 +35,10 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        checkSession();
+
+            checkSession();
+
+
     }
 
     private void checkSession() {
@@ -69,7 +72,7 @@ public class Login extends AppCompatActivity {
 
                 if(CheckBox.isChecked()==true) {
 
-                    checkboxStatus=true;
+                    sessionActivity.setIscheckBox(true);
 
                 }
                 String username, password;

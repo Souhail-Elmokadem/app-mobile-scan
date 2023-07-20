@@ -1,10 +1,6 @@
 package com.example.finestapp.product;
 
 import android.content.DialogInterface;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +17,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,7 +28,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finestapp.R;
+import com.example.finestapp.Server;
 import com.example.finestapp.fournisseur.Fournisseur;
+import com.example.finestapp.product.frag_products.ProductMain;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONArray;
@@ -36,7 +38,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import com.example.finestapp.Server;
 public class ProductDetail extends AppCompatActivity {
 
 
@@ -130,6 +131,20 @@ public class ProductDetail extends AppCompatActivity {
 
                 TextView textViewFournisseurName = findViewById(R.id.textViewFournisseurName);
                 textViewFournisseurName.setText("Fournisseur Name: " + fournisseurName);
+            } else if (extras.getString("productCode")!=null) {
+                TextView textViewProductDate = findViewById(R.id.textViewProductDate);
+                TextView textViewProductMarge = findViewById(R.id.textViewProductMarge);
+                textViewProductMarge.setVisibility(View.GONE);
+                TextView textViewFournisseurName = findViewById(R.id.textViewFournisseurName);
+                textViewFournisseurName.setVisibility(View.GONE);
+                textViewProductDate.setVisibility(View.GONE);
+                String productName = extras.getString("productName");
+                String productCode = extras.getString("productCode");
+                TextView textViewProductName = findViewById(R.id.textViewProductName);
+                textViewProductName.setText("Product Name: " + productName);
+
+                TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
+                textViewProductPrice.setText("Product Code: " + productCode );
             }
         }
 
@@ -201,7 +216,7 @@ public class ProductDetail extends AppCompatActivity {
                                 if (putData.onComplete()){
                                     String res = putData.getResult();
                                     if (res.equals("Updated Success")){
-                                        startActivity(new Intent(getApplicationContext(),ProductList.class));
+                                        startActivity(new Intent(getApplicationContext(), ProductMain.class));
                                         finish();
                                         Toast.makeText(getApplicationContext(),"Update Success",Toast.LENGTH_SHORT).show();
                                     }else{
@@ -291,7 +306,7 @@ public class ProductDetail extends AppCompatActivity {
                                 if (putData.onComplete()){
                                     String res = putData.getResult();
                                     if (res.equals("Product deleted successfully.")){
-                                        startActivity(new Intent(getApplicationContext(),ProductList.class));
+                                        startActivity(new Intent(getApplicationContext(), ProductMain.class));
                                         finish();
                                         Toast.makeText(getApplicationContext(), "Suppression with success", Toast.LENGTH_SHORT).show();
                                     }

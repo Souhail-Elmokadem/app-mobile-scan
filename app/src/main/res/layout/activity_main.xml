@@ -11,8 +11,6 @@
     tools:context=".MainActivity">
 
 
-
-
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="414dp"
         android:layout_height="523dp"
