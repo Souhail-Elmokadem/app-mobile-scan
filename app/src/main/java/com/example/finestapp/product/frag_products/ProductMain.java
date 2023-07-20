@@ -9,12 +9,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.finestapp.databinding.ActivityFragmentProduitMainBinding;
 import com.example.finestapp.product.AddProduct;
-import com.example.finestapp.ui.main.SectionsPagerAdapter;
+import com.example.finestapp.ui.mainProduitTabbed.SectionsPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 public class ProductMain extends AppCompatActivity {
+
 
     private ActivityFragmentProduitMainBinding binding;
 
@@ -30,6 +31,7 @@ public class ProductMain extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
+
         buttonAdd(0);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

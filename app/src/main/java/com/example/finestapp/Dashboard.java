@@ -18,6 +18,10 @@ public class Dashboard extends AppCompatActivity {
     LinearLayout layout_home,layout_products,layout_supplier,layout_settings;
     ImageView fournisseur,product,scanbtn,userbtn,profilebtn;
 
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

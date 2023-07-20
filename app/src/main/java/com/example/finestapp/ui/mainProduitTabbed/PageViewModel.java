@@ -1,4 +1,4 @@
-package com.example.finestapp.ui.main;
+package com.example.finestapp.ui.mainProduitTabbed;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;

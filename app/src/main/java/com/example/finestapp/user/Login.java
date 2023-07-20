@@ -58,6 +58,9 @@ public class Login extends AppCompatActivity {
         }
     }
 
+
+
+
     //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,7 @@ public class Login extends AppCompatActivity {
         Login = findViewById(R.id.loginbtn);
         CheckBox = findViewById(R.id.checkBox);
         SessionActivity sessionActivity = new SessionActivity(com.example.finestapp.user.Login.this);
+
 
 //        progressBar = findViewById(R.id.progress);
 //        sharedPreferences = getSharedPreferences("state", Context.MODE_PRIVATE);
