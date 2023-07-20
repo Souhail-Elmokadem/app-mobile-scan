@@ -91,8 +91,7 @@ public class UserList extends AppCompatActivity {
                 intent.putExtra("prenomUser", prenomUser);
                 intent.putExtra("emailUser",emailUser);
                 intent.putExtra("idUser",idUser);
-                startActivity(intent);
-                finish();
+
             }
         });
     }
@@ -159,7 +158,6 @@ public class UserList extends AppCompatActivity {
         protected void onPostExecute(List<User> resultList) {
             originalItemList = resultList;
             // Process the retrieved data (resultList)
-            Toast.makeText(UserList.this, "Received data: " + resultList.size() + " items", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "Received data: " + resultList.size() + " items");
 
             adapter.clear();

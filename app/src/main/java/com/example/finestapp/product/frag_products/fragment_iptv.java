@@ -168,7 +168,7 @@ public class fragment_iptv extends Fragment {
         protected void onPostExecute(List<Item> resultList) {
             originalItemList = resultList;
             // Process the retrieved data (resultList)
-            Toast.makeText(getContext(), "Received data: " + resultList.size() + " items", Toast.LENGTH_SHORT).show();
+
             Log.d(TAG, "Received data: " + resultList.size() + " items");
 
             adapter.clear();

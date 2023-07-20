@@ -135,7 +135,7 @@ public class ScannerQr extends AppCompatActivity {
             }
         });
     }
-//timer
+    //timer
     private CountDownTimer createTimer(long duration) {
         return new CountDownTimer(duration, 1000) {
             @Override
