@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".scanner.Scancamera"
+    tools:context=".scanner.ScannerQr"
     android:background="#8CC0DE"
     android:orientation="vertical">
 
@@ -15,7 +15,6 @@
         android:layout_height="380dp"
         android:layout_gravity="center">
     </SurfaceView>
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="@android:style/Widget.ProgressBar.Horizontal"
@@ -48,9 +47,16 @@
             android:layout_height="wrap_content"
             android:text="Back"
             android:layout_gravity="bottom"
-            android:backgroundTint="#E76161"/>
+            android:backgroundTint="#E76161"
+            android:layout_below="@+id/addbtn"
+            />
+        <Button
+            android:id="@+id/addbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add product"
+            android:background="@color/purple"
+            />
     </RelativeLayout>
-
-
 
 </LinearLayout>

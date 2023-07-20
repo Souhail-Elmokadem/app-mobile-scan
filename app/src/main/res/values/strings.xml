@@ -11,5 +11,10 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_listproduct">Listproduct</string>
     <string name="title_activity_listfournisseur">List Fournisseur</string>
+    <string name="title_activity_fragment_produit_main">Produits</string>
+    <string name="tab1">Physique</string>
+    <string name="tab2">Iptv</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

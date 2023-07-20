@@ -1,7 +1,4 @@
-package com.example.finestapp;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
+package com.example.finestapp.scanner;
 
 import android.Manifest;
 import android.content.Intent;
@@ -10,7 +7,8 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -20,26 +18,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.finestapp.product.Item;
-import com.example.finestapp.product.ProductDetail;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import com.example.finestapp.R;
+import com.example.finestapp.product.frag_products.fragment_ProductMain;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
 
-public class Scancamera extends AppCompatActivity {
+public class ScannerQr extends AppCompatActivity {
+    private Button backbtn,addbtn;
 
     private boolean isProcessingBarcode = false;
     private SurfaceView surfaceView;
@@ -47,30 +40,26 @@ public class Scancamera extends AppCompatActivity {
     private CameraSource cameraSource;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     private ToneGenerator toneGen1;
-    private static final String Url_PHP_Product = "https://ftapp.finesttechnology.ma/Loginregister/getProductByBarcode.php";
     private TextView barcodeText;
     private String barcodeData;
-    private Button backbtn;
     private ProgressBar progressBar;
     private CountDownTimer timer;
     private static final int TIMER_DURATION = 5000; // 5 seconds
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scancamera);
-
-        barcodeText = findViewById(R.id.barcodeText);
-
-        surfaceView = findViewById(R.id.surface_view);
+        setContentView(R.layout.activity_scanner_qr);
 
         backbtn = findViewById(R.id.backbtn);
-
+        barcodeText = findViewById(R.id.barcodeText);
+        surfaceView = findViewById(R.id.surface_view);
         progressBar = findViewById(R.id.progressBar);
-
         timer = createTimer(TIMER_DURATION);
 
         initialiseDetectorsAndSources();
+
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +67,8 @@ public class Scancamera extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void initialiseDetectorsAndSources() {
 
@@ -98,15 +89,18 @@ public class Scancamera extends AppCompatActivity {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 try {
-                    if (ActivityCompat.checkSelfPermission(Scancamera.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(ScannerQr.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                         cameraSource.start(surfaceView.getHolder());
                     } else {
-                        ActivityCompat.requestPermissions(Scancamera.this, new
+                        ActivityCompat.requestPermissions(ScannerQr.this, new
                                 String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
                     }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+
             }
 
             @Override
@@ -122,7 +116,8 @@ public class Scancamera extends AppCompatActivity {
 
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
-            public void release() { }
+            public void release() {
+            }
 
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
@@ -135,19 +130,68 @@ public class Scancamera extends AppCompatActivity {
                         barcodeData = barcode.email.address;
                     } else {
                         barcodeData = barcode.displayValue;
-                        //  barcodeText.setText(barcodeData);
+                        barcodeText.setText(barcodeData);
+                        analysedate(barcodeData);
                         toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
-                        verife_CodeBarre_Produit(barcodeData);
 
                         // Start the timer and show the progress bar
                         timer.start();
-
                     }
                 }
             }
+
+            private void analysedate(String barcodeData) {
+                addbtn = findViewById(R.id.addbtn);
+                addbtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle extras = getIntent().getExtras();
+
+
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                String[] field = new String[5];
+                                field[0] = "NomProd";
+                                field[1] = "PrixAchat";
+                                field[2] = "MargeProd";
+                                field[3] = "idFour";
+                                field[4] = "Libelle";
+                                //Creating array for data
+                                String[] data = new String[5];
+                                data[0] = extras.getString("productName");
+                                data[1] = extras.getString("productPrice");
+                                data[2] = extras.getString("productMarge");
+                                data[3] = extras.getString("fournisseurid");
+                                data[4] = barcodeData;
+                                //                        PutData putData = new PutData("http://192.168.11.66/Loginregister/addproduct.php", "POST", field, data);
+                                PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/addProductWithQr.php", "POST", field, data);
+
+
+                                if(putData.startPut()){
+                                    if(putData.onComplete()){
+                                        String res = putData.getResult();
+                                        if(res.equals("Add Success")){
+                                            Intent intent = new Intent(getApplicationContext(), fragment_ProductMain.class);
+                                            startActivity(intent);
+                                            finish();
+                                            Toast.makeText(getApplicationContext(),"Product Added !",Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                    }
+                });
+
+            }
         });
     }
-
+//timer
     private CountDownTimer createTimer(long duration) {
         return new CountDownTimer(duration, 1000) {
             @Override
@@ -170,72 +214,6 @@ public class Scancamera extends AppCompatActivity {
         };
     }
 
-    private boolean verife_CodeBarre_Produit(String barecode) {
-
-        ArrayList<Item> resultList = new ArrayList<>();
-        boolean status = false;
-        try {
-            URL url = new URL(Url_PHP_Product);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            InputStream inputStream = connection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            StringBuilder response = new StringBuilder();
-            String line;
-
-
-            while ((line = bufferedReader.readLine()) != null) {
-                response.append(line);
-            }
-
-            bufferedReader.close();
-            inputStream.close();
-            connection.disconnect();
-
-            // Parse the JSON response
-            JSONArray jsonArray = new JSONArray(response.toString());
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                if(jsonObject.getString("Lebelle").equals(barecode)){
-                    String productId = jsonObject.getString("idProd");
-                    String productName = jsonObject.getString("NomProd");
-                    String productPrice = jsonObject.getString("PrixAchat");
-                    String productdate = jsonObject.getString("dateProd");
-                    String productMarge = jsonObject.getString("MargeProd");
-                    String productFourn = jsonObject.getString("idFour");
-                    String productFourName = jsonObject.getString("FournisseurName");
-                    // Item item = new Item(productName, productPrice);
-                    Item item = new Item(productId, productName, productPrice,productdate,productMarge,productFourName,productFourn);
-                    resultList.add(item);
-
-                    Intent intent = new Intent(Scancamera.this, ProductDetail.class);
-                    intent.putExtra("productId",productId);
-                    intent.putExtra("productfourn",productFourn);
-                    intent.putExtra("productMarge",productMarge);
-                    intent.putExtra("productDate",productdate);
-                    intent.putExtra("productName", productName);
-                    intent.putExtra("productPrice", productPrice);
-                    intent.putExtra("FournisseurName",productFourName);
-
-                    startActivity(intent);
-                    finish();
-                    status = true;
-
-                }else {
-                    barcodeText.setText("Codebar Not Found");
-                }
-            }
-
-        } catch (IOException | JSONException e) {
-            Log.e(resultList.toString(), "Error retrieving data: " + e.getMessage());
-        }
-
-
-
-
-        return true;
-    }
 
     @Override
     public void onBackPressed() {

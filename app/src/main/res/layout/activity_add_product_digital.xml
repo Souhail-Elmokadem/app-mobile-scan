@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".product.AddProduct"
+    tools:context=".product.AddProductDigital"
     android:gravity="center"
     android:background="#8CC0DE"
     android:orientation="vertical">
@@ -14,13 +14,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="20dp">
+        app:cardElevation="20dp"
+        android:layout_gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_gravity="center_horizontal"
             android:padding="24dp"
             android:backgroundTint="#1D5B79"
             android:background="@drawable/border">
@@ -28,79 +28,48 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ADD PRODUCT"
-                android:id="@+id/useridtext"
+                android:text="IP TV"
+                android:id="@+id/textviewpDigitalProduct"
                 android:textSize="36sp"
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:textColor="@color/white"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:singleLine="true"
+                android:id="@+id/editnomprod"
+                android:background="@drawable/border"
+                android:layout_marginTop="20dp"
+                android:maxLength="50"
+                android:padding="8dp"
+                android:hint="Nom Produit"
+                android:textColorHint="@color/white"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:drawablePadding="8dp"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/editname"
+                android:id="@+id/editcodeprod"
                 android:singleLine="true"
                 android:background="@drawable/border"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
-                android:hint="Product Name"
+                android:maxLength="50"
+                android:hint="Code Produit"
                 android:textColorHint="@color/white"
                 android:textColor="@color/white"
                 android:drawablePadding="8dp"/>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/editprice"
-                android:background="@drawable/border"
-                android:layout_marginTop="20dp"
-                android:maxLength="4"
-                android:padding="8dp"
-                android:hint="Product Price"
-                android:textColorHint="@color/white"
-                android:inputType="number"
-                android:textColor="@color/white"
-                android:drawablePadding="8dp"/>
 
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/editmarge"
-                android:background="@drawable/border"
-                android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="Product Marge"
-                android:textColorHint="@color/white"
-                android:maxLength="3"
-                android:inputType="number"
-                android:textColor="@color/white"
-                android:drawablePadding="8dp"/>
-
-            <Spinner
-                android:id="@+id/spinnerFournisseur"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:drawablePadding="8dp"
-                android:inputType="number"
-                android:padding="8dp"/>
 
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="ADD WITH BARCODE"
                 android:id="@+id/addbtn"
-                android:textSize="18sp"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="#00DFA2"
-                app:cornerRadius = "20dp"/>
-
-            <Button
-                android:id="@+id/qrbtn"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="ADD WITH QRCODE"
+                android:text="ADD DIGITAL PRODUCT"
                 android:textSize="18sp"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#00DFA2"
@@ -116,9 +85,6 @@
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#E76161"
                 app:cornerRadius = "20dp"/>
-
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
 </ScrollView>

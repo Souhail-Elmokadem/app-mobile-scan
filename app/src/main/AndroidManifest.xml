@@ -22,10 +22,21 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".product.frag_products.fragment_ProductMain"
+            android:exported="false"
+            android:label="@string/title_activity_fragment_produit_main"
+            android:theme="@style/Theme.FinestApp.NoActionBar" />
+        <activity
+            android:name=".scanner.ScannerQr"
+            android:exported="false" />
+        <activity
+            android:name=".Setting"
+            android:exported="false"
+            android:label="Settings" />
+        <activity
             android:name=".user.UserDetail"
             android:exported="false"
-            android:label="Detail User"
-            />
+            android:label="Detail User" />
         <activity
             android:name=".fournisseur.FournisseurDetail"
             android:exported="false"
@@ -59,7 +70,11 @@
             android:exported="false"
             android:label="Add Product" />
         <activity
-            android:name=".Scancamera"
+            android:name=".product.AddProductDigital"
+            android:exported="false"
+            android:label="Add IPTV" />
+        <activity
+            android:name=".scanner.Scancamera"
             android:exported="false"
             android:label="Code Scan" />
 
@@ -70,10 +85,6 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity
-            android:name=".product.ProductList"
-            android:exported="false"
-            android:label="List Of Products" />
         <activity
             android:name=".user.Login"
             android:exported="false"

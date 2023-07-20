@@ -1,27 +1,25 @@
-package com.example.finestapp.product;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.finestapp.product.frag_products;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
-import com.example.finestapp.Dashboard;
-import com.example.finestapp.fournisseur.FournisseurList;
-import com.example.finestapp.user.Login;
-import com.example.finestapp.MainActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.example.finestapp.R;
-import com.example.finestapp.Scancamera;
+import com.example.finestapp.product.AddProduct;
+import com.example.finestapp.product.Item;
+import com.example.finestapp.product.ProductDetail;
+import com.example.finestapp.product.ProductListAdapterPhysique;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,56 +34,39 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductList extends AppCompatActivity {
 
+public class fragment_physical extends Fragment {
+
+
+    public fragment_physical() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+//        Toast.makeText(,"hi",Toast.LENGTH_SHORT).show();
+
+    }
     private SearchView searchView;
     private List<Item> originalItemList;
     private static final String TAG = "ProductList";
     private static final String PHP_SCRIPT_URL = "http://ftapp.finesttechnology.ma/Loginregister/ItemDetail.php";
 
     private ListView listView;
-    private ProductListAdapter adapter;
-
-    private SharedPreferences sharedPreferences;
-    LinearLayout layout_home,layout_products,layout_supplier,layout_settings;
-
-
+    private ProductListAdapterPhysique adapter;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_list);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+       // start oncreate
+        //Toast.makeText(Produit_physique.this,"hi",Toast.LENGTH_SHORT).show();
 
-        //nav bar
+        View v = inflater.inflate(R.layout.fragment_produit_physique, container, false);
+        // start oncreate produit
 
-        layout_home = findViewById(R.id.layout_home);
-        layout_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               //
-                startActivity(new Intent(getApplicationContext(), Dashboard.class));
-                finish();
-            }
-        });
-        layout_products = findViewById(R.id.layout_products);
-        layout_products.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Products",Toast.LENGTH_SHORT).show();
 
-            }
-        });
-        layout_supplier = findViewById(R.id.layout_supplier);
-        layout_supplier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), FournisseurList.class));
-                finish();
-            }
-        });
-
-        // end nav bar
-
-        searchView = findViewById(R.id.searchView);
+        searchView = v.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -106,11 +87,11 @@ public class ProductList extends AppCompatActivity {
             }
         });
 
-        listView = findViewById(R.id.subListView);
-        adapter = new ProductListAdapter(this,R.layout.list_item_layout, new ArrayList<>());
+        listView = v.findViewById(R.id.subListView);
+        adapter = new ProductListAdapterPhysique(getContext(),R.layout.list_item_layout, new ArrayList<>());
         listView.setAdapter(adapter);
 
-        ProductListAsyncTask ProductListAsyncTask = new ProductListAsyncTask();
+        ProductListAsyncTaskph ProductListAsyncTask = new ProductListAsyncTaskph();
         ProductListAsyncTask.execute();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -124,7 +105,7 @@ public class ProductList extends AppCompatActivity {
                 String productfourn = selectedItem.getIdFour();
                 String productId = selectedItem.getId();
                 String productfourname = selectedItem.getFournisseurName();
-                Intent intent = new Intent(ProductList.this, ProductDetail.class);
+                Intent intent = new Intent(getContext(), ProductDetail.class);
                 intent.putExtra("productId",productId);
                 intent.putExtra("productfourn",productfourn);
                 intent.putExtra("productMarge",productMarge);
@@ -133,13 +114,19 @@ public class ProductList extends AppCompatActivity {
                 intent.putExtra("productPrice", productPrice);
                 intent.putExtra("FournisseurName",productfourname);
                 startActivity(intent);
-                finish();
+                getActivity().finish();
             }
         });
+        FloatingActionButton fab = v.findViewById(R.id.addbtnIptv);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               startActivity(new Intent(getContext(), AddProduct.class));
+            }
+        });
+       // end oncreate
+        return v;
     }
-
-
-
     private void filterItems(String query) {
         List<Item> filteredList = new ArrayList<>();
         for (Item item : originalItemList) {
@@ -151,8 +138,7 @@ public class ProductList extends AppCompatActivity {
         adapter.addAll(filteredList);
         adapter.notifyDataSetChanged();
     }
-
-    private class ProductListAsyncTask extends AsyncTask<Void, Void, List<Item>> {
+    public class ProductListAsyncTaskph extends AsyncTask<Void, Void, List<Item>> {
 
         @Override
         protected List<Item> doInBackground(Void... voids) {
@@ -204,7 +190,6 @@ public class ProductList extends AppCompatActivity {
         protected void onPostExecute(List<Item> resultList) {
             originalItemList = resultList;
             // Process the retrieved data (resultList)
-            Toast.makeText(ProductList.this, "Received data: " + resultList.size() + " items", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "Received data: " + resultList.size() + " items");
 
             adapter.clear();
@@ -213,36 +198,4 @@ public class ProductList extends AppCompatActivity {
         }
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.nav, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.addbtn) {
-            Toast.makeText(this, "Add Product", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(ProductList.this, AddProduct.class);
-            startActivity(intent);
-            finish();
-            return true;
-        }else if (id == R.id.scan) {
-            Toast.makeText(this, "Scan Product", Toast.LENGTH_SHORT).show();
-            // Handle scanbtn click action
-            Intent intent = new Intent(ProductList.this, Scancamera.class);
-            startActivity(intent);
-            return true;
-        }else if (id == R.id.logoutbtn) {
-            Login.sharedPreferences.edit().remove("state").commit();
-
-            Intent intent = new Intent(ProductList.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-
-    }
 }

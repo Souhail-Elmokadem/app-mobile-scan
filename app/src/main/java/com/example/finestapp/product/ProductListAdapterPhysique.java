@@ -1,4 +1,4 @@
-package com.example.finestapp.user;
+package com.example.finestapp.product;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,12 +14,12 @@ import com.example.finestapp.R;
 
 import java.util.List;
 
-public class UserListAdapter extends ArrayAdapter<User> {
+public class ProductListAdapterPhysique extends ArrayAdapter<Item> {
     private Context context;
     private int resource;
 
-    public UserListAdapter(Context context, int resource, List<User> users){
-        super(context, resource, users);
+    public ProductListAdapterPhysique(Context context, int resource, List<Item> items) {
+        super(context, resource, items);
         this.context = context;
         this.resource = resource;
     }
@@ -33,12 +33,14 @@ public class UserListAdapter extends ArrayAdapter<User> {
             itemView = inflater.inflate(resource, parent, false);
         }
 
-        TextView textViewName = itemView.findViewById(R.id.userNom);
-        TextView textViewRole = itemView.findViewById(R.id.userRole);
-        User currentItem = getItem(position);
+        TextView textViewName = itemView.findViewById(R.id.productNameTextView);
+        TextView textViewPrice = itemView.findViewById(R.id.productPriceTextView);
+
+        Item currentItem = getItem(position);
         if (currentItem != null) {
-            textViewName.setText(currentItem.getNom() + " " + currentItem.getPrenom());
-            textViewRole.setText(currentItem.getEmail());
+            textViewName.setText(currentItem.getName());
+            String priceText = currentItem.getPrice() + " DHS";
+            textViewPrice.setText(priceText);
         }
 
         return itemView;

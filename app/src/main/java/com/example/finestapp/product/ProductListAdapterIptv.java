@@ -14,15 +14,17 @@ import com.example.finestapp.R;
 
 import java.util.List;
 
-public class ProductListAdapter extends ArrayAdapter<Item> {
+
+public class ProductListAdapterIptv extends ArrayAdapter<Item> {
     private Context context;
     private int resource;
 
-    public ProductListAdapter(Context context, int resource, List<Item> items) {
+    public ProductListAdapterIptv(Context context, int resource, List<Item> items) {
         super(context, resource, items);
         this.context = context;
         this.resource = resource;
     }
+
 
     @NonNull
     @Override
@@ -34,16 +36,16 @@ public class ProductListAdapter extends ArrayAdapter<Item> {
         }
 
         TextView textViewName = itemView.findViewById(R.id.productNameTextView);
-        TextView textViewPrice = itemView.findViewById(R.id.productPriceTextView);
+        TextView textViewCode = itemView.findViewById(R.id.productPriceTextView);
 
         Item currentItem = getItem(position);
         if (currentItem != null) {
             textViewName.setText(currentItem.getName());
-            String priceText = currentItem.getPrice() + " DHS";
-            textViewPrice.setText(priceText);
+            String Code = currentItem.getCode();
+            textViewCode.setText(Code);
         }
 
         return itemView;
     }
-
 }
+
