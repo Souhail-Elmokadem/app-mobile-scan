@@ -22,7 +22,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".product.frag_products.ProductMain"
+            android:name=".product.frag_products.fragment_ProductMain"
             android:exported="false"
             android:label="@string/title_activity_fragment_produit_main"
             android:theme="@style/Theme.FinestApp.NoActionBar" />

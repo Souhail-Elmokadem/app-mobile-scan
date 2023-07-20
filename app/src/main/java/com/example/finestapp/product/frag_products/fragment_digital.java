@@ -10,17 +10,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.finestapp.R;
-import com.example.finestapp.product.AddProduct;
 import com.example.finestapp.product.Item;
 import com.example.finestapp.product.ProductDetail;
-import com.example.finestapp.product.ProductListAdapterPhysique;
+import com.example.finestapp.product.ProductListAdapterIptv;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,37 +34,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Produit_physique extends Fragment {
+public class fragment_digital extends Fragment {
 
-
-    public Produit_physique() {
+    public fragment_digital() {
         // Required empty public constructor
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-//        Toast.makeText(,"hi",Toast.LENGTH_SHORT).show();
-
-    }
     private SearchView searchView;
     private List<Item> originalItemList;
     private static final String TAG = "ProductList";
-    private static final String PHP_SCRIPT_URL = "http://ftapp.finesttechnology.ma/Loginregister/ItemDetail.php";
+    private static final String PHP_SCRIPT_URL = "https://ftapp.finesttechnology.ma/Loginregister/ListProduitsDigital.php";
 
     private ListView listView;
-    private ProductListAdapterPhysique adapter;
+    private ProductListAdapterIptv adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       // start oncreate
-        //Toast.makeText(Produit_physique.this,"hi",Toast.LENGTH_SHORT).show();
-
-        View v = inflater.inflate(R.layout.fragment_produit_physique, container, false);
-        // start oncreate produit
-
-
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_iptv, container, false);
         searchView = v.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -89,43 +74,36 @@ public class Produit_physique extends Fragment {
         });
 
         listView = v.findViewById(R.id.subListView);
-        adapter = new ProductListAdapterPhysique(getContext(),R.layout.list_item_layout, new ArrayList<>());
+        adapter = new ProductListAdapterIptv(getContext(),R.layout.list_item_layout, new ArrayList<>());
         listView.setAdapter(adapter);
 
-        ProductListAsyncTaskph ProductListAsyncTask = new ProductListAsyncTaskph();
+        ProductListAsyncTaskiptv ProductListAsyncTask = new ProductListAsyncTaskiptv();
         ProductListAsyncTask.execute();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Item selectedItem = adapter.getItem(position);
-                String productName = selectedItem.getName();
-                String productPrice = selectedItem.getPrice();
-                String productDate = selectedItem.getDate();
-                String productMarge = selectedItem.getMarge();
-                String productfourn = selectedItem.getIdFour();
                 String productId = selectedItem.getId();
-                String productfourname = selectedItem.getFournisseurName();
+                String productName = selectedItem.getName();
+                String productCode = selectedItem.getCode();
                 Intent intent = new Intent(getContext(), ProductDetail.class);
                 intent.putExtra("productId",productId);
-                intent.putExtra("productfourn",productfourn);
-                intent.putExtra("productMarge",productMarge);
-                intent.putExtra("productDate",productDate);
+                intent.putExtra("productCode",productCode);
                 intent.putExtra("productName", productName);
-                intent.putExtra("productPrice", productPrice);
-                intent.putExtra("FournisseurName",productfourname);
                 startActivity(intent);
-
+                getActivity().finish();
             }
         });
         FloatingActionButton fab = v.findViewById(R.id.addbtnIptv);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startActivity(new Intent(getContext(), AddProduct.class));
+                //startActivity(new Intent(getContext(), AddProduct.class));
+                Snackbar.make(v,"en cours",Snackbar.LENGTH_LONG).show();
             }
         });
-       // end oncreate
+        // end oncreate
         return v;
     }
     private void filterItems(String query) {
@@ -139,7 +117,9 @@ public class Produit_physique extends Fragment {
         adapter.addAll(filteredList);
         adapter.notifyDataSetChanged();
     }
-    public class ProductListAsyncTaskph extends AsyncTask<Void, Void, List<Item>> {
+
+    public class ProductListAsyncTaskiptv extends AsyncTask<Void, Void, List<Item>> {
+
 
         @Override
         protected List<Item> doInBackground(Void... voids) {
@@ -168,13 +148,9 @@ public class Produit_physique extends Fragment {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String productId = jsonObject.getString("idProd");
                     String productName = jsonObject.getString("NomProd");
-                    String productPrice = jsonObject.getString("PrixAchat");
-                    String productdate = jsonObject.getString("dateProd");
-                    String productMarge = jsonObject.getString("MargeProd");
-                    String productFourn = jsonObject.getString("idFour");
-                    String productFourName = jsonObject.getString("FournisseurName");
+                    String productCode = jsonObject.getString("CodeProd");
                     // Item item = new Item(productName, productPrice);
-                    Item item = new Item(productId, productName, productPrice,productdate,productMarge,productFourName,productFourn);
+                    Item item = new Item(productId,productName,productCode);
                     resultList.add(item);
                 }
 
@@ -191,7 +167,6 @@ public class Produit_physique extends Fragment {
         protected void onPostExecute(List<Item> resultList) {
             originalItemList = resultList;
             // Process the retrieved data (resultList)
-            Toast.makeText(getContext(), "Received data: " + resultList.size() + " items", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "Received data: " + resultList.size() + " items");
 
             adapter.clear();

@@ -48,10 +48,10 @@
             android:text="Back"
             android:layout_gravity="bottom"
             android:backgroundTint="#E76161"
-            android:layout_below="@+id/savebtn"
+            android:layout_below="@+id/addbtn"
             />
         <Button
-            android:id="@+id/savebtn"
+            android:id="@+id/addbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add product"
