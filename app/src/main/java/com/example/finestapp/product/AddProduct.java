@@ -22,7 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finestapp.R;
 import com.example.finestapp.fournisseur.Fournisseur;
-import com.example.finestapp.product.frag_products.ProductMain;
+import com.example.finestapp.product.frag_products.fragment_ProductMain;
 import com.example.finestapp.scanner.ScannerQr;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -134,7 +134,7 @@ public class AddProduct extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProductMain.class);
+                Intent intent = new Intent(getApplicationContext(), fragment_ProductMain.class);
                 startActivity(intent);
                 finish();
             }
@@ -180,9 +180,11 @@ public class AddProduct extends AppCompatActivity {
                                 if(putData.onComplete()){
                                     String res = putData.getResult();
                                     if(res.equals("Add Success")){
-                                        Intent intent = new Intent(getApplicationContext(), ProductMain.class);
+                                        Intent intent = new Intent(getApplicationContext(), fragment_ProductMain.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
                                         finish();
+
                                         Toast.makeText(getApplicationContext(),"Product Added !",Toast.LENGTH_SHORT).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();

@@ -1,4 +1,4 @@
-package com.example.finestapp.ui.main;
+package com.example.finestapp.ui.mainProduitTabbed;
 
 import android.content.Context;
 
@@ -9,8 +9,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.finestapp.R;
-import com.example.finestapp.product.frag_products.Produit_physique;
-import com.example.finestapp.product.frag_products.fragment_iptv;
+import com.example.finestapp.product.frag_products.fragment_physical;
+import com.example.finestapp.product.frag_products.fragment_digital;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -32,9 +32,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
        Fragment f =null;
        switch (position){
            case 0:
-               f = new Produit_physique();break;
+               f = new fragment_physical();break;
            case 1:
-               f= new fragment_iptv();break;
+               f= new fragment_digital();break;
        }
         return f;
     }

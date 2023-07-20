@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -36,10 +35,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Produit_physique extends Fragment {
+public class fragment_physical extends Fragment {
 
 
-    public Produit_physique() {
+    public fragment_physical() {
         // Required empty public constructor
     }
 
@@ -115,7 +114,7 @@ public class Produit_physique extends Fragment {
                 intent.putExtra("productPrice", productPrice);
                 intent.putExtra("FournisseurName",productfourname);
                 startActivity(intent);
-
+                getActivity().finish();
             }
         });
         FloatingActionButton fab = v.findViewById(R.id.addbtnIptv);

@@ -30,7 +30,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.finestapp.R;
 import com.example.finestapp.Server;
 import com.example.finestapp.fournisseur.Fournisseur;
-import com.example.finestapp.product.frag_products.ProductMain;
+import com.example.finestapp.product.frag_products.fragment_ProductMain;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONArray;
@@ -152,7 +152,8 @@ public class ProductDetail extends AppCompatActivity {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
+                finish();
             }
         });
 
@@ -216,7 +217,7 @@ public class ProductDetail extends AppCompatActivity {
                                 if (putData.onComplete()){
                                     String res = putData.getResult();
                                     if (res.equals("Updated Success")){
-                                        startActivity(new Intent(getApplicationContext(), ProductMain.class));
+                                        startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
                                         Toast.makeText(getApplicationContext(),"Update Success",Toast.LENGTH_SHORT).show();
                                     }else{
@@ -306,7 +307,7 @@ public class ProductDetail extends AppCompatActivity {
                                 if (putData.onComplete()){
                                     String res = putData.getResult();
                                     if (res.equals("Product deleted successfully.")){
-                                        startActivity(new Intent(getApplicationContext(), ProductMain.class));
+                                        startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
                                         Toast.makeText(getApplicationContext(), "Suppression with success", Toast.LENGTH_SHORT).show();
                                     }

@@ -1,14 +1,14 @@
 package com.example.finestapp.scanner;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -18,16 +18,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import com.example.finestapp.R;
+import com.example.finestapp.product.frag_products.fragment_ProductMain;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.io.IOException;
 
 public class ScannerQr extends AppCompatActivity {
-    private Button backbtn;
+    private Button backbtn,addbtn;
 
     private boolean isProcessingBarcode = false;
     private SurfaceView surfaceView;
@@ -126,12 +131,63 @@ public class ScannerQr extends AppCompatActivity {
                     } else {
                         barcodeData = barcode.displayValue;
                         barcodeText.setText(barcodeData);
+                        analysedate(barcodeData);
                         toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
 
                         // Start the timer and show the progress bar
                         timer.start();
                     }
                 }
+            }
+
+            private void analysedate(String barcodeData) {
+                addbtn = findViewById(R.id.addbtn);
+                addbtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle extras = getIntent().getExtras();
+
+
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                String[] field = new String[5];
+                                field[0] = "NomProd";
+                                field[1] = "PrixAchat";
+                                field[2] = "MargeProd";
+                                field[3] = "idFour";
+                                field[4] = "Libelle";
+                                //Creating array for data
+                                String[] data = new String[5];
+                                data[0] = extras.getString("productName");
+                                data[1] = extras.getString("productPrice");
+                                data[2] = extras.getString("productMarge");
+                                data[3] = extras.getString("fournisseurid");
+                                data[4] = barcodeData;
+                                //                        PutData putData = new PutData("http://192.168.11.66/Loginregister/addproduct.php", "POST", field, data);
+                                PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/addProductWithQr.php", "POST", field, data);
+
+
+                                if(putData.startPut()){
+                                    if(putData.onComplete()){
+                                        String res = putData.getResult();
+                                        if(res.equals("Add Success")){
+                                            Intent intent = new Intent(getApplicationContext(), fragment_ProductMain.class);
+                                            startActivity(intent);
+                                            finish();
+                                            Toast.makeText(getApplicationContext(),"Product Added !",Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                    }
+                });
+
             }
         });
     }

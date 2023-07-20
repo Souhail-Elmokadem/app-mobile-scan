@@ -1,9 +1,5 @@
 package com.example.finestapp.fournisseur;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.finestapp.R;
-import com.google.protobuf.Value;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class FournisseurDetail extends AppCompatActivity {

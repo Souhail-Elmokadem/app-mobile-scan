@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -35,9 +34,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class fragment_iptv extends Fragment {
+public class fragment_digital extends Fragment {
 
-    public fragment_iptv() {
+    public fragment_digital() {
         // Required empty public constructor
     }
 
@@ -93,7 +92,7 @@ public class fragment_iptv extends Fragment {
                 intent.putExtra("productCode",productCode);
                 intent.putExtra("productName", productName);
                 startActivity(intent);
-
+                getActivity().finish();
             }
         });
         FloatingActionButton fab = v.findViewById(R.id.addbtnIptv);
@@ -168,7 +167,6 @@ public class fragment_iptv extends Fragment {
         protected void onPostExecute(List<Item> resultList) {
             originalItemList = resultList;
             // Process the retrieved data (resultList)
-
             Log.d(TAG, "Received data: " + resultList.size() + " items");
 
             adapter.clear();
