@@ -25,24 +25,17 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 
 public class Login extends AppCompatActivity {
-
-    private static final String KEY_USER_ID = "userId";
-    public static SharedPreferences sharedPreferences;
     EditText Username, Password;
     Button Login;
     //    ProgressBar progressBar;
     CheckBox CheckBox;
     private Button leavebtn;
-    private SessionActivity session;
     public static boolean checkboxStatus=false;
 
     @Override
     protected void onStart() {
         super.onStart();
-
             checkSession();
-
-
     }
 
     private void checkSession() {
@@ -58,9 +51,6 @@ public class Login extends AppCompatActivity {
         }
     }
 
-
-
-
     //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,20 +63,6 @@ public class Login extends AppCompatActivity {
         CheckBox = findViewById(R.id.checkBox);
         SessionActivity sessionActivity = new SessionActivity(com.example.finestapp.user.Login.this);
 
-
-//        progressBar = findViewById(R.id.progress);
-//        sharedPreferences = getSharedPreferences("state", Context.MODE_PRIVATE);
-//        sharedPreferences.edit();
-//        int hasLoggedIn = sharedPreferences.getInt("hasLoggedIn",0);
-
-
-//       0 if(hasLoggedIn==1){
-//
-//            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-//            startActivity(intent);
-//            finish();
-//            Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
-//        }
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
