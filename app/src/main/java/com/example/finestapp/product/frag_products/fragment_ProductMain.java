@@ -13,6 +13,7 @@ import com.example.finestapp.R;
 import com.example.finestapp.SessionActivity;
 import com.example.finestapp.databinding.ActivityFragmentProduitMainBinding;
 import com.example.finestapp.product.AddProduct;
+import com.example.finestapp.product.AddProductDigital;
 import com.example.finestapp.scanner.Scancamera;
 import com.example.finestapp.ui.mainProduitTabbed.SectionsPagerAdapter;
 import com.example.finestapp.user.Login;
@@ -73,7 +74,8 @@ public class fragment_ProductMain extends AppCompatActivity {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(v, "en cours", Snackbar.LENGTH_LONG).show();
+                    startActivity(new Intent(fragment_ProductMain.this, AddProductDigital.class));
+                    finish();
                 }
             });
         } else {

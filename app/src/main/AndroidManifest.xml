@@ -70,6 +70,10 @@
             android:exported="false"
             android:label="Add Product" />
         <activity
+            android:name=".product.AddProductDigital"
+            android:exported="false"
+            android:label="Add IPTV" />
+        <activity
             android:name=".scanner.Scancamera"
             android:exported="false"
             android:label="Code Scan" />
