@@ -177,7 +177,8 @@ public class AddProduct extends AppCompatActivity {
                                     String res = putData.getResult();
 
                                     if(res.equals("Add Success")){
-                                        setResult(Activity.RESULT_OK);
+                                        fragment_ProductMain.fa.finish();
+                                        startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
 
                                     }else{

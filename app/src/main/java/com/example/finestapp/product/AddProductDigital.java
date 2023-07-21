@@ -56,8 +56,8 @@ public class AddProductDigital extends AppCompatActivity {
                                 if(putData.onComplete()){
                                     String res = putData.getResult();
                                     if(res.equals("Add Success")){
-                                        Intent intent = new Intent(getApplicationContext(), fragment_ProductMain.class);
-                                        startActivity(intent);
+                                        fragment_ProductMain.fa.finish();
+                                        startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
                                         Toast.makeText(getApplicationContext(),"Digital Product Added !",Toast.LENGTH_SHORT).show();
                                     }else{

@@ -27,6 +27,7 @@
             android:label="Digital Product Detail"/>
         <activity
             android:name=".product.frag_products.fragment_ProductMain"
+            android:launchMode="singleInstance"
             android:exported="false"
             android:label="@string/title_activity_fragment_produit_main"
             android:theme="@style/Theme.FinestApp.NoActionBar" />

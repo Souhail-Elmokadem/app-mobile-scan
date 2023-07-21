@@ -1,5 +1,6 @@
 package com.example.finestapp.product.frag_products;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,6 +30,8 @@ public class fragment_ProductMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        fa = this;
 
         binding = ActivityFragmentProduitMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -87,4 +90,5 @@ public class fragment_ProductMain extends AppCompatActivity {
             tab.select();
         }
     }
+    public static Activity fa;
 }

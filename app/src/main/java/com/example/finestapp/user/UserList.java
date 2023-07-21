@@ -91,7 +91,7 @@ public class UserList extends AppCompatActivity {
                 intent.putExtra("prenomUser", prenomUser);
                 intent.putExtra("emailUser",emailUser);
                 intent.putExtra("idUser",idUser);
-
+                startActivity(intent);
             }
         });
     }
@@ -129,7 +129,7 @@ public class UserList extends AppCompatActivity {
                     response.append(line);
                 }
 
-                Log.d(TAG, "Server Response: " + response.toString()); // Add this line to log the response
+                Log.d("TAG", "Server Response: " + response.toString()); // Add this line to log the response
 
                 bufferedReader.close();
                 inputStream.close();
@@ -158,14 +158,13 @@ public class UserList extends AppCompatActivity {
         protected void onPostExecute(List<User> resultList) {
             originalItemList = resultList;
             // Process the retrieved data (resultList)
-            Log.d(TAG, "Received data: " + resultList.size() + " items");
+            Log.d("TAG", "Received data: " + resultList.size() + " items");
 
             adapter.clear();
             adapter.addAll(resultList);
             adapter.notifyDataSetChanged();
         }
     }
-
 
 
     @Override

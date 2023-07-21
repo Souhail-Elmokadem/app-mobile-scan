@@ -216,8 +216,10 @@ public class ProductDetail extends AppCompatActivity {
                                 if (putData.onComplete()){
                                     String res = putData.getResult();
                                     if (res.equals("Updated Success")){
+                                        fragment_ProductMain.fa.finish();
                                         startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
+
                                         Toast.makeText(getApplicationContext(),"Update Success",Toast.LENGTH_SHORT).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
@@ -306,6 +308,8 @@ public class ProductDetail extends AppCompatActivity {
                                 if (putData.onComplete()){
                                     String res = putData.getResult();
                                     if (res.equals("Product deleted successfully.")){
+                                        fragment_ProductMain.fa.finish();
+                                        startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
                                         Toast.makeText(getApplicationContext(), "Suppression with success", Toast.LENGTH_SHORT).show();
                                     }
