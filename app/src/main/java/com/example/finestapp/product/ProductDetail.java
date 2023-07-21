@@ -55,7 +55,6 @@ public class ProductDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
-        // textbox product details pour edit btn
 
         name = findViewById(R.id.editname);
         price = findViewById(R.id.editprice);
@@ -152,7 +151,7 @@ public class ProductDetail extends AppCompatActivity {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
+                onBackPressed();
                 finish();
             }
         });
@@ -307,7 +306,6 @@ public class ProductDetail extends AppCompatActivity {
                                 if (putData.onComplete()){
                                     String res = putData.getResult();
                                     if (res.equals("Product deleted successfully.")){
-                                        startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
                                         Toast.makeText(getApplicationContext(), "Suppression with success", Toast.LENGTH_SHORT).show();
                                     }

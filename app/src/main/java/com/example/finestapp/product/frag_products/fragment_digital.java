@@ -1,5 +1,6 @@
 package com.example.finestapp.product.frag_products;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,11 +12,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.finestapp.R;
+import com.example.finestapp.product.AddProduct;
 import com.example.finestapp.product.Item;
 import com.example.finestapp.product.ProductDetail;
+import com.example.finestapp.product.ProductDetailDigital;
 import com.example.finestapp.product.ProductListAdapterIptv;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -44,6 +48,7 @@ public class fragment_digital extends Fragment {
     private List<Item> originalItemList;
     private static final String TAG = "ProductList";
     private static final String PHP_SCRIPT_URL = "https://ftapp.finesttechnology.ma/Loginregister/ListProduitsDigital.php";
+    private static final int REQUEST_CODE_ADD_PRODUCT = 1;
 
     private ListView listView;
     private ProductListAdapterIptv adapter;
@@ -87,25 +92,26 @@ public class fragment_digital extends Fragment {
                 String productId = selectedItem.getId();
                 String productName = selectedItem.getName();
                 String productCode = selectedItem.getCode();
-                Intent intent = new Intent(getContext(), ProductDetail.class);
+                Intent intent = new Intent(getContext(), ProductDetailDigital.class);
                 intent.putExtra("productId",productId);
-                intent.putExtra("productCode",productCode);
                 intent.putExtra("productName", productName);
+                intent.putExtra("productCode",productCode);
+
+                intent.putExtra("currentTabIndex", 1); // Set the current tab index
                 startActivity(intent);
-                getActivity().finish();
             }
         });
         FloatingActionButton fab = v.findViewById(R.id.addbtnIptv);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(getContext(), AddProduct.class));
-                Snackbar.make(v,"en cours",Snackbar.LENGTH_LONG).show();
+                Intent intent = new Intent(getContext(), AddProduct.class);
+                startActivity(intent);
             }
         });
-        // end oncreate
         return v;
     }
+
     private void filterItems(String query) {
         List<Item> filteredList = new ArrayList<>();
         for (Item item : originalItemList) {
@@ -119,8 +125,6 @@ public class fragment_digital extends Fragment {
     }
 
     public class ProductListAsyncTaskiptv extends AsyncTask<Void, Void, List<Item>> {
-
-
         @Override
         protected List<Item> doInBackground(Void... voids) {
             List<Item> resultList = new ArrayList<>();
@@ -158,9 +162,7 @@ public class fragment_digital extends Fragment {
             } catch (IOException | JSONException e) {
                 Log.e(TAG, "Error retrieving data: " + e.getMessage());
             }
-
             return resultList;
-
         }
 
         @Override
@@ -174,5 +176,4 @@ public class fragment_digital extends Fragment {
             adapter.notifyDataSetChanged();
         }
     }
-
 }

@@ -25,6 +25,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#1D5B79"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
             android:padding="24dp"
@@ -47,10 +48,12 @@
                 android:layout_marginTop="40dp"
                 android:background="@drawable/border"
                 android:drawableLeft="@drawable/baseline_alternate_email_24"
+                android:drawableTint="#8CC0DE"
                 android:drawablePadding="8dp"
                 android:hint="Email (DEV USERNAME)"
+                android:textColorHint="@color/white"
                 android:padding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -61,15 +64,18 @@
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:hint="Password"
-                android:drawableLeft="@drawable/baseline_lock_24"
-                android:textColor="@color/black"
-                android:drawablePadding="8dp"/>
+                android:textColorHint="@color/white"
+                android:drawableStart="@drawable/baseline_lock_24"
+                android:drawableTint="#8CC0DE"
+                android:drawablePadding="8dp"
+                android:textColor="@color/white" />
 
             <CheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Keep Me Logged In" />
+                android:text="Keep Me Logged In"
+                android:textColor="@color/white"/>
 
             <Button
                 android:id="@+id/loginbtn"

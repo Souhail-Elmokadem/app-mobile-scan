@@ -1,11 +1,13 @@
 package com.example.finestapp.user;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.finestapp.Dashboard;
 import com.example.finestapp.R;
@@ -27,31 +30,30 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 public class Login extends AppCompatActivity {
     EditText Username, Password;
     Button Login;
-    //    ProgressBar progressBar;
     CheckBox CheckBox;
     private Button leavebtn;
-    public static boolean checkboxStatus=false;
+
 
     @Override
     protected void onStart() {
         super.onStart();
-            checkSession();
+        checkSession();
     }
 
     private void checkSession() {
         SessionActivity sessionActivity = new SessionActivity(Login.this);
         String userEmail = sessionActivity.getSession();
-        if (userEmail!="null"){
+        if (userEmail != "null") {
             Intent intent = new Intent(getApplicationContext(), Dashboard.class);
             startActivity(intent);
             finish();
             Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
-        }else {
-                // do somethings
+        } else {
+            // do somethings
         }
     }
 
-    //
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,8 @@ public class Login extends AppCompatActivity {
         Username = findViewById(R.id.username);
         Password = findViewById(R.id.password);
         Login = findViewById(R.id.loginbtn);
+
+
         CheckBox = findViewById(R.id.checkBox);
         SessionActivity sessionActivity = new SessionActivity(com.example.finestapp.user.Login.this);
 

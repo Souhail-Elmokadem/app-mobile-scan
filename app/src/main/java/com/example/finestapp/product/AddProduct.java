@@ -1,5 +1,6 @@
 package com.example.finestapp.product;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -130,13 +131,10 @@ public class AddProduct extends AppCompatActivity {
         marge = findViewById(R.id.editmarge);
 
 
-        //Cancel Action
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), fragment_ProductMain.class);
-                startActivity(intent);
-                finish();
+                onBackPressed();
             }
         });
 
@@ -170,22 +168,18 @@ public class AddProduct extends AppCompatActivity {
                             data[1] = Price;
                             data[2] = Marge;
                             data[3] = selectedFournisseurId;
-                            //Adresse IP Local
-    //                        PutData putData = new PutData("http://192.168.11.66/Loginregister/addproduct.php", "POST", field, data);
-//                            //Adresse IP Cloud
+
                             PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/addProduct.php", "POST", field, data);
 
 
                             if(putData.startPut()){
                                 if(putData.onComplete()){
                                     String res = putData.getResult();
+
                                     if(res.equals("Add Success")){
-                                        Intent intent = new Intent(getApplicationContext(), fragment_ProductMain.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        startActivity(intent);
+                                        setResult(Activity.RESULT_OK);
                                         finish();
 
-                                        Toast.makeText(getApplicationContext(),"Product Added !",Toast.LENGTH_SHORT).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
                                     }
@@ -198,9 +192,7 @@ public class AddProduct extends AppCompatActivity {
                 }
             }
         });
-
         requestQueue.add(jsonObjectRequest);
-
     }
     @Override
     public void onBackPressed() {
