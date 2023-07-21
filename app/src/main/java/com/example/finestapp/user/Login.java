@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +34,8 @@ public class Login extends AppCompatActivity {
     Button Login;
     CheckBox CheckBox;
     private Button leavebtn;
+
+    boolean PasswordVisable;
 
 
     @Override
@@ -63,6 +67,41 @@ public class Login extends AppCompatActivity {
         Password = findViewById(R.id.password);
         Login = findViewById(R.id.loginbtn);
 
+        // this code for hide and show password in login
+
+        Password.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                final int startIcon = 0;
+                final int endIcon = 2;
+
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    Drawable drawable = Password.getCompoundDrawables()[startIcon];
+                    if (motionEvent.getRawX() <= Password.getLeft() + drawable.getBounds().width()) {
+                        togglePasswordVisibility();
+                        return true;
+                    } else if (motionEvent.getRawX() >= Password.getRight() - Password.getCompoundDrawables()[endIcon].getBounds().width()) {
+                        togglePasswordVisibility();
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            private void togglePasswordVisibility() {
+                int selection = Password.getSelectionEnd();
+                if (PasswordVisable) {
+                    Password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_lock_24, 0, R.drawable.baseline_passwordhidden_24, 0);
+                    Password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                } else {
+                    Password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_lock_24, 0, R.drawable.baseline_passwordvisible_24, 0);
+                    Password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+                PasswordVisable = !PasswordVisable;
+                Password.setSelection(selection);
+            }
+        });
 
         CheckBox = findViewById(R.id.checkBox);
         SessionActivity sessionActivity = new SessionActivity(com.example.finestapp.user.Login.this);
