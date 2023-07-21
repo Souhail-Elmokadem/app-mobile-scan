@@ -69,6 +69,7 @@
         android:textColor="@color/white"
         android:drawablePadding="8dp"/>
 
+
     <EditText
         android:id="@+id/EditConfirmNewPassword"
         android:layout_width="match_parent"
@@ -84,7 +85,9 @@
         android:textColor="@color/white"
         android:drawablePadding="8dp" />
 
-    <Button
+
+
+            <Button
         android:id="@+id/savebtn"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
