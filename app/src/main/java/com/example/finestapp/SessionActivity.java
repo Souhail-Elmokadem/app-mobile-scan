@@ -10,6 +10,7 @@ public class SessionActivity {
 
     private boolean ischeckBox=false;
     private String Email;
+    private String nom;
     private String idUser;
 
 
@@ -18,8 +19,15 @@ public class SessionActivity {
         editor = sharedPreferences.edit();
     }
     public void saveSession(String Email,String password){
+
         editor.putString("session_email",Email);
         editor.putString("session_password",password);
+        editor.commit();
+    }
+
+    public void saveSessionDetail(String idUser,String Nom){
+        editor.putString("session_id",idUser);
+        editor.putString("session_nom",Nom);
         editor.commit();
     }
     public String getSession(){
@@ -38,10 +46,14 @@ public class SessionActivity {
         return sharedPreferences.getString("session_email","null");
     }
 
+
     public String getIdUser() {
-        return idUser;
+        return sharedPreferences.getString("session_id","null");
     }
 
+    public String getNom(){
+        return  sharedPreferences.getString("session_nom","null");
+    }
     public void setEmail(String Email) {
         this.Email = Email;
     }

@@ -25,11 +25,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:background="#1D5B79"
             android:orientation="vertical"
-            android:layout_gravity="center_horizontal"
-            android:padding="24dp"
-          >
+            android:padding="24dp">
 
             <TextView
                 android:id="@+id/useridtext"
@@ -48,34 +47,36 @@
                 android:layout_marginTop="40dp"
                 android:background="@drawable/border"
                 android:drawableLeft="@drawable/baseline_alternate_email_24"
-                android:drawableTint="#8CC0DE"
                 android:drawablePadding="8dp"
+                android:drawableTint="#8CC0DE"
                 android:hint="Email (DEV USERNAME)"
-                android:textColorHint="@color/white"
                 android:padding="8dp"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
 
             <EditText
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/password"
-                android:background="@drawable/border"
                 android:layout_marginTop="20dp"
+                android:background="@drawable/border"
+                android:drawableStart="@drawable/baseline_lock_24"
+                android:drawableEnd="@drawable/baseline_passwordhidden_24"
+                android:drawablePadding="8dp"
+                android:drawableTint="#8CC0DE"
+                android:hint="Password"
+                android:longClickable="false"
                 android:inputType="textPassword"
                 android:padding="8dp"
-                android:hint="Password"
-                android:textColorHint="@color/white"
-                android:drawableStart="@drawable/baseline_lock_24"
-                android:drawableTint="#8CC0DE"
-                android:drawablePadding="8dp"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
 
             <CheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Keep Me Logged In"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/loginbtn"
@@ -87,11 +88,11 @@
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
 
-<!--            <ProgressBar-->
-<!--                android:id="@+id/progress"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:visibility="gone"/>-->
+            <!--            <ProgressBar-->
+            <!--                android:id="@+id/progress"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:visibility="gone"/>-->
 
             <Button
                 android:id="@+id/leavebtn"

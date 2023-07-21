@@ -1,7 +1,5 @@
 package com.example.finestapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,10 +7,12 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.finestapp.user.Login;
-import com.example.finestapp.user.UserList;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class Setting extends AppCompatActivity {
@@ -29,7 +29,8 @@ public class Setting extends AppCompatActivity {
         savebtn = findViewById(R.id.savebtn);
         logoutbtn=findViewById(R.id.logoutbtn);
         SessionActivity sessionActivity = new SessionActivity(Setting.this);
-
+        TextView textView = findViewById(R.id.textViewNom);
+    textView.setText(new SessionActivity(Setting.this).getNom());
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

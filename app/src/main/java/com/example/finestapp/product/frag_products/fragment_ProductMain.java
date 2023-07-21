@@ -3,23 +3,16 @@ package com.example.finestapp.product.frag_products;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.finestapp.R;
-import com.example.finestapp.SessionActivity;
 import com.example.finestapp.databinding.ActivityFragmentProduitMainBinding;
 import com.example.finestapp.product.AddProduct;
 import com.example.finestapp.product.AddProductDigital;
-import com.example.finestapp.scanner.Scancamera;
 import com.example.finestapp.ui.mainProduitTabbed.SectionsPagerAdapter;
-import com.example.finestapp.user.Login;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 public class fragment_ProductMain extends AppCompatActivity {
@@ -36,6 +29,7 @@ public class fragment_ProductMain extends AppCompatActivity {
         binding = ActivityFragmentProduitMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+       // Toast.makeText(fragment_ProductMain.this,new SessionActivity(fragment_ProductMain.this).getIdUser(), Toast.LENGTH_SHORT).show();
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
