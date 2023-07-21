@@ -92,7 +92,7 @@ public class UserList extends AppCompatActivity {
                 intent.putExtra("prenomUser", prenomUser);
                 intent.putExtra("emailUser",emailUser);
                 intent.putExtra("idUser",idUser);
-
+                startActivity(intent);
             }
         });
     }
@@ -140,9 +140,6 @@ public class UserList extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(response.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    if (jsonObject.getString("EmailUser").equals(sessionActivity.getEmailSession())){
-                        sessionActivity.saveSession(jsonObject.getString("idUser"),jsonObject.getString("NomUser"));
-                    }
                     String idUser = jsonObject.getString("idUser");
                     String nomUser = jsonObject.getString("NomUser");
                     String prenomUser = jsonObject.getString("PrenomUser");

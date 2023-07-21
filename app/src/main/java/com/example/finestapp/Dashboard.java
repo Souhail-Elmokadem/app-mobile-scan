@@ -30,7 +30,7 @@ public class Dashboard extends AppCompatActivity {
         fournisseur = findViewById(R.id.fournisseurbtn);
         product = findViewById(R.id.productbtn);
         profilebtn = findViewById(R.id.ProfileButton);
-
+           // startActivity(new Intent(getApplicationContext(), UserDetail.class));
 
         //Toast.makeText(getApplicationContext(),sessionActivity.getIdUser(),Toast.LENGTH_SHORT).show();
         //startActivity(new Intent(getApplicationContext(), fragment_physical.class));
