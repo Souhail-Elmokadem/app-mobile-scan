@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,8 +45,8 @@ public class UserList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
-        SessionActivity sessionActivity = new SessionActivity(getApplicationContext());
-        Toast.makeText(getApplicationContext(),sessionActivity.getIdUser(),Toast.LENGTH_SHORT).show();
+
+
         listView = findViewById(R.id.subListView);
         adapter = new UserListAdapter(this,R.layout.list_user_layout, new ArrayList<>());
         listView.setAdapter(adapter);
@@ -141,9 +140,9 @@ public class UserList extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(response.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                    if (jsonObject.getString("EmailUser").equals(sessionActivity.getEmailSession())){
-//                        sessionActivity.saveSession(jsonObject.getString("idUser"));
-//                    }
+                    if (jsonObject.getString("EmailUser").equals(sessionActivity.getEmailSession())){
+                        sessionActivity.saveSession(jsonObject.getString("idUser"),jsonObject.getString("NomUser"));
+                    }
                     String idUser = jsonObject.getString("idUser");
                     String nomUser = jsonObject.getString("NomUser");
                     String prenomUser = jsonObject.getString("PrenomUser");

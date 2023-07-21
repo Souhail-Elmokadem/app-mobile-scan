@@ -7,6 +7,12 @@
     android:gravity="center"
     android:background="#8CC0DE">
 
+    <TextView
+        android:id="@+id/textViewNom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

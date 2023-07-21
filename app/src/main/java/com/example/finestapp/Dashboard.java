@@ -30,8 +30,9 @@ public class Dashboard extends AppCompatActivity {
         fournisseur = findViewById(R.id.fournisseurbtn);
         product = findViewById(R.id.productbtn);
         profilebtn = findViewById(R.id.ProfileButton);
-//        UserList.UserListAsyncTask UserListAsyncTask = new Dashboard.UserListAsyncTask();
-//        UserListAsyncTask.execute();
+
+
+        //Toast.makeText(getApplicationContext(),sessionActivity.getIdUser(),Toast.LENGTH_SHORT).show();
         //startActivity(new Intent(getApplicationContext(), fragment_physical.class));
         profilebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,8 +50,7 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        SessionActivity sessionActivity = new SessionActivity(getApplicationContext());
-        Toast.makeText(getApplicationContext(),sessionActivity.getIdUser(),Toast.LENGTH_SHORT).show();
+
         fournisseur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,31 +70,11 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), UserList.class));
             }
         });
-//        layout_home = findViewById(R.id.layout_home);
-//        layout_home.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(),"Home",Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        layout_products = findViewById(R.id.layout_products);
-//        layout_products.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
-//                finish();
-//
-//            }
-//        });
-//        layout_supplier = findViewById(R.id.layout_supplier);
-//        layout_supplier.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(getApplicationContext(),FournisseurList.class));
-//                finish();
-//            }
-//        });
 
 
     }
- }
+
+
+
+
+}
