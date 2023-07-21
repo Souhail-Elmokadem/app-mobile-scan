@@ -30,6 +30,8 @@ public class Dashboard extends AppCompatActivity {
         fournisseur = findViewById(R.id.fournisseurbtn);
         product = findViewById(R.id.productbtn);
         profilebtn = findViewById(R.id.ProfileButton);
+//        UserList.UserListAsyncTask UserListAsyncTask = new Dashboard.UserListAsyncTask();
+//        UserListAsyncTask.execute();
         //startActivity(new Intent(getApplicationContext(), fragment_physical.class));
         profilebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +48,9 @@ public class Dashboard extends AppCompatActivity {
                 Toast.makeText(Dashboard.this, "product", Toast.LENGTH_SHORT).show();
             }
         });
+
+        SessionActivity sessionActivity = new SessionActivity(getApplicationContext());
+        Toast.makeText(getApplicationContext(),sessionActivity.getIdUser(),Toast.LENGTH_SHORT).show();
         fournisseur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,4 +97,4 @@ public class Dashboard extends AppCompatActivity {
 
 
     }
-}
+ }

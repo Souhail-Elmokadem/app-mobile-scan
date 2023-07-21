@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.R;
+import com.example.finestapp.SessionActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,8 +35,8 @@ public class UserList extends AppCompatActivity {
     private SearchView searchView;
     private List<User> originalItemList;
     private static final String TAG = "UserList";
-    private String Server= com.example.finestapp.Server.Url;
-    String PHP_SCRIPT_URL = Server+"/Loginregister/ListUser.php";
+    private static String Server= com.example.finestapp.Server.Url;
+    static String PHP_SCRIPT_URL = Server+"/Loginregister/ListUser.php";
     private ListView listView;
     private UserListAdapter adapter;
 
@@ -45,7 +46,8 @@ public class UserList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
-
+        SessionActivity sessionActivity = new SessionActivity(getApplicationContext());
+        Toast.makeText(getApplicationContext(),sessionActivity.getIdUser(),Toast.LENGTH_SHORT).show();
         listView = findViewById(R.id.subListView);
         adapter = new UserListAdapter(this,R.layout.list_user_layout, new ArrayList<>());
         listView.setAdapter(adapter);
@@ -112,11 +114,11 @@ public class UserList extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    private class UserListAsyncTask extends AsyncTask<Void, Void, List<User>> {
+    public class UserListAsyncTask extends AsyncTask<Void, Void, List<User>> {
         @Override
         protected List<User> doInBackground(Void... voids) {
             List<User> resultList = new ArrayList<>();
-
+            SessionActivity sessionActivity = new SessionActivity(UserList.this);
             try {
                 URL url = new URL(PHP_SCRIPT_URL);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -140,6 +142,9 @@ public class UserList extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(response.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                    if (jsonObject.getString("EmailUser").equals(sessionActivity.getEmailSession())){
+//                        sessionActivity.saveSession(jsonObject.getString("idUser"));
+//                    }
                     String idUser = jsonObject.getString("idUser");
                     String nomUser = jsonObject.getString("NomUser");
                     String prenomUser = jsonObject.getString("PrenomUser");
