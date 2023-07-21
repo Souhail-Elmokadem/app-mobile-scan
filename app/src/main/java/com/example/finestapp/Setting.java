@@ -26,7 +26,7 @@ public class Setting extends AppCompatActivity {
         editOld = findViewById(R.id.EditOldPassword);
         editnew = findViewById(R.id.EditNewPassword);
         editconfnew = findViewById(R.id.EditConfirmNewPassword);
-        savebtn = findViewById(R.id.savebtnpass);
+        savebtn = findViewById(R.id.savebtn);
         logoutbtn=findViewById(R.id.logoutbtn);
         SessionActivity sessionActivity = new SessionActivity(Setting.this);
 

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".product.ProductDetailDigital"
+    android:background="#8CC0DE"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:padding="24dp"
+        android:backgroundTint="#1D5B79"
+        android:background="@drawable/border"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/editname"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:singleLine="true"
+            android:background="@drawable/border"
+            android:drawablePadding="8dp"
+            android:hint="Product Name"
+            android:textColorHint="@color/white"
+            android:padding="8dp"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/editcode"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:singleLine="true"
+            android:background="@drawable/border"
+            android:drawablePadding="8dp"
+            android:hint="Product Code"
+            android:textColorHint="@color/white"
+            android:maxLength="50"
+            android:padding="8dp"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/savebtn"
+            android:padding="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#8EAC50"
+            android:text="Save"
+            app:cornerRadius="20dp" />
+        <Button
+            android:id="@+id/cancelbtn"
+            android:padding="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F1C93B"
+            android:text="discard"
+            app:cornerRadius="20dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewProductName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="NAME"
+        android:padding="24dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewProductCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CODE"
+        android:padding="24dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textStyle="bold"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/backbtn"
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#E76161"
+            android:text="Back" />
+    </RelativeLayout>
+
+</LinearLayout>

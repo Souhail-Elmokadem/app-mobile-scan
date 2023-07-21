@@ -17,8 +17,6 @@ import com.example.finestapp.product.frag_products.fragment_digital;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class AddProductDigital extends AppCompatActivity {
-
-
     Button cancel, addbtn;
     EditText code,name;
 
@@ -78,9 +76,7 @@ public class AddProductDigital extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), fragment_digital.class);
-                startActivity(intent);
-                finish();
+                onBackPressed();
             }
         });
     }

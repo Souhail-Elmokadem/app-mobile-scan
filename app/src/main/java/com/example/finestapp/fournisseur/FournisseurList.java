@@ -164,7 +164,6 @@ public class FournisseurList extends AppCompatActivity {
         protected void onPostExecute(List<Fournisseur> resultList) {
             originalItemList = resultList;
             // Process the retrieved data (resultList)
-            Toast.makeText(FournisseurList.this, "Received data: " + resultList.size() + " items", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "Received data: " + resultList.size() + " items");
 
             adapter.clear();

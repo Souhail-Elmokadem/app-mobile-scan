@@ -105,8 +105,6 @@
             app:cornerRadius="20dp" />
     </LinearLayout>
 
-            <!--TEXT VIEWS FOR DETAILS-->
-
 
     <TextView
         android:id="@+id/textViewProductName"
