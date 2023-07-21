@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.R;
 import com.example.finestapp.Server;
+import com.example.finestapp.product.frag_products.fragment_ProductMain;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class UserDetail extends AppCompatActivity {
@@ -128,6 +129,7 @@ public class UserDetail extends AppCompatActivity {
                                 if (putData.startPut() && putData.onComplete()) {
                                     String res = putData.getResult();
                                     if (res.equals("Updated Success")) {
+                                        UserList.userlist.finish();
                                         startActivity(new Intent(getApplicationContext(), UserList.class));
                                         finish();
                                         Toast.makeText(getApplicationContext(), "Updated Success", Toast.LENGTH_SHORT).show();
@@ -172,6 +174,7 @@ public class UserDetail extends AppCompatActivity {
                                 if (putData.onComplete()){
                                     String res = putData.getResult();
                                     if (res.equals("User deleted successfully.")){
+                                        UserList.userlist.finish();
                                         startActivity(new Intent(getApplicationContext(), UserList.class));
                                         finish();
                                         Toast.makeText(getApplicationContext(), "Suppression success", Toast.LENGTH_SHORT).show();

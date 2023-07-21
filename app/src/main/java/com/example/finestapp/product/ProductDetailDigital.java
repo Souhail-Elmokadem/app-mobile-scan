@@ -170,7 +170,6 @@ public class ProductDetailDigital extends AppCompatActivity {
                             }
                         }
                     });
-
                 }
             });
             alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

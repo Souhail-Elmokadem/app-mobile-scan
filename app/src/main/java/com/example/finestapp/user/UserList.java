@@ -1,5 +1,6 @@
 package com.example.finestapp.user;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -45,6 +46,8 @@ public class UserList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
+
+        userlist = this;
 
 
         listView = findViewById(R.id.subListView);
@@ -183,4 +186,5 @@ public class UserList extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public static Activity userlist;
 }
