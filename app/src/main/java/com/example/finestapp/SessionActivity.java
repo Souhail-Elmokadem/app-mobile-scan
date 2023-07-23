@@ -12,6 +12,7 @@ public class SessionActivity {
     private String Email;
     private String nom;
     private String idUser;
+    private  String idrole;
 
 
     public SessionActivity(Context context){
@@ -25,9 +26,10 @@ public class SessionActivity {
         editor.commit();
     }
 
-    public void saveSessionDetail(String idUser,String Nom){
+    public void saveSessionDetail(String idUser,String Nom,String idrole){
         editor.putString("session_id",idUser);
         editor.putString("session_nom",Nom);
+        editor.putString("session_role",idrole);
         editor.commit();
     }
     public String getSession(){
@@ -45,6 +47,11 @@ public class SessionActivity {
     public String getEmailSession() {
         return sharedPreferences.getString("session_email","null");
     }
+
+    public String getIdrole() {
+         return sharedPreferences.getString("session_role","null");
+    }
+
 
 
     public String getIdUser() {

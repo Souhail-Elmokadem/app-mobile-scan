@@ -1,10 +1,5 @@
 package com.example.finestapp.product;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,8 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.finestapp.R;
 import com.example.finestapp.Server;
+import com.example.finestapp.SessionActivity;
 import com.example.finestapp.product.frag_products.fragment_ProductMain;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -32,7 +32,12 @@ public class ProductDetailDigital extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navdetail, menu);
+        SessionActivity sessionActivity = new SessionActivity(ProductDetailDigital.this);
+        if (Integer.parseInt(sessionActivity.getIdrole())==2){
+            getMenuInflater().inflate(R.menu.navdetail, menu);
+        }else{
+
+        }
         return super.onCreateOptionsMenu(menu);
     }
 

@@ -243,15 +243,16 @@ public class Login extends AppCompatActivity {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     if (jsonObject.getString("EmailUser").equals(useremail)){
-                        sessionActivity.saveSessionDetail(jsonObject.getString("idUser"),jsonObject.getString("NomUser"));
+                        sessionActivity.saveSessionDetail(jsonObject.getString("idUser"),jsonObject.getString("NomUser"), jsonObject.getString("idrole"));
                         break;
                     }
                     String idUser = jsonObject.getString("idUser");
                     String nomUser = jsonObject.getString("NomUser");
                     String prenomUser = jsonObject.getString("PrenomUser");
                     String email = jsonObject.getString("EmailUser");
-                    String telephone =jsonObject.getString("telUser");
-                    User users = new User(idUser,nomUser, prenomUser,email,telephone);
+                    String telephone =jsonObject.getString("TelUser");
+                    String idrole =  jsonObject.getString("idrole");
+                    User users = new User(idUser,nomUser, prenomUser,email,telephone,idrole);
                     resultList.add(users);
                 }
 

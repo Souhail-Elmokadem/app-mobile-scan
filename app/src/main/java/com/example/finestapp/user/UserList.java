@@ -88,13 +88,14 @@ public class UserList extends AppCompatActivity {
                 String emailUser = selectedItem.getEmail();
                 String telUser = selectedItem.getTelephone();
                 String idUser = selectedItem.getIdUser();
-
+                String idrole = selectedItem.getrole();
                 Intent intent = new Intent(UserList.this, UserDetail.class);
                 intent.putExtra("telUser",telUser);
                 intent.putExtra("nomUser", nomUser);
                 intent.putExtra("prenomUser", prenomUser);
                 intent.putExtra("emailUser",emailUser);
                 intent.putExtra("idUser",idUser);
+                intent.putExtra("idrole",idrole);
                 startActivity(intent);
             }
         });
@@ -147,8 +148,9 @@ public class UserList extends AppCompatActivity {
                     String nomUser = jsonObject.getString("NomUser");
                     String prenomUser = jsonObject.getString("PrenomUser");
                     String email = jsonObject.getString("EmailUser");
-                    String telephone =jsonObject.getString("telUser");
-                    User users = new User(idUser,nomUser, prenomUser,email,telephone);
+                    String telephone =jsonObject.getString("TelUser");
+                    String idrole =  jsonObject.getString("idrole");
+                    User users = new User(idUser,nomUser, prenomUser,email,telephone,idrole);
                     resultList.add(users);
                 }
 
@@ -173,7 +175,12 @@ public class UserList extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navfour,menu);
+        SessionActivity sessionActivity = new SessionActivity(UserList.this);
+        if (Integer.parseInt(sessionActivity.getIdrole())==2){
+            getMenuInflater().inflate(R.menu.navfour, menu);
+        }else{
+
+        }
         return super.onCreateOptionsMenu(menu);
     }
 

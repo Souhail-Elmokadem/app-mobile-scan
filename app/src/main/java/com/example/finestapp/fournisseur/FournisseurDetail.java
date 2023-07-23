@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.R;
+import com.example.finestapp.SessionActivity;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class FournisseurDetail extends AppCompatActivity {
@@ -27,7 +28,12 @@ public class FournisseurDetail extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navdetail,menu);
+        SessionActivity sessionActivity = new SessionActivity(FournisseurDetail.this);
+        if (Integer.parseInt(sessionActivity.getIdrole())==2){
+            getMenuInflater().inflate(R.menu.navdetail, menu);
+        }else{
+
+        }
         return super.onCreateOptionsMenu(menu);
     }
     EditText editFournName,editFournPrenom,editFournTel;

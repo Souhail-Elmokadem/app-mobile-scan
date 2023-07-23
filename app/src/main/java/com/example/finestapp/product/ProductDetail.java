@@ -29,6 +29,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finestapp.R;
 import com.example.finestapp.Server;
+import com.example.finestapp.SessionActivity;
 import com.example.finestapp.fournisseur.Fournisseur;
 import com.example.finestapp.product.frag_products.fragment_ProductMain;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
@@ -289,46 +290,47 @@ public class ProductDetail extends AppCompatActivity {
         savebtn.setVisibility(View.VISIBLE);
         }
         else if (item.getItemId() == R.id.deletebtn) {
-            alertDialog = new AlertDialog.Builder(ProductDetail.this);
-            alertDialog.setTitle("Suppression");
-            alertDialog.setMessage("Are you sure ?");
-            alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Handler handler = new Handler(Looper.getMainLooper());
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            String[] field = new String[1];
-                            field[0] = "idProd";
-                            String[] data = new String[1];
-                            data[0] = getIntent().getExtras().getString("productId");
-                            PutData putData = new PutData(Server.Url+"/Loginregister/deleteProd.php", "POST", field, data);
-                            if (putData.startPut()){
-                                if (putData.onComplete()){
-                                    String res = putData.getResult();
-                                    if (res.equals("Product deleted successfully.")){
-                                        fragment_ProductMain.fa.finish();
-                                        startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
-                                        finish();
-                                        Toast.makeText(getApplicationContext(), "Suppression with success", Toast.LENGTH_SHORT).show();
+
+                alertDialog = new AlertDialog.Builder(ProductDetail.this);
+                alertDialog.setTitle("Suppression");
+                alertDialog.setMessage("Are you sure ?");
+                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                String[] field = new String[1];
+                                field[0] = "idProd";
+                                String[] data = new String[1];
+                                data[0] = getIntent().getExtras().getString("productId");
+                                PutData putData = new PutData(Server.Url + "/Loginregister/deleteProd.php", "POST", field, data);
+                                if (putData.startPut()) {
+                                    if (putData.onComplete()) {
+                                        String res = putData.getResult();
+                                        if (res.equals("Product deleted successfully.")) {
+                                            fragment_ProductMain.fa.finish();
+                                            startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
+                                            finish();
+                                            Toast.makeText(getApplicationContext(), "Suppression with success", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 }
                             }
+                        });
+
                     }
-                    });
+                });
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Any Message for inform user cancel
+                    }
+                });
 
-                }
-            });
-            alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // Any Message for inform user cancel
-                }
-            });
-
-            AlertDialog dialog = alertDialog.create();
-            dialog.show();
+                AlertDialog dialog = alertDialog.create();
+                dialog.show();
 
         }
         return super.onOptionsItemSelected(item);
@@ -336,7 +338,13 @@ public class ProductDetail extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navdetail, menu);
+        SessionActivity sessionActivity = new SessionActivity(ProductDetail.this);
+        if (Integer.parseInt(sessionActivity.getIdrole())==2){
+            getMenuInflater().inflate(R.menu.navdetail, menu);
+        }else{
+            
+        }
+
         return true;
     }
 

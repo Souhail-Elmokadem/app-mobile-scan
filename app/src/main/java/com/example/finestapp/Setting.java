@@ -7,7 +7,6 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,9 +27,9 @@ public class Setting extends AppCompatActivity {
         editconfnew = findViewById(R.id.EditConfirmNewPassword);
         savebtn = findViewById(R.id.savebtn);
         logoutbtn=findViewById(R.id.logoutbtn);
-        SessionActivity sessionActivity = new SessionActivity(Setting.this);
-        TextView textView = findViewById(R.id.textViewNom);
-    textView.setText(new SessionActivity(Setting.this).getNom());
+       SessionActivity sessionActivity = new SessionActivity(Setting.this);
+//        TextView textView = findViewById(R.id.textViewNom);
+//        textView.setText(new SessionActivity(Setting.this).getIdrole());
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
