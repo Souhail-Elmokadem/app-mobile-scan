@@ -28,6 +28,7 @@ public class Setting extends AppCompatActivity {
         savebtn = findViewById(R.id.savebtn);
         logoutbtn=findViewById(R.id.logoutbtn);
        SessionActivity sessionActivity = new SessionActivity(Setting.this);
+       getSupportActionBar().setTitle(sessionActivity.getNom());
 //        TextView textView = findViewById(R.id.textViewNom);
 //        textView.setText(new SessionActivity(Setting.this).getIdrole());
         savebtn.setOnClickListener(new View.OnClickListener() {
@@ -89,4 +90,5 @@ public class Setting extends AppCompatActivity {
         });
 
     }
+
 }
