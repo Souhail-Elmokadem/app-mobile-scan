@@ -32,7 +32,7 @@
             android:label="@string/title_activity_fragment_produit_main"
             android:theme="@style/Theme.FinestApp.NoActionBar" />
         <activity
-            android:name=".scanner.ScannerQr"
+            android:name=".ui.mainProduitTabbed.scanner.ScannerQr"
             android:exported="false"
             android:label="Scan With QR Code" />
         <activity
@@ -80,7 +80,7 @@
             android:exported="false"
             android:label="Add IPTV" />
         <activity
-            android:name=".scanner.Scancamera"
+            android:name=".ui.mainProduitTabbed.scanner.Scancamera"
             android:exported="false"
             android:label="Code Scan" />
 
