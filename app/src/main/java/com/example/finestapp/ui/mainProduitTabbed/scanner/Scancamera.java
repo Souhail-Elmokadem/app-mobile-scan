@@ -1,4 +1,4 @@
-package com.example.finestapp.scanner;
+package com.example.finestapp.ui.mainProduitTabbed.scanner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -22,7 +22,6 @@ import android.widget.TextView;
 import com.example.finestapp.R;
 import com.example.finestapp.product.Item;
 import com.example.finestapp.product.ProductDetail;
-import com.example.finestapp.product.ProductDetailDigital;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;

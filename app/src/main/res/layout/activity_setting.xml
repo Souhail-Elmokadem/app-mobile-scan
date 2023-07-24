@@ -44,15 +44,16 @@
         android:id="@+id/EditOldPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Enter Your Old Password"
-        android:inputType="textPassword"
-        android:singleLine="true"
-        android:background="@drawable/border"
         android:layout_marginTop="20dp"
+        android:background="@drawable/border"
+        android:drawableEnd="@drawable/baseline_passwordhidden_24"
+        android:drawablePadding="8dp"
+        android:drawableTint="#8CC0DE"
+        android:hint="Old Password"
+        android:inputType="textPassword"
         android:padding="8dp"
-        android:textColorHint="@color/white"
         android:textColor="@color/white"
-        android:drawablePadding="8dp"/>
+        android:textColorHint="@color/white"/>
 
     <EditText
         android:id="@+id/EditNewPassword"
@@ -83,7 +84,7 @@
         android:padding="8dp"
         android:textColorHint="@color/white"
         android:textColor="@color/white"
-        android:drawablePadding="8dp" />
+        android:drawablePadding="8dp"/>
 
 
 
