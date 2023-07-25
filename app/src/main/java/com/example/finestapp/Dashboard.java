@@ -15,7 +15,7 @@ import com.example.finestapp.user.UserList;
 
 public class Dashboard extends AppCompatActivity {
     ImageView fournisseur,product,scanbtn,userbtn,profilebtn;
-
+    public static Dashboard dashboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +29,9 @@ public class Dashboard extends AppCompatActivity {
 
         SessionActivity sessionActivity = new SessionActivity(Dashboard.this);
         String role =  sessionActivity.getIdrole();
-        if (role=="null"){
-            role="3";
-        }
+//        if (role=="null"){
+//            role="3";
+//        }
         if (Integer.parseInt(role)==2){
             userbtn.setVisibility(View.VISIBLE);
             userbtn.setOnClickListener(new View.OnClickListener() {
@@ -43,8 +43,6 @@ public class Dashboard extends AppCompatActivity {
         }else if(Integer.parseInt(role)==3){
             userbtn.setVisibility(View.GONE);
         }
-
-
 
         profilebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,9 +76,4 @@ public class Dashboard extends AppCompatActivity {
         });
 
     }
-
-    public static Dashboard dashboard;
-
-
-
 }

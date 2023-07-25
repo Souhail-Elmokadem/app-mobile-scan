@@ -16,7 +16,7 @@ public class SessionActivity {
 
 
     public SessionActivity(Context context){
-        this.sharedPreferences = context.getSharedPreferences(shared_pref_name,Context.MODE_PRIVATE);
+        this.sharedPreferences=context.getSharedPreferences(shared_pref_name,Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
     public void saveSession(String Email,String password){
@@ -31,10 +31,9 @@ public class SessionActivity {
         editor.putString("session_role",idrole);
         editor.commit();
     }
-
-    public String getSession(){
-        return sharedPreferences.getString("session_email","null");
-    }
+//    public String getSession(){
+//        return sharedPreferences.getString("session_email","null");
+//    }
     public boolean isIscheckBox() {
         return ischeckBox;
     }
@@ -49,8 +48,10 @@ public class SessionActivity {
     }
 
     public String getIdrole() {
-         return sharedPreferences.getString("session_role","null");
+         return sharedPreferences.getString("session_role","");
     }
+
+
 
     public String getIdUser() {
         return sharedPreferences.getString("session_id","null");
