@@ -10,11 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.fournisseur.FournisseurList;
 import com.example.finestapp.product.frag_products.fragment_ProductMain;
-import com.example.finestapp.ui.mainProduitTabbed.scanner.Scancamera;
+import com.example.finestapp.scanner.Scancamera;
 import com.example.finestapp.user.UserList;
 
 public class Dashboard extends AppCompatActivity {
     ImageView fournisseur,product,scanbtn,userbtn,profilebtn;
+
 
 
     @Override
@@ -27,11 +28,14 @@ public class Dashboard extends AppCompatActivity {
         product = findViewById(R.id.productbtn);
         profilebtn = findViewById(R.id.ProfileButton);
 
+        dashboard = this;
+
         SessionActivity sessionActivity = new SessionActivity(Dashboard.this);
         if (Integer.parseInt(sessionActivity.getIdrole())==3){
             userbtn.setVisibility(View.GONE);
-
         }
+
+
         userbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,17 +67,14 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         scanbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Scancamera.class));
             }
         });
-
     }
 
-
-
-
-
+    public static Dashboard dashboard;
 }

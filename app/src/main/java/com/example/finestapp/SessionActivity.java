@@ -16,11 +16,10 @@ public class SessionActivity {
 
 
     public SessionActivity(Context context){
-        this.sharedPreferences=context.getSharedPreferences(shared_pref_name,Context.MODE_PRIVATE);
+        this.sharedPreferences = context.getSharedPreferences(shared_pref_name,Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
     public void saveSession(String Email,String password){
-
         editor.putString("session_email",Email);
         editor.putString("session_password",password);
         editor.commit();
@@ -32,6 +31,7 @@ public class SessionActivity {
         editor.putString("session_role",idrole);
         editor.commit();
     }
+
     public String getSession(){
         return sharedPreferences.getString("session_email","null");
     }
@@ -51,8 +51,6 @@ public class SessionActivity {
     public String getIdrole() {
          return sharedPreferences.getString("session_role","null");
     }
-
-
 
     public String getIdUser() {
         return sharedPreferences.getString("session_id","null");

@@ -149,10 +149,11 @@ public class Setting extends AppCompatActivity {
         });
 
         logoutbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 sessionActivity.removeSession();
-                startActivity(new Intent(getApplicationContext(),Login.class));
+                Dashboard.dashboard.finish();
+                Intent intent = new Intent(Setting.this, MainActivity.class);
+                startActivity(intent);
                 finish();
             }
         });

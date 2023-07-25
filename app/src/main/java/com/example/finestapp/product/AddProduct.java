@@ -25,7 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.finestapp.R;
 import com.example.finestapp.fournisseur.Fournisseur;
 import com.example.finestapp.product.frag_products.fragment_ProductMain;
-import com.example.finestapp.ui.mainProduitTabbed.scanner.ScannerQr;
+import com.example.finestapp.scanner.ScannerQr;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONArray;

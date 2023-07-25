@@ -1,4 +1,4 @@
-package com.example.finestapp.ui.mainProduitTabbed.scanner;
+package com.example.finestapp.scanner;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
