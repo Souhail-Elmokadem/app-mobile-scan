@@ -12,7 +12,7 @@
     <LinearLayout
         android:id="@+id/barproduct"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:background="@drawable/product_name_bg"
         android:paddingTop="100dp">
 
@@ -27,7 +27,8 @@
             android:textAppearance="?android:textAppearanceLarge"
             android:textColor="@color/white"
             android:textSize="34sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:layout_marginBottom="15dp" />
     </LinearLayout>
 
     <LinearLayout

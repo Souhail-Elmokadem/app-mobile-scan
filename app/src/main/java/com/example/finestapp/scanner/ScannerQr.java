@@ -1,4 +1,4 @@
-package com.example.finestapp.ui.mainProduitTabbed.scanner;
+package com.example.finestapp.scanner;
 
 import android.Manifest;
 import android.content.Intent;

@@ -69,6 +69,8 @@ public class SessionActivity {
         editor.putString("session_email","null").commit();
         editor.clear();
         editor.remove("session_email");
+        editor.remove("session_password");
+        editor.remove("session_role");
         editor.commit();
     }
 

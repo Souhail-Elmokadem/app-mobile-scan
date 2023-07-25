@@ -5,9 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.Editable;
-import android.text.Selection;
-import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.MenuItem;
@@ -23,7 +20,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.user.Adduser;
-import com.example.finestapp.user.Login;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class Setting extends AppCompatActivity {
@@ -140,11 +136,6 @@ public class Setting extends AppCompatActivity {
                     }
 
                 }
-
-
-
-
-
             }
         });
 
@@ -152,8 +143,11 @@ public class Setting extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sessionActivity.removeSession();
-                startActivity(new Intent(getApplicationContext(),Login.class));
+
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
+                Runtime.getRuntime().exit(0);
+
             }
         });
     }

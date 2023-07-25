@@ -1,8 +1,4 @@
-package com.example.finestapp.ui.mainProduitTabbed.scanner;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
+package com.example.finestapp.scanner;
 
 import android.Manifest;
 import android.content.Intent;
@@ -20,6 +16,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.finestapp.R;
 import com.example.finestapp.product.Item;
