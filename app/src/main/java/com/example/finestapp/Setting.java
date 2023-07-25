@@ -10,6 +10,7 @@ import android.text.Selection;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -17,8 +18,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.finestapp.user.Adduser;
 import com.example.finestapp.user.Login;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -34,6 +38,10 @@ public class Setting extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         editOld = findViewById(R.id.EditOldPassword);
         editnew = findViewById(R.id.EditNewPassword);
         editconfnew = findViewById(R.id.EditConfirmNewPassword);
@@ -148,7 +156,6 @@ public class Setting extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     private boolean validatePassword(){
@@ -168,5 +175,17 @@ public class Setting extends AppCompatActivity {
             MainActivityConfirmPassError.setText("Password Matched");
             return true;
         }
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.addfourn){
+            startActivity(new Intent(getApplicationContext(), Adduser.class));
+            finish();
+            return true;
+        } else if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

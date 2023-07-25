@@ -218,5 +218,5 @@ public class AddProduct extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public static Activity addproduct;
+    public static AddProduct addproduct;
 }
