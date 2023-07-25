@@ -50,7 +50,7 @@
                 android:drawableLeft="@drawable/baseline_alternate_email_24"
                 android:drawableTint="#8CC0DE"
                 android:drawablePadding="8dp"
-                android:hint="Email (DEV USERNAME)"
+                android:hint="Email"
                 android:textColorHint="@color/white"
                 android:padding="8dp"
                 android:textColor="@color/white" />
@@ -65,7 +65,7 @@
                 android:drawableEnd="@drawable/baseline_passwordhidden_24"
                 android:drawablePadding="8dp"
                 android:drawableTint="#8CC0DE"
-                android:hint="Password"
+                android:hint="Mot De Pasee"
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/white"
@@ -75,7 +75,7 @@
                 android:id="@+id/checkBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Keep Me Logged In"
+                android:text="Rester Connecté"
                 android:textColor="@color/white"/>
 
             <Button
@@ -84,7 +84,7 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/purple"
-                android:text="Login"
+                android:text="SE CONNECTER"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
 

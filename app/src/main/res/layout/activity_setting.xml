@@ -28,7 +28,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Modify Your Password"
+                            android:text="CHANGER VOTRE MOT DE PASSE"
                             android:textSize="25dp"
                             android:textAlignment="center"
                             android:textStyle="bold"
@@ -46,7 +46,7 @@
                             android:drawablePadding="8dp"
                             android:drawableTint="#8CC0DE"
                             android:clickable="false"
-                            android:hint="Old Password"
+                            android:hint="Mot de passe ancient"
                             android:inputType="textPassword"
                             android:padding="8dp"
                             android:textColor="@color/white"
@@ -58,7 +58,7 @@
                             android:layout_width="match_parent"
                             android:layout_below="@+id/EditOldPassword"
                             android:layout_height="50dp"
-                            android:hint="Enter Your New Password"
+                            android:hint="Nouveau mot de passe"
                             android:inputType="textPassword"
                             android:singleLine="true"
                             android:background="@drawable/border_selector"
@@ -83,7 +83,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_below="@+id/EditNewPassword"
-                            android:hint="Confirme Your New Password"
+                            android:hint="Comfirmer le nouveau mot de passe"
                             android:inputType="textPassword"
                             android:singleLine="true"
                             android:background="@drawable/border_selector"
@@ -108,7 +108,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_below="@+id/EditConfirmNewPassword"
-                            android:text="save"
+                            android:text="ENREGISTRER"
                             android:backgroundTint="#00DFA2"
                             app:cornerRadius = "20dp"/>
 
@@ -121,6 +121,6 @@
             android:layout_height="80dp"
             android:layout_marginTop="20dp"
             android:backgroundTint="#E76161"
-            android:text="DISCONNECT"
+            android:text="SE DECONNECTER"
             app:cornerRadius="20dp" />
 </LinearLayout>

@@ -47,7 +47,7 @@
                     android:drawableLeft="@drawable/baseline_person_24"
                     android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
-                    android:hint="Firstname"
+                    android:hint="PRENOM"
                     android:singleLine="true"
                     android:padding="8dp"
                     android:textColorHint="@color/white"
@@ -62,7 +62,7 @@
                     android:drawableLeft="@drawable/baseline_person_24"
                     android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
-                    android:hint="Lastname"
+                    android:hint="NOM"
                     android:singleLine="true"
                     android:padding="8dp"
                     android:textColorHint="@color/white"
@@ -76,7 +76,7 @@
                     android:drawableLeft="@drawable/baseline_alternate_email_24"
                     android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
-                    android:hint="Email"
+                    android:hint="EMAIL"
                     android:singleLine="true"
                     android:inputType="textEmailAddress"
                     android:padding="8dp"
@@ -92,7 +92,7 @@
                     android:drawableLeft="@drawable/baseline_lock_24"
                     android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
-                    android:hint="Password"
+                    android:hint="MOT DE PASSE"
                     android:singleLine="true"
                     android:inputType="textPassword"
                     android:padding="8dp"
@@ -108,7 +108,7 @@
                     android:drawableLeft="@drawable/baseline_local_phone_24"
                     android:drawableTint="#75C2F6"
                     android:drawablePadding="8dp"
-                    android:hint="Telephone"
+                    android:hint="TELEPHONE"
                     android:singleLine="true"
                     android:inputType="phone|number"
                     android:maxLength="10"
@@ -128,7 +128,7 @@
                         android:id="@+id/radioAdmin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Admin"
+                        android:text="Administrateur"
                         android:tag="2"
                         android:textColor="@color/white"/>
 
@@ -136,7 +136,7 @@
                         android:id="@+id/radioVisitor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Visitor"
+                        android:text="Visiteur"
                         android:tag="3"
                         android:textColor="@color/white"/>
                 </RadioGroup>
@@ -147,7 +147,7 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="30dp"
                     android:backgroundTint="#00DFA2"
-                    android:text="Add"
+                    android:text="AJOUTER"
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />
 
@@ -163,7 +163,7 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
                     android:backgroundTint="#E76161"
-                    android:text="BACK"
+                    android:text="ANNULER"
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />
 

@@ -75,7 +75,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/border_selector"
                     android:drawablePadding="8dp"
-                    android:hint="Tel"
+                    android:hint="Telephone"
                     android:singleLine="true"
                     android:textColorHint="@color/white"
                     android:maxLength="10"
@@ -89,7 +89,7 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
                     android:backgroundTint="#00DFA2"
-                    android:text="ADD"
+                    android:text="AJOUTER"
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />
 
@@ -99,7 +99,7 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
                     android:backgroundTint="#E76161"
-                    android:text="CANCEL"
+                    android:text="ANNULER"
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />
 

@@ -24,7 +24,7 @@
         <activity
             android:name=".product.ProductDetailDigital"
             android:exported="false"
-            android:label="Digital Product Detail"/>
+            android:label="Detail IPTV"/>
         <activity
             android:name=".product.frag_products.fragment_ProductMain"
             android:launchMode="singleInstance"
@@ -34,35 +34,35 @@
         <activity
             android:name=".scanner.ScannerQr"
             android:exported="false"
-            android:label="Scan With QR Code" />
+            android:label="Scanner avec QRCODE" />
         <activity
             android:name=".Setting"
             android:exported="false"
-            android:label="Settings" />
+            android:label="Parametres" />
         <activity
             android:name=".user.UserDetail"
             android:exported="false"
-            android:label="Detail User" />
+            android:label="Details utilisateur" />
         <activity
             android:name=".fournisseur.FournisseurDetail"
             android:exported="false"
-            android:label="Fournisseur Detail" />
+            android:label="Details fournisseur" />
         <activity
             android:name=".user.Adduser"
             android:exported="false"
-            android:label="Add User" />
+            android:label="Ajouter un utilisateur" />
         <activity
             android:name=".user.UserList"
             android:exported="false"
-            android:label="List Of Users" />
+            android:label="Listes des utilisateurs" />
         <activity
             android:name=".fournisseur.addFournisseur"
             android:exported="false"
-            android:label="Add Supplier" />
+            android:label="Ajouter un fournisseur" />
         <activity
             android:name=".fournisseur.FournisseurList"
             android:exported="false"
-            android:label="List Of Suppliers" />
+            android:label="Liste des fournisseurs" />
         <activity
             android:name=".Dashboard"
             android:exported="false"
@@ -70,19 +70,19 @@
         <activity
             android:name=".product.ProductDetail"
             android:exported="false"
-            android:label="Product Detail" />
+            android:label="Details produit" />
         <activity
             android:name=".product.AddProduct"
             android:exported="false"
-            android:label="Add Product" />
+            android:label="Ajouter produit" />
         <activity
             android:name=".product.AddProductDigital"
             android:exported="false"
-            android:label="Add IPTV" />
+            android:label="Ajouter IPTV" />
         <activity
             android:name=".scanner.Scancamera"
             android:exported="false"
-            android:label="Code Scan" />
+            android:label="Scanner" />
 
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"

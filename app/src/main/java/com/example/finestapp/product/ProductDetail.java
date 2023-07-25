@@ -124,19 +124,20 @@ public class ProductDetail extends AppCompatActivity {
                 String fournisseurName = extras.getString("FournisseurName");
                 // Set values to TextView elements
                 TextView textViewProductName = findViewById(R.id.textViewProductName);
-                textViewProductName.setText("Produit  " + productName);
+                textViewProductName.setText("PRODUIT : " + productName);
 
                 TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
-                textViewProductPrice.setText("Product Price: " + productPrice + "DHS");
+                textViewProductPrice.setText("PRIX : " + productPrice + "DHS");
 
                 TextView textViewProductDate = findViewById(R.id.textViewProductDate);
-                textViewProductDate.setText("Product Date: " + productDate);
+                textViewProductDate.setText("DATE D'ACHAT: " + productDate);
 
                 TextView textViewProductMarge = findViewById(R.id.textViewProductMarge);
-                textViewProductMarge.setText("Product Marge: " + productMarge + "DHS");
+                textViewProductMarge.setText("MARGE: " + productMarge + "DHS");
 
                 TextView textViewFournisseurName = findViewById(R.id.textViewFournisseurName);
-                textViewFournisseurName.setText("Fournisseur Name: " + fournisseurName);
+                textViewFournisseurName.setText("FOURNISSEUR: " + fournisseurName);
+
             } else if (extras.getString("productCode")!=null) {
                 TextView textViewProductDate = findViewById(R.id.textViewProductDate);
                 TextView textViewProductMarge = findViewById(R.id.textViewProductMarge);
@@ -228,9 +229,9 @@ public class ProductDetail extends AppCompatActivity {
                                         startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
 
-                                        Toast.makeText(getApplicationContext(),"Update Success",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Produit Physique Modifié !",Toast.LENGTH_SHORT).show();
                                     }else{
-                                        Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Modification échouée",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -238,7 +239,7 @@ public class ProductDetail extends AppCompatActivity {
                         }
                     });
                 }else{
-                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vide",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vides !",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -302,8 +303,8 @@ public class ProductDetail extends AppCompatActivity {
 
                 alertDialog = new AlertDialog.Builder(ProductDetail.this);
                 alertDialog.setTitle("Suppression");
-                alertDialog.setMessage("Are you sure ?");
-                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                alertDialog.setMessage("Êtes-vous sûr de vouloir supprimer ce produit ?");
+                alertDialog.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Handler handler = new Handler(Looper.getMainLooper());
@@ -322,7 +323,7 @@ public class ProductDetail extends AppCompatActivity {
                                             fragment_ProductMain.fa.finish();
                                             startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                             finish();
-                                            Toast.makeText(getApplicationContext(), "Suppression with success", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "Produit Physique Supprimé !", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
@@ -331,7 +332,7 @@ public class ProductDetail extends AppCompatActivity {
 
                     }
                 });
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                alertDialog.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Any Message for inform user cancel

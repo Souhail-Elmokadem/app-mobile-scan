@@ -17,6 +17,8 @@ import com.example.finestapp.R;
 import com.example.finestapp.product.frag_products.fragment_ProductMain;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
+import io.github.muddz.styleabletoast.StyleableToast;
+
 public class AddProductDigital extends AppCompatActivity {
     Button cancel, addbtn;
     EditText code,name;
@@ -63,16 +65,16 @@ public class AddProductDigital extends AppCompatActivity {
                                         fragment_ProductMain.fa.finish();
                                         startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
-                                        Toast.makeText(getApplicationContext(),"Digital Product Added !",Toast.LENGTH_SHORT).show();
+                                        StyleableToast.makeText(getApplicationContext(),"Produit Digital Ajouté !",R.style.successToast,Toast.LENGTH_SHORT).show();
                                     }else{
-                                        Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Ajout de produit digital échoué",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
                         }
                     });
                 }else{
-                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vide",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vides !",Toast.LENGTH_SHORT).show();
                 }
             }
         });
