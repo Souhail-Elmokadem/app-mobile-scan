@@ -13,6 +13,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.R;
@@ -50,9 +51,8 @@ public class FournisseurList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fournisseur_list);
 
-        // start nav bar
-
-        // end bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         listView = findViewById(R.id.subListView);
         adapter = new FournisseurListAdapter(this,R.layout.list_fournisseur_layout, new ArrayList<>());
@@ -171,20 +171,24 @@ public class FournisseurList extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }
     }
-//
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.addfourn){
-            startActivity(new Intent(getApplicationContext(),addFournisseur.class));
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.navfour,menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.addfourn){
+            startActivity(new Intent(getApplicationContext(),addFournisseur.class));
+            finish();
+        } else if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

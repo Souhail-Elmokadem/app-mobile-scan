@@ -2,6 +2,7 @@ package com.example.finestapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -9,16 +10,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.fournisseur.FournisseurList;
+import com.example.finestapp.product.ProductDetail;
 import com.example.finestapp.product.frag_products.fragment_ProductMain;
 import com.example.finestapp.ui.mainProduitTabbed.scanner.Scancamera;
 import com.example.finestapp.user.UserList;
 
 public class Dashboard extends AppCompatActivity {
-//    LinearLayout layout_home,layout_products,layout_supplier,layout_settings;
     ImageView fournisseur,product,scanbtn,userbtn,profilebtn;
-
-
-
 
 
     @Override
@@ -30,10 +28,9 @@ public class Dashboard extends AppCompatActivity {
         fournisseur = findViewById(R.id.fournisseurbtn);
         product = findViewById(R.id.productbtn);
         profilebtn = findViewById(R.id.ProfileButton);
-           // startActivity(new Intent(getApplicationContext(), UserDetail.class));
 
-        //Toast.makeText(getApplicationContext(),sessionActivity.getIdUser(),Toast.LENGTH_SHORT).show();
-        //startActivity(new Intent(getApplicationContext(), fragment_physical.class));
+//        CheckRole();
+
         profilebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,11 +67,18 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), UserList.class));
             }
         });
-
-
     }
 
 
+//    public boolean CheckRole() {
+//        SessionActivity sessionActivity = new SessionActivity(Dashboard.this);
+//        if (Integer.parseInt(sessionActivity.getIdrole())==3){
+//            ImageView userbtn = findViewById(R.id.userbtn);
+//            userbtn.setVisibility(View.GONE);
+//        }else{
+//        }
+//        return true;
+//    }
 
 
 }

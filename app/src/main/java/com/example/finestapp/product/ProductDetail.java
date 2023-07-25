@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,6 +57,9 @@ public class ProductDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         name = findViewById(R.id.editname);
         price = findViewById(R.id.editprice);
@@ -334,9 +338,13 @@ public class ProductDetail extends AppCompatActivity {
                 AlertDialog dialog = alertDialog.create();
                 dialog.show();
 
+        } else if (item.getItemId() == android.R.id.home) {
+                this.finish();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -344,9 +352,7 @@ public class ProductDetail extends AppCompatActivity {
         if (Integer.parseInt(sessionActivity.getIdrole())==2){
             getMenuInflater().inflate(R.menu.navdetail, menu);
         }else{
-            
         }
-
         return true;
     }
 

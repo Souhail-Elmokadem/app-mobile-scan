@@ -63,7 +63,6 @@ public class fragment_physical extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_produit_physique, container, false);
-        Log.v("hello","hello wrolfd");
         searchView = v.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
