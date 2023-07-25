@@ -114,7 +114,7 @@ public class Login extends AppCompatActivity {
         });
 
         CheckBox = findViewById(R.id.checkBox);
-        SessionActivity sessionActivity = new SessionActivity(com.example.finestapp.user.Login.this);
+
 
 
         Login.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +123,7 @@ public class Login extends AppCompatActivity {
 
                 if(CheckBox.isChecked()==true) {
 
-                    sessionActivity.setIscheckBox(true);
+
 
                 }
                 String username, password;
@@ -162,8 +162,8 @@ public class Login extends AppCompatActivity {
                                         finish();
                                        // Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
                                         //session start
-
-                                            sessionActivity.saveSession(username,password);
+                                        SessionActivity sessionActivity = new SessionActivity(com.example.finestapp.user.Login.this);
+                                        sessionActivity.saveSession(username,password);
                                         Login.DashListAsyncTask dashListAsyncTask= new Login.DashListAsyncTask(username);
                                         dashListAsyncTask.execute();
 

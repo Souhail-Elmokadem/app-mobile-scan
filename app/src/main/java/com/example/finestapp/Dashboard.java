@@ -17,7 +17,6 @@ public class Dashboard extends AppCompatActivity {
     ImageView fournisseur,product,scanbtn,userbtn,profilebtn;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,20 +27,24 @@ public class Dashboard extends AppCompatActivity {
         product = findViewById(R.id.productbtn);
         profilebtn = findViewById(R.id.ProfileButton);
 
-        dashboard = this;
-
         SessionActivity sessionActivity = new SessionActivity(Dashboard.this);
-        if (Integer.parseInt(sessionActivity.getIdrole())==3){
+        String role =  sessionActivity.getIdrole();
+        if (role=="null"){
+            role="3";
+        }
+        if (Integer.parseInt(role)==2){
+            userbtn.setVisibility(View.VISIBLE);
+            userbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(), UserList.class));
+                }
+            });
+        }else if(Integer.parseInt(role)==3){
             userbtn.setVisibility(View.GONE);
         }
 
 
-        userbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), UserList.class));
-            }
-        });
 
         profilebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,14 +70,17 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         scanbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Scancamera.class));
             }
         });
+
     }
 
     public static Dashboard dashboard;
+
+
+
 }
