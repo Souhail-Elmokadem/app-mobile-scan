@@ -179,7 +179,7 @@ public class ScannerQr extends AppCompatActivity {
                                             finish();
                                             Toast.makeText(getApplicationContext(),"Product Added !",Toast.LENGTH_SHORT).show();
                                         }else{
-                                            Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(),"deja exist",Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }

@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/loginbk"
+    android:background="#D0D2F1"
     tools:context=".Dashboard"
-
     >
 
 
@@ -30,7 +29,7 @@
             android:layout_marginLeft="20dp"
 
             android:fontFamily="@font/archivo_bold"
-            android:text="DASHBOARD"
+            android:text="Tableau de bord"
             android:textColor="#6D77FA"
             android:textSize="16sp" />
 

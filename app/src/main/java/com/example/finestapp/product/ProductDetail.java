@@ -124,7 +124,7 @@ public class ProductDetail extends AppCompatActivity {
                 String fournisseurName = extras.getString("FournisseurName");
                 // Set values to TextView elements
                 TextView textViewProductName = findViewById(R.id.textViewProductName);
-                textViewProductName.setText("Produit  " + productName);
+                textViewProductName.setText( productName);
 
                 TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
                 textViewProductPrice.setText("Product Price: " + productPrice + "DHS");

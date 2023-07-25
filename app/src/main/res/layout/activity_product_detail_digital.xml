@@ -7,7 +7,29 @@
     tools:context=".product.ProductDetailDigital"
     android:background="#8CC0DE"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="0dp">
+
+    <LinearLayout
+        android:id="@+id/barproduct"
+        android:layout_width="match_parent"
+        android:layout_height="199dp"
+        android:background="@drawable/product_name_bg"
+        android:paddingTop="99dp">
+
+        <TextView
+            android:id="@+id/textViewProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:hint="NAME"
+            android:padding="23dp"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/white"
+            android:textSize="33sp"
+            android:textStyle="bold"
+            tools:layout_marginBottom="14dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linear"
@@ -18,7 +40,10 @@
         android:padding="24dp"
         android:backgroundTint="#1D5B79"
         android:background="@drawable/border"
-        android:visibility="gone">
+        android:visibility="gone"
+
+
+        >
 
         <EditText
             android:id="@+id/editname"
@@ -68,16 +93,7 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textViewProductName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="NAME"
-        android:padding="24dp"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold"/>
+
 
     <TextView
         android:id="@+id/textViewProductCode"

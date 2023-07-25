@@ -14,16 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="@drawable/product_name_bg"
-        android:paddingTop="100dp">
+        android:paddingTop="0dp">
 
         <TextView
             android:id="@+id/textViewProductName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
+
             android:hint="NAME"
-            android:padding="24dp"
             android:textAppearance="?android:textAppearanceLarge"
             android:textColor="@color/white"
             android:textSize="34sp"
@@ -125,10 +126,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/green"
                 android:padding="20dp"
                 android:text="Save"
-                android:textColor="@color/purple"
+                android:textColor="@color/white"
                 app:cornerRadius="10dp" />
 
             <Button
@@ -136,11 +137,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="#10CAE1"
+                android:backgroundTint="@color/red"
                 android:padding="20dp"
                 android:text="discard"
                 android:textColor="#FFFFFF"
-                app:cornerRadius="20dp" />
+                app:cornerRadius="10dp" />
         </LinearLayout>
 
 
