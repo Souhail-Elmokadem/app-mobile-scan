@@ -136,6 +136,11 @@ public class Setting extends AppCompatActivity {
                     }
 
                 }
+
+
+
+
+
             }
         });
 
@@ -146,8 +151,6 @@ public class Setting extends AppCompatActivity {
 
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
-                Runtime.getRuntime().exit(0);
-
             }
         });
     }

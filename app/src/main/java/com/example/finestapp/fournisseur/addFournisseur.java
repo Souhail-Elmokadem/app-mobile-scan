@@ -74,16 +74,16 @@ public class addFournisseur extends AppCompatActivity {
                                         Intent intent = new Intent(getApplicationContext(), FournisseurList.class);
                                         startActivity(intent);
                                         finish();
-                                        Toast.makeText(getApplicationContext(),"Supplier Added !",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Fournisseur Ajouté !",Toast.LENGTH_SHORT).show();
                                     }else{
-                                        Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Ajout échoué !",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
                         }
                     });
                 }else{
-                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vide",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vides !",Toast.LENGTH_SHORT).show();
                 }
             }
 

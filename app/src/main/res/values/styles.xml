@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <style name="successToast">
+            <item name="colorOnBackground">@color/green</item>
+            <item name="stIconStart">@drawable/baseline_success</item>
+            <item name="stLength">SHORT</item>
+        </style>
+</resources>

@@ -56,7 +56,7 @@ public class Adduser extends AppCompatActivity {
 
                 int selectedRoleId = roleRadioGroup.getCheckedRadioButtonId();
                 if (selectedRoleId == -1) {
-                    Toast.makeText(getApplicationContext(), "Please select a role", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Selectionner Un Role", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -103,9 +103,9 @@ public class Adduser extends AppCompatActivity {
                                             Intent intent = new Intent(getApplicationContext(), UserList.class);
                                             startActivity(intent);
                                             finish();
-                                            Toast.makeText(getApplicationContext(), "Account Created!", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "Utilisateur Ajouté !", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Toast.makeText(getApplicationContext(), "Error Creating Account !", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "Ajout utilisateur échouée", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
@@ -113,7 +113,7 @@ public class Adduser extends AppCompatActivity {
                             }
                         });
                     } else {
-                        Toast.makeText(getApplicationContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Remplire tout les champs vides !", Toast.LENGTH_SHORT).show();
                     }
                 }
         });

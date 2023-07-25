@@ -127,16 +127,17 @@ public class ProductDetail extends AppCompatActivity {
                 textViewProductName.setText( productName);
 
                 TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
-                textViewProductPrice.setText("Product Price: " + productPrice + "DHS");
+                textViewProductPrice.setText("PRIX : " + productPrice + "DHS");
 
                 TextView textViewProductDate = findViewById(R.id.textViewProductDate);
-                textViewProductDate.setText("Product Date: " + productDate);
+                textViewProductDate.setText("DATE D'ACHAT: " + productDate);
 
                 TextView textViewProductMarge = findViewById(R.id.textViewProductMarge);
-                textViewProductMarge.setText("Product Marge: " + productMarge + "DHS");
+                textViewProductMarge.setText("MARGE: " + productMarge + "DHS");
 
                 TextView textViewFournisseurName = findViewById(R.id.textViewFournisseurName);
-                textViewFournisseurName.setText("Fournisseur Name: " + fournisseurName);
+                textViewFournisseurName.setText("FOURNISSEUR: " + fournisseurName);
+
             } else if (extras.getString("productCode")!=null) {
                 TextView textViewProductDate = findViewById(R.id.textViewProductDate);
                 TextView textViewProductMarge = findViewById(R.id.textViewProductMarge);
@@ -228,9 +229,9 @@ public class ProductDetail extends AppCompatActivity {
                                         startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
 
-                                        Toast.makeText(getApplicationContext(),"Update Success",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Produit Physique Modifié !",Toast.LENGTH_SHORT).show();
                                     }else{
-                                        Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Modification échouée",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }

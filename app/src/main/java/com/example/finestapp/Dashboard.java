@@ -26,7 +26,7 @@ public class Dashboard extends AppCompatActivity {
         fournisseur = findViewById(R.id.fournisseurbtn);
         product = findViewById(R.id.productbtn);
         profilebtn = findViewById(R.id.ProfileButton);
-//        dashboard=this;
+
         SessionActivity sessionActivity = new SessionActivity(Dashboard.this);
         String role =  sessionActivity.getIdrole();
         if (role=="null"){

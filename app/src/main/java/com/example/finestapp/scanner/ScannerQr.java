@@ -175,6 +175,7 @@ public class ScannerQr extends AppCompatActivity {
                                         String res = putData.getResult();
                                         if(res.equals("Add Success")){
                                             AddProduct.addproduct.finish();
+                                            fragment_ProductMain.fa.finish();
                                             startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                             finish();
                                             Toast.makeText(getApplicationContext(),"Product Added !",Toast.LENGTH_SHORT).show();

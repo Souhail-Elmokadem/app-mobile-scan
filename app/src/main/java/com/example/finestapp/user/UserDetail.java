@@ -146,16 +146,16 @@ public class UserDetail extends AppCompatActivity {
                                         UserList.userlist.finish();
                                         startActivity(new Intent(getApplicationContext(), UserList.class));
                                         finish();
-                                        Toast.makeText(getApplicationContext(), "Updated Success", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Utilisateur Modifié !", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Modification échouée", Toast.LENGTH_SHORT).show();
 
                                     }
                                 }
                             }
                         });
                     } else {
-                        Toast.makeText(getApplicationContext(), "Remplire tous les champs vide", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Remplire tous les champs vides !", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -191,9 +191,9 @@ public class UserDetail extends AppCompatActivity {
                                         UserList.userlist.finish();
                                         startActivity(new Intent(getApplicationContext(), UserList.class));
                                         finish();
-                                        Toast.makeText(getApplicationContext(), "Suppression success", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Utilisateur Supprimé !", Toast.LENGTH_SHORT).show();
                                     }else {
-                                        Toast.makeText(getApplicationContext(), "Suppression Failed", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Suppression échouée", Toast.LENGTH_SHORT).show();
 
                                     }
                                 }

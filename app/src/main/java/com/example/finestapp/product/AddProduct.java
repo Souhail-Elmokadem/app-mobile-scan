@@ -186,17 +186,18 @@ public class AddProduct extends AppCompatActivity {
                                     if(res.equals("Add Success")){
                                         fragment_ProductMain.fa.finish();
                                         startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
+                                        Toast.makeText(getApplicationContext(),"Produit Physique Ajouté !",Toast.LENGTH_SHORT).show();
                                         finish();
 
                                     }else{
-                                        Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Ajout de produit physique échoué",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
                         }
                     });
                 }else{
-                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vide",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vides !",Toast.LENGTH_SHORT).show();
                 }
             }
         });

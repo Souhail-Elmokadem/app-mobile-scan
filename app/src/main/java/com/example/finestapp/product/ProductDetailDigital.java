@@ -132,16 +132,16 @@ public class ProductDetailDigital extends AppCompatActivity {
                                             fragment_ProductMain.fa.finish();
                                             startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                             finish();
-                                            Toast.makeText(getApplicationContext(), "Update Success", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "Produit Digital Modifié !", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "Modification échouée", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
                             }
                         });
                     } else {
-                        Toast.makeText(getApplicationContext(), "Remplire tout les champs vide", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Remplire tout les champs vides !", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -149,8 +149,8 @@ public class ProductDetailDigital extends AppCompatActivity {
         } else if (item.getItemId() == R.id.deletebtn) {
             alertDialog = new AlertDialog.Builder(ProductDetailDigital.this);
             alertDialog.setTitle("Suppression");
-            alertDialog.setMessage("Are you sure ?");
-            alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            alertDialog.setMessage("Êtes-vous sûr de vouloir supprimer ce produit ?");
+            alertDialog.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Handler handler = new Handler(Looper.getMainLooper());
@@ -169,7 +169,7 @@ public class ProductDetailDigital extends AppCompatActivity {
                                         fragment_ProductMain.fa.finish();
                                         startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
-                                        Toast.makeText(getApplicationContext(), "Suppression with success", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Produit Digital Supprimé !", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -177,7 +177,7 @@ public class ProductDetailDigital extends AppCompatActivity {
                     });
                 }
             });
-            alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            alertDialog.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // Any Message for inform user cancel
