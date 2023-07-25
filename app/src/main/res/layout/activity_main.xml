@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="#8A1AE4FF"
+    android:background="@color/purple_light"
     android:gravity="center"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".MainActivity">
 
 
     <pl.droidsonroids.gif.GifImageView
-        android:layout_width="414dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logogif" />
 
 </LinearLayout>
