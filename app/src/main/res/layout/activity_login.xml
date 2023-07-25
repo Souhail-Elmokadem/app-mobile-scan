@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/loginbk"
+    android:background="#D0D2F1"
     >
 
     <LinearLayout
@@ -65,7 +65,7 @@
                 android:drawableEnd="@drawable/baseline_passwordhidden_24"
                 android:drawablePadding="8dp"
                 android:drawableTint="#8CC0DE"
-                android:hint="Mot De Pasee"
+                android:hint="Mot de passe"
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/white"

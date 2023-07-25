@@ -239,7 +239,7 @@ public class ProductDetail extends AppCompatActivity {
                         }
                     });
                 }else{
-                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vide",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vides !",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -303,7 +303,7 @@ public class ProductDetail extends AppCompatActivity {
 
                 alertDialog = new AlertDialog.Builder(ProductDetail.this);
                 alertDialog.setTitle("Suppression");
-                alertDialog.setMessage("Are you sure ?");
+                alertDialog.setMessage("Êtes-vous sûr de vouloir supprimer ce produit ?");
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -323,7 +323,7 @@ public class ProductDetail extends AppCompatActivity {
                                             fragment_ProductMain.fa.finish();
                                             startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                             finish();
-                                            Toast.makeText(getApplicationContext(), "Suppression with success", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "Produit physique supprimé", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
@@ -332,7 +332,7 @@ public class ProductDetail extends AppCompatActivity {
 
                     }
                 });
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                alertDialog.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Any Message for inform user cancel

@@ -47,6 +47,8 @@ public class ProductDetailDigital extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail_digital);
 
+        //remove shadow under actionbar
+        getSupportActionBar().setElevation(0);
         name = findViewById(R.id.editname);
         code = findViewById(R.id.editcode);
 

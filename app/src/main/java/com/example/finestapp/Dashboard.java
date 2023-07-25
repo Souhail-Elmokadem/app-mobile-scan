@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -58,7 +57,6 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), fragment_ProductMain.class);
                 startActivity(intent);
-                Toast.makeText(Dashboard.this, "product", Toast.LENGTH_SHORT).show();
             }
         });
 
