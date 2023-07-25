@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -55,6 +57,18 @@ public class AddProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+
+        cancel = findViewById(R.id.cancel);
+        addbtn = findViewById(R.id.addbtn);
+        name = findViewById(R.id.editname);
+        price = findViewById(R.id.editprice);
+        marge = findViewById(R.id.editmarge);
+
+
+        addproduct = this;
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         qrbtn = findViewById(R.id.qrbtn);
         qrbtn.setOnClickListener(new View.OnClickListener() {
@@ -124,12 +138,6 @@ public class AddProduct extends AppCompatActivity {
             }
         });
 
-        cancel = findViewById(R.id.cancel);
-        addbtn = findViewById(R.id.addbtn);
-        name = findViewById(R.id.editname);
-        price = findViewById(R.id.editprice);
-        marge = findViewById(R.id.editmarge);
-
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,8 +203,21 @@ public class AddProduct extends AppCompatActivity {
         });
         requestQueue.add(jsonObjectRequest);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+    public static Activity addproduct;
 }

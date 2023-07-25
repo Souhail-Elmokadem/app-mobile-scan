@@ -1,11 +1,13 @@
 package com.example.finestapp.fournisseur;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,22 +18,23 @@ import com.example.finestapp.fournisseur.FournisseurList;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class addFournisseur extends AppCompatActivity {
-// list 
     private Button cancel,addbtn;
-//
     EditText prenom,tel,nom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_fournisseur);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
         cancel = findViewById(R.id.cancel);
         addbtn = findViewById(R.id.addbtn);
         nom = findViewById(R.id.name);
         prenom = findViewById(R.id.prenomtxt);
         tel = findViewById(R.id.teltxt);
-
-
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,11 +64,8 @@ public class addFournisseur extends AppCompatActivity {
                             data[0] = Nom;
                             data[1] = Prenom;
                             data[2] = Tel;
-                            //Adresse IP Local
-//                          PutData putData = new PutData("http://192.168.11.66/Loginregister/addproduct.php", "POST", field, data);
-//                          //Adresse IP Cloud
+
                             PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/AddSupply.php", "POST", field, data);
-//
 
                             if(putData.startPut()){
                                 if(putData.onComplete()){
@@ -88,6 +88,15 @@ public class addFournisseur extends AppCompatActivity {
             }
 
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
     @Override
     public void onBackPressed() {

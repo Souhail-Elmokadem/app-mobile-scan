@@ -3,8 +3,10 @@ package com.example.finestapp.product.frag_products;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -29,7 +31,6 @@ public class fragment_ProductMain extends AppCompatActivity {
         binding = ActivityFragmentProduitMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-       // Toast.makeText(fragment_ProductMain.this,new SessionActivity(fragment_ProductMain.this).getIdUser(), Toast.LENGTH_SHORT).show();
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
@@ -84,5 +85,6 @@ public class fragment_ProductMain extends AppCompatActivity {
             tab.select();
         }
     }
+
     public static Activity fa;
 }

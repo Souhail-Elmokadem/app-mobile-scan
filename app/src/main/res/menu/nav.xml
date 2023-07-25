@@ -3,24 +3,4 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <item
-        android:id="@+id/addbtn"
-        android:icon="@drawable/baseline_add_24"
-        app:showAsAction="always"
-        android:title="add"/>
-
-    <item
-        android:id="@+id/scan"
-        android:icon="@drawable/scanner_icon"
-        app:showAsAction="always"
-        android:title="scan pcode"
-        android:iconTint="@color/white"/>
-        <!-- scanner is EAN-13 -->
-
-    <item
-        android:id="@+id/logoutbtn"
-        android:icon="@drawable/baseline_block_24"
-        app:showAsAction="always"
-        android:title="logout"
-        android:iconTint="@color/white"/>
 </menu>

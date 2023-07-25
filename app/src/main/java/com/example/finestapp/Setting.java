@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.user.Login;
@@ -21,6 +23,11 @@ public class Setting extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
         setContentView(R.layout.activity_setting);
         editOld = findViewById(R.id.EditOldPassword);
         editnew = findViewById(R.id.EditNewPassword);
@@ -28,8 +35,7 @@ public class Setting extends AppCompatActivity {
         savebtn = findViewById(R.id.savebtn);
         logoutbtn=findViewById(R.id.logoutbtn);
        SessionActivity sessionActivity = new SessionActivity(Setting.this);
-//        TextView textView = findViewById(R.id.textViewNom);
-//        textView.setText(new SessionActivity(Setting.this).getIdrole());
+
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +60,6 @@ public class Setting extends AppCompatActivity {
                             data[1] = String.valueOf(editOld.getText());
                             data[2] = String.valueOf(editnew.getText());
 
-
                             PutData putData = new PutData(Server.Url + "/Loginregister/updatePassword.php", "POST", field, data);
                             if (putData.startPut() && putData.onComplete()) {
                                 String res = putData.getResult();
@@ -64,14 +69,10 @@ public class Setting extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "Password Updated Success", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
-
                                 }
                             }
                         }
                     });
-
-                    // end update
-
                 }else{
                     Toast.makeText(getApplicationContext(),"Password does not confirm",Toast.LENGTH_SHORT).show();
                 }
@@ -88,5 +89,15 @@ public class Setting extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

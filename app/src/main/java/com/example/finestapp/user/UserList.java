@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.R;
@@ -46,6 +47,9 @@ public class UserList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         userlist = this;
 
@@ -189,6 +193,9 @@ public class UserList extends AppCompatActivity {
         if (item.getItemId() == R.id.addfourn){
             startActivity(new Intent(getApplicationContext(),Adduser.class));
             finish();
+            return true;
+        } else if (item.getItemId() == android.R.id.home) {
+            this.finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

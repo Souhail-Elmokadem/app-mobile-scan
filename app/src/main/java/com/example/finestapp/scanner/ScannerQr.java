@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.finestapp.R;
+import com.example.finestapp.product.AddProduct;
 import com.example.finestapp.product.frag_products.fragment_ProductMain;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -158,6 +159,7 @@ public class ScannerQr extends AppCompatActivity {
                                 field[2] = "MargeProd";
                                 field[3] = "idFour";
                                 field[4] = "Libelle";
+
                                 //Creating array for data
                                 String[] data = new String[5];
                                 data[0] = extras.getString("productName");
@@ -165,15 +167,14 @@ public class ScannerQr extends AppCompatActivity {
                                 data[2] = extras.getString("productMarge");
                                 data[3] = extras.getString("fournisseurid");
                                 data[4] = barcodeData;
-                                //                        PutData putData = new PutData("http://192.168.11.66/Loginregister/addproduct.php", "POST", field, data);
-                                PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/addProductWithQr.php", "POST", field, data);
 
+                                PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/addProductWithQr.php", "POST", field, data);
 
                                 if(putData.startPut()){
                                     if(putData.onComplete()){
                                         String res = putData.getResult();
                                         if(res.equals("Add Success")){
-                                            fragment_ProductMain.fa.finish();
+                                            AddProduct.addproduct.finish();
                                             startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                             finish();
                                             Toast.makeText(getApplicationContext(),"Product Added !",Toast.LENGTH_SHORT).show();

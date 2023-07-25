@@ -1,5 +1,6 @@
 package com.example.finestapp.scanner;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -61,14 +63,13 @@ public class Scancamera extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scancamera);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         barcodeText = findViewById(R.id.barcodeText);
-
         surfaceView = findViewById(R.id.surface_view);
-
         backbtn = findViewById(R.id.backbtn);
-
         progressBar = findViewById(R.id.progressBar);
-
         timer = createTimer(TIMER_DURATION);
 
         initialiseDetectorsAndSources();
@@ -253,13 +254,18 @@ public class Scancamera extends AppCompatActivity {
         } catch (IOException | JSONException e) {
             Log.e(resultList.toString(), "Error retrieving data: " + e.getMessage());
         }
-
-
-
-
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
