@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.finestapp.fournisseur.FournisseurList;
 import com.example.finestapp.product.ProductDetail;
 import com.example.finestapp.product.frag_products.fragment_ProductMain;
-import com.example.finestapp.scanner.Scancamera;
+import com.example.finestapp.ui.mainProduitTabbed.scanner.Scancamera;
 import com.example.finestapp.user.UserList;
 
 public class Dashboard extends AppCompatActivity {

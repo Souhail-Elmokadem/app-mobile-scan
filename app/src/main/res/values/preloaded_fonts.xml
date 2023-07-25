@@ -4,6 +4,9 @@
         <item>@font/abril_fatface</item>
         <item>@font/archivo_bold</item>
         <item>@font/candal</item>
+        <item>@font/montserrat_alternates_medium</item>
+        <item>@font/montserrat_bold</item>
+        <item>@font/poppins</item>
         <item>@font/poppins_bold</item>
     </array>
 </resources>

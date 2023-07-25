@@ -116,6 +116,7 @@ public class Login extends AppCompatActivity {
         CheckBox = findViewById(R.id.checkBox);
         SessionActivity sessionActivity = new SessionActivity(com.example.finestapp.user.Login.this);
 
+
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,6 +195,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+
             }
         });
     }
@@ -243,7 +245,7 @@ public class Login extends AppCompatActivity {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     if (jsonObject.getString("EmailUser").equals(useremail)){
-                        sessionActivity.saveSessionDetail(jsonObject.getString("idUser"),jsonObject.getString("NomUser"), jsonObject.getString("idrole"));
+                        sessionActivity.saveSessionDetail(jsonObject.getString("idUser"),jsonObject.getString("NomUser")+" "+jsonObject.getString("PrenomUser"), jsonObject.getString("idrole"));
                         break;
                     }
                     String idUser = jsonObject.getString("idUser");

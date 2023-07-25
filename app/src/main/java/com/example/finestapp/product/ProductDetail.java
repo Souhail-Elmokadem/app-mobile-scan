@@ -74,6 +74,8 @@ public class ProductDetail extends AppCompatActivity {
         savebtn = findViewById(R.id.savebtn);
         cancelbtn = findViewById(R.id.cancelbtn);
 
+        //remove shadow under actionbar
+        getSupportActionBar().setElevation(0);
 
         String URL = Server.Url+"/Loginregister/SpinnerFetcher.php";
 
@@ -122,7 +124,7 @@ public class ProductDetail extends AppCompatActivity {
                 String fournisseurName = extras.getString("FournisseurName");
                 // Set values to TextView elements
                 TextView textViewProductName = findViewById(R.id.textViewProductName);
-                textViewProductName.setText("Product Name: " + productName);
+                textViewProductName.setText("Produit  " + productName);
 
                 TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
                 textViewProductPrice.setText("Product Price: " + productPrice + "DHS");
@@ -282,7 +284,7 @@ public class ProductDetail extends AppCompatActivity {
 
 
         TextView textViewProductName = findViewById(R.id.textViewProductName);
-        textViewProductName.setVisibility(View.GONE);
+        textViewProductName.setVisibility(View.VISIBLE);
         TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
         textViewProductPrice.setVisibility(View.GONE);
         TextView textViewProductDate = findViewById(R.id.textViewProductDate);
