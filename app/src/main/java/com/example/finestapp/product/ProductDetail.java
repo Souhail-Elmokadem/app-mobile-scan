@@ -168,7 +168,8 @@ public class ProductDetail extends AppCompatActivity {
             public void onClick(View v) {
                 LinearLayout linearLayout = findViewById(R.id.linear);
                 linearLayout.setVisibility(View.GONE);
-
+                LinearLayout  layout = findViewById(R.id.barproduct);
+                layout.setVisibility(View.VISIBLE);
                 TextView textViewProductName = findViewById(R.id.textViewProductName);
                 TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
                 TextView textViewProductDate = findViewById(R.id.textViewProductDate);
@@ -247,6 +248,8 @@ public class ProductDetail extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId()==R.id.editbtn){
+            LinearLayout layout = findViewById(R.id.barproduct);
+            layout.setVisibility(View.GONE);
             Bundle extras = getIntent().getExtras();
             String productName = extras.getString("productName");
             String productPrice = extras.getString("productPrice");
@@ -284,7 +287,7 @@ public class ProductDetail extends AppCompatActivity {
 
 
         TextView textViewProductName = findViewById(R.id.textViewProductName);
-        textViewProductName.setVisibility(View.VISIBLE);
+        textViewProductName.setVisibility(View.GONE);
         TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
         textViewProductPrice.setVisibility(View.GONE);
         TextView textViewProductDate = findViewById(R.id.textViewProductDate);

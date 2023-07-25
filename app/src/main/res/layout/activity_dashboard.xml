@@ -28,7 +28,7 @@
             android:layout_alignParentEnd="false"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:capitalize="characters"
+
             android:fontFamily="@font/archivo_bold"
             android:text="DASHBOARD"
             android:textColor="#6D77FA"
@@ -95,7 +95,10 @@
         <TableRow
             android:id="@+id/tableRow2"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
 
             <ImageView
                 android:id="@+id/userbtn"

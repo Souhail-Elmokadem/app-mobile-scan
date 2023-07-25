@@ -10,11 +10,11 @@
     android:padding="0dp">
 
     <LinearLayout
+        android:id="@+id/barproduct"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-       android:background="@drawable/product_name_bg"
-        android:paddingTop="100dp"
-        >
+        android:background="@drawable/product_name_bg"
+        android:paddingTop="100dp">
 
         <TextView
             android:id="@+id/textViewProductName"
