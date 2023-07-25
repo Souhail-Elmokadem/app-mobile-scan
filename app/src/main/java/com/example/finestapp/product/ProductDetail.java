@@ -29,6 +29,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finestapp.R;
 import com.example.finestapp.Server;
+import com.example.finestapp.SessionActivity;
 import com.example.finestapp.fournisseur.Fournisseur;
 import com.example.finestapp.product.frag_products.fragment_ProductMain;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
@@ -55,7 +56,6 @@ public class ProductDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
-        // textbox product details pour edit btn
 
         name = findViewById(R.id.editname);
         price = findViewById(R.id.editprice);
@@ -70,6 +70,8 @@ public class ProductDetail extends AppCompatActivity {
         savebtn = findViewById(R.id.savebtn);
         cancelbtn = findViewById(R.id.cancelbtn);
 
+        //remove shadow under actionbar
+        getSupportActionBar().setElevation(0);
 
         String URL = Server.Url+"/Loginregister/SpinnerFetcher.php";
 
@@ -118,7 +120,7 @@ public class ProductDetail extends AppCompatActivity {
                 String fournisseurName = extras.getString("FournisseurName");
                 // Set values to TextView elements
                 TextView textViewProductName = findViewById(R.id.textViewProductName);
-                textViewProductName.setText("Product Name: " + productName);
+                textViewProductName.setText("Produit  " + productName);
 
                 TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
                 textViewProductPrice.setText("Product Price: " + productPrice + "DHS");
@@ -152,7 +154,7 @@ public class ProductDetail extends AppCompatActivity {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
+                onBackPressed();
                 finish();
             }
         });
@@ -217,8 +219,10 @@ public class ProductDetail extends AppCompatActivity {
                                 if (putData.onComplete()){
                                     String res = putData.getResult();
                                     if (res.equals("Updated Success")){
+                                        fragment_ProductMain.fa.finish();
                                         startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
+
                                         Toast.makeText(getApplicationContext(),"Update Success",Toast.LENGTH_SHORT).show();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
@@ -276,7 +280,7 @@ public class ProductDetail extends AppCompatActivity {
 
 
         TextView textViewProductName = findViewById(R.id.textViewProductName);
-        textViewProductName.setVisibility(View.GONE);
+        textViewProductName.setVisibility(View.VISIBLE);
         TextView textViewProductPrice = findViewById(R.id.textViewProductPrice);
         textViewProductPrice.setVisibility(View.GONE);
         TextView textViewProductDate = findViewById(R.id.textViewProductDate);
@@ -288,45 +292,47 @@ public class ProductDetail extends AppCompatActivity {
         savebtn.setVisibility(View.VISIBLE);
         }
         else if (item.getItemId() == R.id.deletebtn) {
-            alertDialog = new AlertDialog.Builder(ProductDetail.this);
-            alertDialog.setTitle("Suppression");
-            alertDialog.setMessage("Are you sure ?");
-            alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Handler handler = new Handler(Looper.getMainLooper());
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            String[] field = new String[1];
-                            field[0] = "idProd";
-                            String[] data = new String[1];
-                            data[0] = getIntent().getExtras().getString("productId");
-                            PutData putData = new PutData(Server.Url+"/Loginregister/deleteProd.php", "POST", field, data);
-                            if (putData.startPut()){
-                                if (putData.onComplete()){
-                                    String res = putData.getResult();
-                                    if (res.equals("Product deleted successfully.")){
-                                        startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
-                                        finish();
-                                        Toast.makeText(getApplicationContext(), "Suppression with success", Toast.LENGTH_SHORT).show();
+
+                alertDialog = new AlertDialog.Builder(ProductDetail.this);
+                alertDialog.setTitle("Suppression");
+                alertDialog.setMessage("Are you sure ?");
+                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                String[] field = new String[1];
+                                field[0] = "idProd";
+                                String[] data = new String[1];
+                                data[0] = getIntent().getExtras().getString("productId");
+                                PutData putData = new PutData(Server.Url + "/Loginregister/deleteProd.php", "POST", field, data);
+                                if (putData.startPut()) {
+                                    if (putData.onComplete()) {
+                                        String res = putData.getResult();
+                                        if (res.equals("Product deleted successfully.")) {
+                                            fragment_ProductMain.fa.finish();
+                                            startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
+                                            finish();
+                                            Toast.makeText(getApplicationContext(), "Suppression with success", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 }
                             }
+                        });
+
                     }
-                    });
+                });
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Any Message for inform user cancel
+                    }
+                });
 
-                }
-            });
-            alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // Any Message for inform user cancel
-                }
-            });
-
-            AlertDialog dialog = alertDialog.create();
-            dialog.show();
+                AlertDialog dialog = alertDialog.create();
+                dialog.show();
 
         }
         return super.onOptionsItemSelected(item);
@@ -334,7 +340,13 @@ public class ProductDetail extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navdetail, menu);
+        SessionActivity sessionActivity = new SessionActivity(ProductDetail.this);
+        if (Integer.parseInt(sessionActivity.getIdrole())==2){
+            getMenuInflater().inflate(R.menu.navdetail, menu);
+        }else{
+            
+        }
+
         return true;
     }
 

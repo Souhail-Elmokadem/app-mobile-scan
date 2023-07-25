@@ -1,7 +1,5 @@
 package com.example.finestapp.product;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,14 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.finestapp.R;
 import com.example.finestapp.product.frag_products.fragment_ProductMain;
-import com.example.finestapp.product.frag_products.fragment_digital;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class AddProductDigital extends AppCompatActivity {
-
-
     Button cancel, addbtn;
     EditText code,name;
 
@@ -46,20 +43,20 @@ public class AddProductDigital extends AppCompatActivity {
                         @Override
                         public void run() {
                             String[] field = new String[2];
-                            field[0] = "CodeProd";
-                            field[1] = "NomProd";
+                            field[0] = "NomProd";
+                            field[1] = "CodeProd";
                             //Creating array for data
                             String[] data = new String[2];
-                            data[0] = Code;
-                            data[1] = Name;
+                            data[0] = Name;
+                            data[1] = Code;
                             PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/addProductDigital.php", "POST", field, data);
 
                             if(putData.startPut()){
                                 if(putData.onComplete()){
                                     String res = putData.getResult();
                                     if(res.equals("Add Success")){
-                                        Intent intent = new Intent(getApplicationContext(), fragment_ProductMain.class);
-                                        startActivity(intent);
+                                        fragment_ProductMain.fa.finish();
+                                        startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
                                         Toast.makeText(getApplicationContext(),"Digital Product Added !",Toast.LENGTH_SHORT).show();
                                     }else{
@@ -78,9 +75,7 @@ public class AddProductDigital extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), fragment_digital.class);
-                startActivity(intent);
-                finish();
+                onBackPressed();
             }
         });
     }

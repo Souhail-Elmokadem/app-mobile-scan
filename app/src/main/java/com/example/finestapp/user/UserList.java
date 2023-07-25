@@ -1,5 +1,6 @@
 package com.example.finestapp.user;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,12 +11,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.R;
+import com.example.finestapp.SessionActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,8 +35,8 @@ public class UserList extends AppCompatActivity {
     private SearchView searchView;
     private List<User> originalItemList;
     private static final String TAG = "UserList";
-    private String Server= com.example.finestapp.Server.Url;
-    String PHP_SCRIPT_URL = Server+"/Loginregister/ListUser.php";
+    private static String Server= com.example.finestapp.Server.Url;
+    static String PHP_SCRIPT_URL = Server+"/Loginregister/ListUser.php";
     private ListView listView;
     private UserListAdapter adapter;
 
@@ -45,6 +46,9 @@ public class UserList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
+
+        userlist = this;
+
 
         listView = findViewById(R.id.subListView);
         adapter = new UserListAdapter(this,R.layout.list_user_layout, new ArrayList<>());
@@ -84,15 +88,15 @@ public class UserList extends AppCompatActivity {
                 String emailUser = selectedItem.getEmail();
                 String telUser = selectedItem.getTelephone();
                 String idUser = selectedItem.getIdUser();
-
+                String idrole = selectedItem.getrole();
                 Intent intent = new Intent(UserList.this, UserDetail.class);
                 intent.putExtra("telUser",telUser);
                 intent.putExtra("nomUser", nomUser);
                 intent.putExtra("prenomUser", prenomUser);
                 intent.putExtra("emailUser",emailUser);
                 intent.putExtra("idUser",idUser);
+                intent.putExtra("idrole",idrole);
                 startActivity(intent);
-                finish();
             }
         });
     }
@@ -112,11 +116,11 @@ public class UserList extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    private class UserListAsyncTask extends AsyncTask<Void, Void, List<User>> {
+    public class UserListAsyncTask extends AsyncTask<Void, Void, List<User>> {
         @Override
         protected List<User> doInBackground(Void... voids) {
             List<User> resultList = new ArrayList<>();
-
+            SessionActivity sessionActivity = new SessionActivity(UserList.this);
             try {
                 URL url = new URL(PHP_SCRIPT_URL);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -130,7 +134,7 @@ public class UserList extends AppCompatActivity {
                     response.append(line);
                 }
 
-                Log.d(TAG, "Server Response: " + response.toString()); // Add this line to log the response
+                Log.d("TAG", "Server Response: " + response.toString()); // Add this line to log the response
 
                 bufferedReader.close();
                 inputStream.close();
@@ -144,8 +148,9 @@ public class UserList extends AppCompatActivity {
                     String nomUser = jsonObject.getString("NomUser");
                     String prenomUser = jsonObject.getString("PrenomUser");
                     String email = jsonObject.getString("EmailUser");
-                    String telephone =jsonObject.getString("telUser");
-                    User users = new User(idUser,nomUser, prenomUser,email,telephone);
+                    String telephone =jsonObject.getString("TelUser");
+                    String idrole =  jsonObject.getString("idrole");
+                    User users = new User(idUser,nomUser, prenomUser,email,telephone,idrole);
                     resultList.add(users);
                 }
 
@@ -159,8 +164,7 @@ public class UserList extends AppCompatActivity {
         protected void onPostExecute(List<User> resultList) {
             originalItemList = resultList;
             // Process the retrieved data (resultList)
-            Toast.makeText(UserList.this, "Received data: " + resultList.size() + " items", Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "Received data: " + resultList.size() + " items");
+            Log.d("TAG", "Received data: " + resultList.size() + " items");
 
             adapter.clear();
             adapter.addAll(resultList);
@@ -169,10 +173,14 @@ public class UserList extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navfour,menu);
+        SessionActivity sessionActivity = new SessionActivity(UserList.this);
+        if (Integer.parseInt(sessionActivity.getIdrole())==2){
+            getMenuInflater().inflate(R.menu.navfour, menu);
+        }else{
+
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -185,4 +193,5 @@ public class UserList extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public static Activity userlist;
 }

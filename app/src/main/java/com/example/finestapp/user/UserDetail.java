@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.R;
 import com.example.finestapp.Server;
+import com.example.finestapp.SessionActivity;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class UserDetail extends AppCompatActivity {
@@ -34,7 +35,12 @@ public class UserDetail extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navdetail,menu);
+        SessionActivity sessionActivity = new SessionActivity(UserDetail.this);
+        if (Integer.parseInt(sessionActivity.getIdrole())==2){
+            getMenuInflater().inflate(R.menu.navdetail, menu);
+        }else{
+
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -53,7 +59,7 @@ public class UserDetail extends AppCompatActivity {
             String UserPrenom = extras.getString("prenomUser");
             String UserEmail = extras.getString("emailUser");
             String telUser = extras.getString("telUser");
-            String roleId = extras.getString("roleId");
+            String roleId = extras.getString("idrole");
 
 
             LinearLayout linear = findViewById(R.id.linear);
@@ -72,6 +78,13 @@ public class UserDetail extends AppCompatActivity {
             editEmailUser.setText(UserEmail);
             editPrenomUser.setText(UserPrenom);
             editTelUser.setText(telUser);
+            RadioButton rAdmin = findViewById(R.id.radioAdmin);
+            RadioButton rVisiteur = findViewById(R.id.radioVisitor);
+            if (Integer.parseInt(roleId)==2){
+                rAdmin.setChecked(true);
+            }else{
+                rVisiteur.setChecked(true);
+            }
 
             linear.setVisibility(View.VISIBLE);
 
@@ -92,6 +105,7 @@ public class UserDetail extends AppCompatActivity {
                     textViewUserPrenom.setVisibility(View.VISIBLE);
                     textViewUserEmail.setVisibility(View.VISIBLE);
                     textViewUserTel.setVisibility(View.VISIBLE);
+
                 }
             });
 
@@ -128,6 +142,7 @@ public class UserDetail extends AppCompatActivity {
                                 if (putData.startPut() && putData.onComplete()) {
                                     String res = putData.getResult();
                                     if (res.equals("Updated Success")) {
+                                        UserList.userlist.finish();
                                         startActivity(new Intent(getApplicationContext(), UserList.class));
                                         finish();
                                         Toast.makeText(getApplicationContext(), "Updated Success", Toast.LENGTH_SHORT).show();
@@ -172,6 +187,7 @@ public class UserDetail extends AppCompatActivity {
                                 if (putData.onComplete()){
                                     String res = putData.getResult();
                                     if (res.equals("User deleted successfully.")){
+                                        UserList.userlist.finish();
                                         startActivity(new Intent(getApplicationContext(), UserList.class));
                                         finish();
                                         Toast.makeText(getApplicationContext(), "Suppression success", Toast.LENGTH_SHORT).show();

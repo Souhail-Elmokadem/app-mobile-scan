@@ -28,7 +28,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="IP TV"
+                android:text="IPTV"
                 android:id="@+id/textviewpDigitalProduct"
                 android:textSize="36sp"
                 android:textAlignment="center"
@@ -43,7 +43,7 @@
                 android:layout_marginTop="20dp"
                 android:maxLength="50"
                 android:padding="8dp"
-                android:hint="Nom Produit"
+                android:hint="Product Name"
                 android:textColorHint="@color/white"
                 android:inputType="text"
                 android:textColor="@color/white"
@@ -58,7 +58,7 @@
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:maxLength="50"
-                android:hint="Code Produit"
+                android:hint="Product Code"
                 android:textColorHint="@color/white"
                 android:textColor="@color/white"
                 android:drawablePadding="8dp"/>

@@ -1,4 +1,4 @@
-package com.example.finestapp.scanner;
+package com.example.finestapp.ui.mainProduitTabbed.scanner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -220,8 +220,31 @@ public class Scancamera extends AppCompatActivity {
 
                     startActivity(intent);
                     finish();
-                    status = true;
-                }else {
+                } else if (jsonObject.getString("Libelle").equals(barecode)) {
+                    String productId = jsonObject.getString("idProd");
+                    String productName = jsonObject.getString("NomProd");
+                    String productPrice = jsonObject.getString("PrixAchat");
+                    String productdate = jsonObject.getString("dateProd");
+                    String productMarge = jsonObject.getString("MargeProd");
+                    String productFourn = jsonObject.getString("idFour");
+                    String productFourName = jsonObject.getString("FournisseurName");
+                    // Item item = new Item(productName, productPrice);
+                    Item item = new Item(productId, productName, productPrice,productdate,productMarge,productFourName,productFourn);
+                    resultList.add(item);
+
+                    Intent intent = new Intent(Scancamera.this, ProductDetail.class);
+                    intent.putExtra("productId",productId);
+                    intent.putExtra("productfourn",productFourn);
+                    intent.putExtra("productMarge",productMarge);
+                    intent.putExtra("productDate",productdate);
+                    intent.putExtra("productName", productName);
+                    intent.putExtra("productPrice", productPrice);
+                    intent.putExtra("FournisseurName",productFourName);
+
+                    startActivity(intent);
+                    finish();
+
+                } else {
                     barcodeText.setText("Codebar Not Found");
                 }
             }

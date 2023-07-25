@@ -1,5 +1,6 @@
 package com.example.finestapp.product.frag_products;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -46,26 +49,21 @@ public class fragment_physical extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        Toast.makeText(,"hi",Toast.LENGTH_SHORT).show();
-
     }
+
+    private static final int REQUEST_CODE_ADD_PRODUCT = 1;
     private SearchView searchView;
     private List<Item> originalItemList;
     private static final String TAG = "ProductList";
     private static final String PHP_SCRIPT_URL = "http://ftapp.finesttechnology.ma/Loginregister/ItemDetail.php";
-
     private ListView listView;
     private ProductListAdapterPhysique adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       // start oncreate
-        //Toast.makeText(Produit_physique.this,"hi",Toast.LENGTH_SHORT).show();
 
         View v = inflater.inflate(R.layout.fragment_produit_physique, container, false);
-        // start oncreate produit
-
-
+        Log.v("hello","hello wrolfd");
         searchView = v.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -79,6 +77,7 @@ public class fragment_physical extends Fragment {
                 return true;
             }
         });
+
 
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +104,7 @@ public class fragment_physical extends Fragment {
                 String productfourn = selectedItem.getIdFour();
                 String productId = selectedItem.getId();
                 String productfourname = selectedItem.getFournisseurName();
+
                 Intent intent = new Intent(getContext(), ProductDetail.class);
                 intent.putExtra("productId",productId);
                 intent.putExtra("productfourn",productfourn);
@@ -113,20 +113,25 @@ public class fragment_physical extends Fragment {
                 intent.putExtra("productName", productName);
                 intent.putExtra("productPrice", productPrice);
                 intent.putExtra("FournisseurName",productfourname);
+
+                intent.putExtra("currentTabIndex", 0); // Set the current tab index
                 startActivity(intent);
-                getActivity().finish();
             }
         });
+
         FloatingActionButton fab = v.findViewById(R.id.addbtnIptv);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startActivity(new Intent(getContext(), AddProduct.class));
+                Intent intent = new Intent(getContext(), AddProduct.class);
+                // Use the new API to start the AddProduct activity and listen for the result
+                startActivity(intent);
             }
         });
-       // end oncreate
         return v;
     }
+
+
     private void filterItems(String query) {
         List<Item> filteredList = new ArrayList<>();
         for (Item item : originalItemList) {
@@ -138,8 +143,8 @@ public class fragment_physical extends Fragment {
         adapter.addAll(filteredList);
         adapter.notifyDataSetChanged();
     }
-    public class ProductListAsyncTaskph extends AsyncTask<Void, Void, List<Item>> {
 
+    public class ProductListAsyncTaskph extends AsyncTask<Void, Void, List<Item>> {
         @Override
         protected List<Item> doInBackground(Void... voids) {
             List<Item> resultList = new ArrayList<>();
@@ -179,7 +184,7 @@ public class fragment_physical extends Fragment {
 
 
             } catch (IOException | JSONException e) {
-                Log.e(TAG, "Error retrieving data: " + e.getMessage());
+                Log.e("gg", "Error retrieving data: " + e.getMessage());
             }
 
             return resultList;
@@ -197,5 +202,4 @@ public class fragment_physical extends Fragment {
             adapter.notifyDataSetChanged();
         }
     }
-
 }

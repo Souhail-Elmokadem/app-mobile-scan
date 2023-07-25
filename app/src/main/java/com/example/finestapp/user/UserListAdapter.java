@@ -38,7 +38,7 @@ public class UserListAdapter extends ArrayAdapter<User> {
         User currentItem = getItem(position);
         if (currentItem != null) {
             textViewName.setText(currentItem.getNom() + " " + currentItem.getPrenom());
-            textViewRole.setText(currentItem.getEmail());
+            textViewRole.setText(currentItem.getroleName());
         }
 
         return itemView;

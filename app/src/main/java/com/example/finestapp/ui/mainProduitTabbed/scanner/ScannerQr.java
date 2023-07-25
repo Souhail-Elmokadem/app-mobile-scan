@@ -1,4 +1,4 @@
-package com.example.finestapp.scanner;
+package com.example.finestapp.ui.mainProduitTabbed.scanner;
 
 import android.Manifest;
 import android.content.Intent;
@@ -173,8 +173,8 @@ public class ScannerQr extends AppCompatActivity {
                                     if(putData.onComplete()){
                                         String res = putData.getResult();
                                         if(res.equals("Add Success")){
-                                            Intent intent = new Intent(getApplicationContext(), fragment_ProductMain.class);
-                                            startActivity(intent);
+                                            fragment_ProductMain.fa.finish();
+                                            startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                             finish();
                                             Toast.makeText(getApplicationContext(),"Product Added !",Toast.LENGTH_SHORT).show();
                                         }else{
@@ -191,7 +191,7 @@ public class ScannerQr extends AppCompatActivity {
             }
         });
     }
-//timer
+    //timer
     private CountDownTimer createTimer(long duration) {
         return new CountDownTimer(duration, 1000) {
             @Override
