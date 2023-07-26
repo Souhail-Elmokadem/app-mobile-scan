@@ -17,6 +17,13 @@ public class Dashboard extends AppCompatActivity {
     public static Dashboard dashboard;
 
     @Override
+    protected void onStop() {
+        super.onStop();
+
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
@@ -28,9 +35,10 @@ public class Dashboard extends AppCompatActivity {
 
         SessionActivity sessionActivity = new SessionActivity(Dashboard.this);
         String role =  sessionActivity.getIdrole();
-//        if (role=="null"){
-//            role="3";
-//        }
+
+        if (role=="null"){
+            role=getIntent().getExtras().getString("idrole");
+        }
         if (Integer.parseInt(role)==2){
             userbtn.setVisibility(View.VISIBLE);
             userbtn.setOnClickListener(new View.OnClickListener() {

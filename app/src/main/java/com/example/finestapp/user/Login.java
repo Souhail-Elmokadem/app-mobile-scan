@@ -47,28 +47,30 @@ public class Login extends AppCompatActivity {
 
     boolean PasswordVisable;
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        this.finish();
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
-        // checkSession();
+        checkSession();
     }
 
-//    private void checkSession() {
-//        SessionActivity sessionActivity = new SessionActivity(Login.this);
-//        //String userEmail = sessionActivity.getSession();
-//        Log.v("mail",""+userEmail);
-//        if (userEmail != "null") {
-//            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-//            startActivity(intent);
-//            Log.v("mail",""+userEmail);
-//            finish();
-//            Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
-//            Log.v("mail",""+userEmail);
-//        } else {
-//            // do somethings
-//        }
-//    }
+    private void checkSession() {
+        SessionActivity sessionActivity = new SessionActivity(Login.this);
+        String userEmail = sessionActivity.getEmailSession();
+        if (userEmail != "null") {
+            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+            startActivity(intent);
+            finish();
+            Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
+        } else {
+            // do somethings
+        }
+    }
 
 
     @Override
@@ -118,25 +120,26 @@ public class Login extends AppCompatActivity {
 
         CheckBox = findViewById(R.id.checkBox);
 
+
+
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if(CheckBox.isChecked()==true) {
-//
-//                }
+
+                if(CheckBox.isChecked()==true) {
+
+
+
+                }
                 String username, password;
 
-//                username = String.valueOf(Username.getText());
-//                password = String.valueOf(Password.getText());
+                username = String.valueOf(Username.getText());
+                password = String.valueOf(Password.getText());
 
-                username = String.valueOf(Username.getText().toString());
-                password = String.valueOf(Password.getText().toString());
 
-                Log.v("us","username"+username);
-                Log.v("pas","pass "+ password);
-
-                if(!username.equals("") && !password.equals(""))
-                {
+                if(!username.equals("") && !password.equals("")) {
+//                    progressBar.setVisibility(View.VISIBLE);
+                    //Start ProgressBar first (Set visibility VISIBLE)
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override
@@ -153,30 +156,29 @@ public class Login extends AppCompatActivity {
 //
                             //The IP-Adress means that devices needs to be connected to the same WIFI network
                             PutData putData = new PutData(Server.Url +"/Loginregister/login.php", "POST", field, data);
-                            if (putData.startPut())
-                            {
-                                if (putData.onComplete())
-                                {
+                            if (putData.startPut()) {
+                                if (putData.onComplete()) {
+//                                    progressBar.setVisibility(View.GONE);
                                     String result = putData.getResult();
-                                    if(result.equals("Login Success"))
-                                    {
+                                    //End ProgressBar (Set visibility to GONE)
+                                    if(result.equals("Login Success")){
+                                        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
 
                                        // Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
                                         //session start
                                         SessionActivity sessionActivity = new SessionActivity(com.example.finestapp.user.Login.this);
                                         sessionActivity.saveSession(username,password);
-                                        Login.DashListAsyncTask dashListAsyncTask= new Login.DashListAsyncTask(username);
+                                        DashListAsyncTask dashListAsyncTask= new DashListAsyncTask(username);
                                         dashListAsyncTask.execute();
-                                        finish();
-
-                                        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-                                        startActivity(intent);
 
                                         //moveToDashboard();
                                         //session end
                                       //Toast.makeText(getApplicationContext(),sharedPreferences.getString("isLoggedIn","false"),Toast.LENGTH_SHORT).show();
 
-                                    }else {Toast.makeText(Login.this, "Try Again", Toast.LENGTH_SHORT).show();}
+
+                                    }else {
+                                        Toast.makeText(Login.this, "Try Again", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
                             //End Write and Read data with URL
@@ -209,7 +211,7 @@ public class Login extends AppCompatActivity {
 
     public class DashListAsyncTask extends AsyncTask<Void, Void, List<User>> {
 
-        public String useremail;
+        private String useremail;
         public DashListAsyncTask(String username) {
             useremail = username;
         }
@@ -236,7 +238,7 @@ public class Login extends AppCompatActivity {
                     response.append(line);
                 }
 
-                Log.v("res", "Server Response: " + response.toString()); // Add this line to log the response
+                Log.d(TAG, "Server Response: " + response.toString()); // Add this line to log the response
 
                 bufferedReader.close();
                 inputStream.close();
@@ -248,6 +250,10 @@ public class Login extends AppCompatActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     if (jsonObject.getString("EmailUser").equals(useremail)){
                         sessionActivity.saveSessionDetail(jsonObject.getString("idUser"),jsonObject.getString("NomUser")+" "+jsonObject.getString("PrenomUser"), jsonObject.getString("idrole"));
+                        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                        intent.putExtra("idrole", jsonObject.getString("idrole"));
+                        startActivity(intent);
+                        finish();
                         break;
                     }
                     String idUser = jsonObject.getString("idUser");
@@ -261,7 +267,7 @@ public class Login extends AppCompatActivity {
                 }
 
             } catch (IOException | JSONException e) {
-                Log.e("error", "Error retrieving data: " + e.getMessage());
+                Log.e(TAG, "Error retrieving data: " + e.getMessage());
             }
 
             return resultList;

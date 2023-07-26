@@ -148,9 +148,9 @@ public class Setting extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sessionActivity.removeSession();
-
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
+                Runtime.getRuntime().exit(0);
             }
         });
     }

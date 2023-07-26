@@ -38,7 +38,7 @@ public class FournisseurDetail extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
     EditText editFournName,editFournPrenom,editFournTel;
-    Button savebtn,backbtn, cancelbtn;
+    Button savebtn, cancelbtn;
 
     @Override
     public void onBackPressed() {
@@ -50,7 +50,8 @@ public class FournisseurDetail extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId()==R.id.editbtn){
-
+            LinearLayout  layout = findViewById(R.id.barproduct);
+            layout.setVisibility(View.GONE);
             editFournName = findViewById(R.id.EditNom);
             editFournPrenom = findViewById(R.id.EditPrenom);
             editFournTel = findViewById(R.id.EditTele);
@@ -63,8 +64,7 @@ public class FournisseurDetail extends AppCompatActivity {
 //
             TextView textViewFournName = findViewById(R.id.textViewFournisseurNom) ;
             textViewFournName.setVisibility(View.GONE);
-            TextView textViewFournTel = findViewById(R.id.textViewFournisseurPrenom);
-            textViewFournTel.setVisibility(View.GONE);
+
             TextView textViewFournisseurPrenome = findViewById(R.id.textViewFournisseurTele);
             textViewFournisseurPrenome.setVisibility(View.GONE);
 
@@ -81,11 +81,11 @@ public class FournisseurDetail extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     linear.setVisibility(View.GONE);
-
+                    LinearLayout  layout = findViewById(R.id.barproduct);
+                    layout.setVisibility(View.VISIBLE);
                     TextView textViewFournName = findViewById(R.id.textViewFournisseurNom) ;
                     textViewFournName.setVisibility(View.VISIBLE);
-                    TextView textViewFournTel = findViewById(R.id.textViewFournisseurPrenom);
-                    textViewFournTel.setVisibility(View.VISIBLE);
+
                     TextView textViewFournisseurPrenome = findViewById(R.id.textViewFournisseurTele);
                     textViewFournisseurPrenome.setVisibility(View.VISIBLE);
 
@@ -191,25 +191,17 @@ public class FournisseurDetail extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        backbtn = findViewById(R.id.backbtnFour);
-        backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-                finish();
-            }
-        });
+        //remove shadow under actionbar
+        getSupportActionBar().setElevation(0);
         // view data
         Bundle extras = getIntent().getExtras();
         TextView textViewFournName = findViewById(R.id.textViewFournisseurNom);
         textViewFournName.setVisibility(View.VISIBLE);
-        textViewFournName.setText("NOM : "+ extras.getString("FournisseurNom"));
+        textViewFournName.setText( extras.getString("FournisseurNom")+" "+extras.getString("FournisseurPrenom"));
         TextView textViewFournTel = findViewById(R.id.textViewFournisseurTele);
         textViewFournTel.setVisibility(View.VISIBLE);
-        TextView textViewFournisseurPrenome = findViewById(R.id.textViewFournisseurPrenom);
-        textViewFournisseurPrenome.setText("PRENOM: " + extras.getString("FournisseurPrenom"));
         textViewFournTel.setText("TELEPHONE : "+extras.getString("FournisseurTelephone"));
-        textViewFournisseurPrenome.setVisibility(View.VISIBLE);
+
 
 
         // end view

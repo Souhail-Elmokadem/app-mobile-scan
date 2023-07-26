@@ -148,6 +148,11 @@ public class ScannerQr extends AppCompatActivity {
                     public void onClick(View v) {
                         Bundle extras = getIntent().getExtras();
 
+                        if (extras.getString("productName").equals("")) {
+                            Toast.makeText(getApplicationContext(), "veuillez remplire les champs vide", Toast.LENGTH_SHORT).show();
+                        } else {
+
+
 
                         Handler handler = new Handler(Looper.getMainLooper());
                         handler.post(new Runnable() {
@@ -170,23 +175,23 @@ public class ScannerQr extends AppCompatActivity {
 
                                 PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/addProductWithQr.php", "POST", field, data);
 
-                                if(putData.startPut()){
-                                    if(putData.onComplete()){
+                                if (putData.startPut()) {
+                                    if (putData.onComplete()) {
                                         String res = putData.getResult();
-                                        if(res.equals("Add Success")){
+                                        if (res.equals("Add Success")) {
                                             AddProduct.addproduct.finish();
                                             fragment_ProductMain.fa.finish();
                                             startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                             finish();
-                                            Toast.makeText(getApplicationContext(),"Product Added !",Toast.LENGTH_SHORT).show();
-                                        }else{
-                                            Toast.makeText(getApplicationContext(),"deja exist",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "Product Added !", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "deja exist", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
                             }
                         });
-
+                    }
                     }
                 });
 

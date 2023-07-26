@@ -10,13 +10,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.R;
+import com.example.finestapp.SessionActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -174,7 +174,11 @@ public class FournisseurList extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navfour,menu);
+        SessionActivity sessionActivity = new SessionActivity(FournisseurList.this);
+        if (Integer.parseInt(sessionActivity.getIdrole())==2){
+            getMenuInflater().inflate(R.menu.navfour,menu);
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 

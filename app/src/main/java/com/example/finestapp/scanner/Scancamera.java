@@ -136,11 +136,12 @@ public class Scancamera extends AppCompatActivity {
                         barcodeData = barcode.email.address;
                     } else {
                         barcodeData = barcode.displayValue;
-                        //  barcodeText.setText(barcodeData);
+
                         toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
                         verife_CodeBarre_Produit(barcodeData);
 
                         // Start the timer and show the progress bar
+
                         timer.start();
 
                     }
@@ -221,6 +222,8 @@ public class Scancamera extends AppCompatActivity {
 
                     startActivity(intent);
                     finish();
+                   break;
+
                 } else if (jsonObject.getString("Libelle").equals(barecode)) {
                     String productId = jsonObject.getString("idProd");
                     String productName = jsonObject.getString("NomProd");
@@ -244,16 +247,18 @@ public class Scancamera extends AppCompatActivity {
 
                     startActivity(intent);
                     finish();
+                    break;
 
                 } else {
                     barcodeText.setText("Codebar Not Found");
+
                 }
             }
 
         } catch (IOException | JSONException e) {
             Log.e(resultList.toString(), "Error retrieving data: " + e.getMessage());
         }
-        return true;
+       return false;
     }
 
     @Override

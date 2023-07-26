@@ -48,7 +48,7 @@ public class SessionActivity {
     }
 
     public String getIdrole() {
-         return sharedPreferences.getString("session_role","");
+         return sharedPreferences.getString("session_role","null");
     }
 
 
@@ -71,6 +71,7 @@ public class SessionActivity {
         editor.remove("session_password");
         editor.remove("session_role");
         editor.commit();
+        editor.apply();
     }
 
 }

@@ -55,24 +55,19 @@ public class ProductDetailDigital extends AppCompatActivity {
         textViewName = findViewById(R.id.textViewProductName);
         textViewCode = findViewById(R.id.textViewProductCode);
 
-        backbtn = findViewById(R.id.backbtn);
+
         savebtn = findViewById(R.id.savebtn);
         cancelbtn = findViewById(R.id.cancelbtn);
 
-        backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-                finish();
-            }
-        });
+
 
         Bundle extras = getIntent().getExtras();
         textViewName.setVisibility(View.VISIBLE);
         textViewName.setText(extras.getString("productName"));
 
         textViewCode.setVisibility(View.VISIBLE);
-        textViewCode.setText(extras.getString("productCode"));
+        textViewCode.setText("Code : "+extras.getString("productCode"));
+
     }
 
     @Override
@@ -80,6 +75,8 @@ public class ProductDetailDigital extends AppCompatActivity {
 
         if (item.getItemId() == R.id.editbtn) {
 
+           LinearLayout layout = findViewById(R.id.barproduct);
+           layout.setVisibility(View.GONE);
             Bundle extras = getIntent().getExtras();
             String productName = extras.getString("productName");
             String productCode = extras.getString("productCode");
@@ -98,7 +95,8 @@ public class ProductDetailDigital extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     linear.setVisibility(View.GONE);
-
+                    LinearLayout layout = findViewById(R.id.barproduct);
+                    layout.setVisibility(View.VISIBLE);
                     textViewName.setVisibility(View.VISIBLE);
                     textViewCode.setVisibility(View.VISIBLE);
 

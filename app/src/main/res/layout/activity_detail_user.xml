@@ -6,61 +6,96 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#8CC0DE"
-    android:padding="16dp"
+    android:background="@color/white"
+
     tools:context=".user.UserDetail">
+
+    <LinearLayout
+        android:id="@+id/barproduct"
+        android:layout_width="match_parent"
+        android:layout_height="199dp"
+        android:background="@drawable/product_name_bg"
+        android:paddingTop="99dp"
+        android:layout_gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/textViewUserNom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:hint="NAME"
+
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/white"
+            android:textSize="33sp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_gravity="center"
-        android:padding="24dp"
-        android:backgroundTint="#1D5B79"
         android:background="@drawable/border"
-        android:visibility="gone">
+        android:backgroundTint="#6D77FA"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:visibility="gone"
+        android:layout_margin="10dp">
 
     <EditText
         android:id="@+id/editNomUser"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/border"
+
         android:singleLine="true"
         android:drawablePadding="8dp"
         android:hint="Nom Utilisateur"
         android:textColorHint="@color/white"
         android:padding="8dp"
-        android:textColor="@color/white" />
+
+        android:background="@drawable/borderpurple"
+        android:textColor="#303DE3"
+
+        />
 
     <EditText
         android:id="@+id/EditPrenomUser"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/border"
+
         android:drawablePadding="8dp"
         android:hint="Prenom Utilisateur"
         android:singleLine="true"
         android:textColorHint="@color/white"
         android:inputType="text"
         android:padding="8dp"
-        android:textColor="@color/white"/>
+        android:background="@drawable/borderpurple"
+        android:textColor="#303DE3"
+
+        />
 
     <EditText
         android:id="@+id/EditEmailUser"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/border"
+
         android:drawablePadding="8dp"
         android:hint="Email Utilisateur"
         android:singleLine="true"
         android:textColorHint="@color/white"
         android:inputType="textEmailAddress"
         android:padding="8dp"
-        android:textColor="@color/white"/>
+        android:background="@drawable/borderpurple"
+        android:textColor="#303DE3"/>
 
 
     <EditText
@@ -68,7 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/border"
+
         android:drawablePadding="8dp"
         android:hint="Tel Utilisateur"
         android:singleLine="true"
@@ -76,7 +111,10 @@
         android:inputType="number"
         android:textColorHint="@color/white"
         android:padding="8dp"
-        android:textColor="@color/white"/>
+        android:background="@drawable/borderpurple"
+        android:textColor="#303DE3"
+
+        />
 
         <RadioGroup
             android:id="@+id/radioGroupRoles"
@@ -106,43 +144,26 @@
         <Button
             android:id="@+id/savebtn"
             android:padding="20dp"
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#8EAC50"
+            android:backgroundTint="@color/green"
             android:text="Save"
             app:cornerRadius="20dp" />
         <Button
             android:id="@+id/cancelbtn"
             android:padding="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#F1C93B"
+            android:backgroundTint="@color/red"
             android:text="discard"
             app:cornerRadius="20dp" />
 </LinearLayout>
 
-    <TextView
-        android:id="@+id/textViewUserNom"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nom User"
-        android:padding="24dp"
-        android:textColorHint="@color/white"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textViewUserPrenom"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Prenom User"
-        android:padding="24dp"
-        android:textColorHint="@color/white"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold" />
+
+
 
     <TextView
         android:id="@+id/textViewUserEmail"
@@ -152,8 +173,13 @@
         android:hint="Email User"
         android:padding="24dp"
         android:textColorHint="@color/white"
+
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold" />
+        android:textColor="#333333"
+
+        />
 
     <TextView
         android:id="@+id/textViewUserTel"
@@ -163,22 +189,10 @@
         android:padding="24dp"
         android:hint="Telephone User"
         android:textColorHint="@color/white"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold" />
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom">
-
-        <Button
-            android:id="@+id/backbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#E76161"
-            android:padding="20dp"
-            android:text="Back" />
-
-    </RelativeLayout>
+        android:textColor="#333333"
+        />
 
 </LinearLayout>

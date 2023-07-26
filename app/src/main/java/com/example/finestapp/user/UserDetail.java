@@ -53,7 +53,8 @@ public class UserDetail extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId()==R.id.editbtn){
-
+            LinearLayout  layout = findViewById(R.id.barproduct);
+            layout.setVisibility(View.GONE);
             Bundle extras = getIntent().getExtras();
             String isUser = extras.getString("idUser");
             String UserNom = extras.getString("nomUser");
@@ -72,7 +73,7 @@ public class UserDetail extends AppCompatActivity {
 
             textViewUserEmail.setVisibility(View.GONE);
             textViewUserNom.setVisibility(View.GONE);
-            textViewUserPrenom.setVisibility(View.GONE);
+
             TextViewUserTel.setVisibility(View.GONE);
 
             editNomUser.setText(UserNom);
@@ -96,14 +97,15 @@ public class UserDetail extends AppCompatActivity {
                 public void onClick(View v) {
                     LinearLayout linearLayout = findViewById(R.id.linear);
                     linearLayout.setVisibility(View.GONE);
-
+                    LinearLayout  layout = findViewById(R.id.barproduct);
+                    layout.setVisibility(View.VISIBLE);
                     TextView textViewUserNom = findViewById(R.id.textViewUserNom);
-                    TextView textViewUserPrenom = findViewById(R.id.textViewUserPrenom);
+
                     TextView textViewUserEmail = findViewById(R.id.textViewUserEmail);
                     TextView textViewUserTel = findViewById(R.id.textViewUserTel);
 
                     textViewUserNom.setVisibility(View.VISIBLE);
-                    textViewUserPrenom.setVisibility(View.VISIBLE);
+                    
                     textViewUserEmail.setVisibility(View.VISIBLE);
                     textViewUserTel.setVisibility(View.VISIBLE);
 
@@ -225,7 +227,8 @@ public class UserDetail extends AppCompatActivity {
 
         LinearLayout linearLayout = findViewById(R.id.linear);
         linearLayout.setVisibility(View.GONE);
-
+        //remove shadow under actionbar
+        getSupportActionBar().setElevation(0);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -236,10 +239,9 @@ public class UserDetail extends AppCompatActivity {
             String roleId = extras.getString("roleId"); // Add this line to retrieve the roleId
 
             textViewUserNom = findViewById(R.id.textViewUserNom);
-            textViewUserNom.setText("First Name: " + UserNom);
+            textViewUserNom.setText( UserNom +" "+UserPrenom);
 
-            textViewUserPrenom = findViewById(R.id.textViewUserPrenom);
-            textViewUserPrenom.setText("Last Name: " + UserPrenom);
+
 
             textViewUserEmail = findViewById(R.id.textViewUserEmail);
             textViewUserEmail.setText("Email: " + UserEmail);
@@ -247,11 +249,7 @@ public class UserDetail extends AppCompatActivity {
             TextViewUserTel =findViewById(R.id.textViewUserTel);
             TextViewUserTel.setText("Telephone : "+ telUser);
         }
-        backbtn = findViewById(R.id.backbtn);
-        backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {onBackPressed();}
-        });
+
 
         radioGroupRoles = findViewById(R.id.radioGroupRoles);
         radioAdmin = findViewById(R.id.radioAdmin);
