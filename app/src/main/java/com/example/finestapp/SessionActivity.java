@@ -46,6 +46,17 @@ public class SessionActivity {
     public String getEmailSession() {
         return sharedPreferences.getString("session_email","null");
     }
+    public void setEmailSession(String email){
+        editor.putString("session_email",email);
+        editor.commit();
+    }
+    public String getPassword(){
+        return  sharedPreferences.getString("session_email","null");
+    }
+    public void setPassword(String pass){
+        editor.putString("session_password",pass);
+        editor.commit();
+    }
 
     public String getIdrole() {
          return sharedPreferences.getString("session_role","null");

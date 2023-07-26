@@ -34,6 +34,7 @@ public class Dashboard extends AppCompatActivity {
         profilebtn = findViewById(R.id.ProfileButton);
 
         SessionActivity sessionActivity = new SessionActivity(Dashboard.this);
+
         String role =  sessionActivity.getIdrole();
 
         if (role=="null"){
@@ -50,6 +51,11 @@ public class Dashboard extends AppCompatActivity {
         }else if(Integer.parseInt(role)==3){
             userbtn.setVisibility(View.GONE);
         }
+        if (sessionActivity.getEmailSession().equals("null") && sessionActivity.getPassword().equals("null")){
+            sessionActivity.setEmailSession(getIntent().getExtras().getString("email"));
+            sessionActivity.setPassword(getIntent().getExtras().getString("password"));
+        }
+
 
         profilebtn.setOnClickListener(new View.OnClickListener() {
             @Override

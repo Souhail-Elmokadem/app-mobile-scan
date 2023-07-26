@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/border"
+                    android:background="@drawable/border_selector"
                     android:drawablePadding="8dp"
                     android:hint="Nom"
                     android:singleLine="true"

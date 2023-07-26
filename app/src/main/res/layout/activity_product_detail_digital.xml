@@ -55,7 +55,7 @@
 
             android:drawablePadding="8dp"
             android:hint="Product Name"
-            android:textColorHint="@color/white"
+
             android:padding="8dp"
 
             android:background="@drawable/borderpurple"
@@ -71,7 +71,7 @@
 
             android:drawablePadding="8dp"
             android:hint="Product Code"
-            android:textColorHint="@color/white"
+
             android:maxLength="50"
             android:padding="8dp"
 

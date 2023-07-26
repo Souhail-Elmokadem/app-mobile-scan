@@ -183,9 +183,9 @@ public class ScannerQr extends AppCompatActivity {
                                             fragment_ProductMain.fa.finish();
                                             startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                             finish();
-                                            Toast.makeText(getApplicationContext(), "Product Added !", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "Produit Ajouté !", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Toast.makeText(getApplicationContext(), "deja exist", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "QRcode existe deja !", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }

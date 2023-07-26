@@ -87,19 +87,21 @@
                 android:padding="8dp"/>
 
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="AJOUTER AVEC CODEBARRE"
                 android:id="@+id/addbtn"
-                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="60dp"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#00DFA2"
-                app:cornerRadius = "20dp"/>
+                android:text="AJOUTER AVEC CODEBARRE"
+                android:textSize="18sp"
+                app:cornerRadius="20dp" />
 
             <Button
                 android:id="@+id/qrbtn"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
+                android:minHeight="60dp"
                 android:text="AJOUTER AVEC QRCODE"
                 android:textSize="18sp"
                 android:layout_marginTop="20dp"

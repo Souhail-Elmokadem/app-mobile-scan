@@ -168,7 +168,7 @@ public class Login extends AppCompatActivity {
                                         //session start
                                         SessionActivity sessionActivity = new SessionActivity(com.example.finestapp.user.Login.this);
                                         sessionActivity.saveSession(username,password);
-                                        DashListAsyncTask dashListAsyncTask= new DashListAsyncTask(username);
+                                        DashListAsyncTask dashListAsyncTask= new DashListAsyncTask(username,password);
                                         dashListAsyncTask.execute();
 
                                         //moveToDashboard();
@@ -212,8 +212,10 @@ public class Login extends AppCompatActivity {
     public class DashListAsyncTask extends AsyncTask<Void, Void, List<User>> {
 
         private String useremail;
-        public DashListAsyncTask(String username) {
+        private String userpasswrd;
+        public DashListAsyncTask(String username,String password) {
             useremail = username;
+            userpasswrd=password;
         }
 
         private  final String TAG = "UserList";
@@ -252,6 +254,8 @@ public class Login extends AppCompatActivity {
                         sessionActivity.saveSessionDetail(jsonObject.getString("idUser"),jsonObject.getString("NomUser")+" "+jsonObject.getString("PrenomUser"), jsonObject.getString("idrole"));
                         Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                         intent.putExtra("idrole", jsonObject.getString("idrole"));
+                        intent.putExtra("password",userpasswrd);
+                        intent.putExtra("email",useremail);
                         startActivity(intent);
                         finish();
                         break;
