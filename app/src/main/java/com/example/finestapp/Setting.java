@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.MenuItem;
@@ -26,8 +28,10 @@ public class Setting extends AppCompatActivity {
 
     EditText editOld,editnew,editconfnew;
     Button savebtn,logoutbtn;
-    TextView MainActivityPasswordError,MainActivityConfirmPassError;
+    TextView MainActivityPasswordError,MainActivityConfirmPassError,MainActivityOldPasswordError;
     boolean PasswordVisible;
+
+    String actuelOldPassword;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -45,10 +49,12 @@ public class Setting extends AppCompatActivity {
         savebtn = findViewById(R.id.savebtn);
         logoutbtn=findViewById(R.id.logoutbtn);
 
+        MainActivityOldPasswordError= findViewById(R.id.OldPasswordAlert);
         MainActivityPasswordError=findViewById(R.id.NewPaswordAlert);
         MainActivityConfirmPassError=findViewById(R.id.ConfirmPassAlert);
 
        SessionActivity sessionActivity = new SessionActivity(Setting.this);
+        actuelOldPassword=new SessionActivity(Setting.this).getPassword();
 
         editOld.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -121,9 +127,9 @@ public class Setting extends AppCompatActivity {
                                     if (res.equals("Password updated successfully.")) {
                                         startActivity(new Intent(getApplicationContext(), Dashboard.class));
                                         finish();
-                                        Toast.makeText(getApplicationContext(), "Password Updated Success", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "votre mot de passe à été changé avec succès", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Invalid", Toast.LENGTH_SHORT).show();
 
                                     }
                                 }
@@ -133,7 +139,7 @@ public class Setting extends AppCompatActivity {
                         // end update
 
                     }else{
-                        Toast.makeText(getApplicationContext(),"Password does not confirm",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Mot de passe est invalid",Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -154,23 +160,94 @@ public class Setting extends AppCompatActivity {
                 Runtime.getRuntime().exit(0);
             }
         });
+
+        // Ajoutez ces lignes dans votre onCreate après avoir initialisé les EditTexts
+
+// TextWatcher pour le champ d'ancien mot de passe
+        editOld.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Rien à faire avant que le texte change
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Effacez le message d'erreur de l'ancien mot de passe lorsque l'utilisateur commence à saisir
+                MainActivityOldPasswordError.setText("");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Rien à faire après que le texte a changé
+            }
+        });
+
+// TextWatcher pour le champ de nouveau mot de passe
+        editnew.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Rien à faire avant que le texte change
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Effacez le message d'erreur du nouveau mot de passe lorsque l'utilisateur commence à saisir
+                MainActivityPasswordError.setText("");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Rien à faire après que le texte a changé
+            }
+        });
+
+// TextWatcher pour le champ de confirmation du nouveau mot de passe
+        editconfnew.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Rien à faire avant que le texte change
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Effacez le message d'erreur de la confirmation du nouveau mot de passe lorsque l'utilisateur commence à saisir
+
+                MainActivityConfirmPassError.setText("");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Rien à faire après que le texte a changé
+            }
+        });
+
     }
 
     private boolean validatePassword(){
+        String enterOldPassword=editOld.getText().toString().trim();
         String passwordInput = editnew.getText().toString().trim();
         String ConfitmpasswordInput = editconfnew.getText().toString().trim();
-        if (passwordInput.isEmpty() || ConfitmpasswordInput.isEmpty()) {
-            MainActivityPasswordError.setText("Field can't be empty");
+        if (!actuelOldPassword.equals(enterOldPassword)){
+            MainActivityOldPasswordError.setVisibility(View.VISIBLE);
+            MainActivityOldPasswordError.setText("Mot de passe est Incorrect");
+           return false;
+        }
+        else if (passwordInput.isEmpty() || ConfitmpasswordInput.isEmpty()) {
+            MainActivityPasswordError.setText("Remplire Les champs vide");
+            MainActivityPasswordError.setVisibility(View.VISIBLE);
             return false;
         } else if (editnew.getText().toString().trim().length()<5 && editconfnew.getText().toString().trim().length()<5) {
-            MainActivityPasswordError.setText("Password must be at least 5 characters");
+            MainActivityPasswordError.setText("mot de passe doit contenir au minimum 5 caractères");
+            MainActivityPasswordError.setVisibility(View.VISIBLE);
             return false;
         }
         else if (!passwordInput.equals(ConfitmpasswordInput)) {
-            MainActivityConfirmPassError.setText("Password Would Not be matched");
+            MainActivityConfirmPassError.setText("Le mot de passe ne correspond pas");
+            MainActivityConfirmPassError.setVisibility(View.VISIBLE);
             return false;
         }else {
-            MainActivityConfirmPassError.setText("Password Matched");
+
+            MainActivityConfirmPassError.setVisibility(View.VISIBLE);
             return true;
         }
     }

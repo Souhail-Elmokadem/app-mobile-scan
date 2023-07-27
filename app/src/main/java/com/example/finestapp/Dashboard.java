@@ -2,8 +2,10 @@ package com.example.finestapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,7 +17,9 @@ import com.example.finestapp.user.UserList;
 public class Dashboard extends AppCompatActivity {
     ImageView fournisseur,product,scanbtn,userbtn,profilebtn;
     public static Dashboard dashboard;
-
+    private static final long CHECK_INTERVAL = 5000; // Check every 5 seconds
+    private Handler handler = new Handler();
+    private InternetConnectivityChecker connectivityChecker;
     @Override
     protected void onStop() {
         super.onStop();
@@ -32,6 +36,8 @@ public class Dashboard extends AppCompatActivity {
         fournisseur = findViewById(R.id.fournisseurbtn);
         product = findViewById(R.id.productbtn);
         profilebtn = findViewById(R.id.ProfileButton);
+
+        connectivityChecker = new InternetConnectivityChecker(this);
 
         SessionActivity sessionActivity = new SessionActivity(Dashboard.this);
 
@@ -88,4 +94,46 @@ public class Dashboard extends AppCompatActivity {
         });
 
     }
+
+    private Runnable connectivityRunnable = new Runnable() {
+        @Override
+        public void run() {
+            checkInternetConnection();
+            handler.postDelayed(this, CHECK_INTERVAL);
+        }
+    };
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler.post(connectivityRunnable);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacks(connectivityRunnable);
+    }
+
+    public void checkInternetConnection() {
+        if (connectivityChecker.isInternetAvailable()) {
+
+
+
+        } else {
+            startActivity(new Intent(getApplicationContext(), NoInternetConnection.class));
+            finish();
+            showToast("No internet connection!");
+        }
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
 }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -46,6 +47,10 @@ public class ProductDetailDigital extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail_digital);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         //remove shadow under actionbar
         getSupportActionBar().setElevation(0);
@@ -187,6 +192,9 @@ public class ProductDetailDigital extends AppCompatActivity {
             AlertDialog dialog = alertDialog.create();
             dialog.show();
 
+        }else if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

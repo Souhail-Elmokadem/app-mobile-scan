@@ -3,6 +3,7 @@ package com.example.finestapp.fournisseur;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,11 +11,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.finestapp.InternetConnectivityChecker;
+import com.example.finestapp.NoInternetConnection;
 import com.example.finestapp.R;
 import com.example.finestapp.SessionActivity;
 
@@ -43,14 +47,16 @@ public class FournisseurList extends AppCompatActivity {
 
     private ListView listView;
     private FournisseurListAdapter adapter;
-
+    private static final long CHECK_INTERVAL = 5000; // Check every 5 seconds
+    private Handler handler = new Handler();
+    private InternetConnectivityChecker connectivityChecker;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fournisseur_list);
-
+        connectivityChecker = new InternetConnectivityChecker(this);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -100,6 +106,43 @@ public class FournisseurList extends AppCompatActivity {
             }
         });
 
+    }
+    private Runnable connectivityRunnable = new Runnable() {
+        @Override
+        public void run() {
+            checkInternetConnection();
+            handler.postDelayed(this, CHECK_INTERVAL);
+        }
+    };
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler.post(connectivityRunnable);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacks(connectivityRunnable);
+    }
+
+    public void checkInternetConnection() {
+        if (connectivityChecker.isInternetAvailable()) {
+
+
+
+        } else {
+            startActivity(new Intent(getApplicationContext(), NoInternetConnection.class));
+            finish();
+            showToast("No internet connection!");
+        }
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void filterItems(String query) {

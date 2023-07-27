@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#8CC0DE">
+    android:background="@color/purple_light">
 
 
 
@@ -22,7 +22,7 @@
                     android:orientation="vertical"
                     android:layout_gravity="center_horizontal"
                     android:padding="24dp"
-                    android:backgroundTint="#1D5B79"
+                    android:backgroundTint="@color/purple"
                     android:background="@drawable/border">
 
                         <TextView
@@ -51,7 +51,14 @@
                             android:padding="8dp"
                             android:textColor="@color/white"
                             android:textColorHint="@color/white"/>
-
+                        <TextView
+                            android:id="@+id/OldPasswordAlert"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:textColor="@color/red"
+                            android:textSize="20dp"
+                            android:visibility="gone" />
 
                         <EditText
                             android:id="@+id/EditNewPassword"
@@ -73,9 +80,10 @@
                             android:id="@+id/NewPaswordAlert"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="20dp"
                             android:layout_marginLeft="20dp"
-                            android:textColor="#B71C1C"/>
+                            android:textColor="@color/red"
+                            android:textSize="20dp"
+                            android:visibility="gone" />
 
 
                         <EditText
@@ -92,13 +100,15 @@
                             android:textColorHint="@color/white"
                             android:textColor="@color/white"
                             android:drawablePadding="8dp"/>
+
                         <TextView
                             android:id="@+id/ConfirmPassAlert"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="20dp"
                             android:layout_marginLeft="20dp"
-                            android:textColor="#4CAF50"/>
+                            android:textColor="@color/red"
+                            android:textSize="20dp"
+                            android:visibility="gone" />
 
 
 
@@ -117,10 +127,10 @@
 
         <Button
             android:id="@+id/logoutbtn"
-            android:layout_width="wrap_content"
+            android:layout_width="338dp"
             android:layout_height="80dp"
             android:layout_marginTop="20dp"
             android:backgroundTint="#E76161"
             android:text="SE DECONNECTER"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="5dp" />
 </LinearLayout>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".product.AddProduct"
     android:gravity="center"
-    android:background="#8CC0DE"
+    android:background="@color/purple_light"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -22,7 +22,7 @@
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
             android:padding="24dp"
-            android:backgroundTint="#1D5B79"
+            android:backgroundTint="#6D77FA"
             android:background="@drawable/border">
 
             <TextView

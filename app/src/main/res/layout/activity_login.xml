@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D0D2F1"
+    android:background="@color/purple_light"
     >
 
     <LinearLayout
@@ -51,9 +51,12 @@
                 android:drawableTint="#8CC0DE"
                 android:drawablePadding="8dp"
                 android:hint="Email"
+                android:inputType="textEmailAddress"
                 android:textColorHint="@color/white"
                 android:padding="8dp"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:singleLine="true"
+                />
 
             <EditText
                 android:id="@+id/password"
@@ -69,14 +72,19 @@
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                android:textColorHint="@color/white"
+                android:singleLine="true"
+
+                />
 
             <CheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Rester Connecté"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+
+                />
 
             <Button
                 android:id="@+id/loginbtn"

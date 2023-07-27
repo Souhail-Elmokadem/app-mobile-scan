@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".user.Adduser"
     android:gravity="center"
-    android:background="#8CC0DE"
+    android:background="@color/purple_light"
     android:orientation="vertical">
 
 
@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/border"
-                android:backgroundTint="#1D5B79"
+                android:backgroundTint="#6D77FA"
                 android:orientation="vertical"
                 android:padding="24dp">
 
@@ -98,6 +98,38 @@
                     android:padding="8dp"
                     android:textColorHint="@color/white"
                     android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/OldPasswordAlert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/red"
+                    android:textSize="20dp"
+                    android:visibility="gone" />
+                <EditText
+                    android:id="@+id/password2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/border_selector"
+                    android:drawableLeft="@drawable/baseline_lock_24"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="#75C2F6"
+                    android:hint="CONFIRM MOT DE PASSE"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
+
+                <TextView
+                    android:id="@+id/OldPassword2Alert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/red"
+                    android:textSize="20dp"
+                    android:visibility="gone" />
 
                 <EditText
                     android:id="@+id/telephone"

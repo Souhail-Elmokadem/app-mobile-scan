@@ -7,6 +7,7 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.MenuItem;
@@ -16,11 +17,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.finestapp.InternetConnectivityChecker;
+import com.example.finestapp.NoInternetConnection;
 import com.example.finestapp.R;
 import com.example.finestapp.product.Item;
 import com.example.finestapp.product.ProductDetail;
@@ -56,12 +60,14 @@ public class Scancamera extends AppCompatActivity {
     private ProgressBar progressBar;
     private CountDownTimer timer;
     private static final int TIMER_DURATION = 5000; // 5 seconds
-
+    private static final long CHECK_INTERVAL = 5000; // Check every 5 seconds
+    private Handler handler = new Handler();
+    private InternetConnectivityChecker connectivityChecker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scancamera);
-
+        connectivityChecker = new InternetConnectivityChecker(this);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -78,6 +84,43 @@ public class Scancamera extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+    private Runnable connectivityRunnable = new Runnable() {
+        @Override
+        public void run() {
+            checkInternetConnection();
+            handler.postDelayed(this, CHECK_INTERVAL);
+        }
+    };
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler.post(connectivityRunnable);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacks(connectivityRunnable);
+    }
+
+    public void checkInternetConnection() {
+        if (connectivityChecker.isInternetAvailable()) {
+
+
+
+        } else {
+            startActivity(new Intent(getApplicationContext(), NoInternetConnection.class));
+            finish();
+            showToast("No internet connection!");
+        }
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void initialiseDetectorsAndSources() {

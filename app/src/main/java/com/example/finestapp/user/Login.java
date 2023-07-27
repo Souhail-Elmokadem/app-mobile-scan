@@ -66,7 +66,7 @@ public class Login extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), Dashboard.class);
             startActivity(intent);
             finish();
-            Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
+
         } else {
             // do somethings
         }
@@ -177,7 +177,7 @@ public class Login extends AppCompatActivity {
 
 
                                     }else {
-                                        Toast.makeText(Login.this, "Try Again", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Login.this, "Les donnees sont incorrect", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -186,7 +186,7 @@ public class Login extends AppCompatActivity {
                     });
                 }
                 else {
-                    Toast.makeText(Login.this, "All fields are required", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Remplire tous les champs", Toast.LENGTH_SHORT).show();
                 }
 
             }

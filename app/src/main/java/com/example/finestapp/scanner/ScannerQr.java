@@ -21,6 +21,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.finestapp.InternetConnectivityChecker;
+import com.example.finestapp.NoInternetConnection;
 import com.example.finestapp.R;
 import com.example.finestapp.product.AddProduct;
 import com.example.finestapp.product.frag_products.fragment_ProductMain;
@@ -46,13 +48,15 @@ public class ScannerQr extends AppCompatActivity {
     private ProgressBar progressBar;
     private CountDownTimer timer;
     private static final int TIMER_DURATION = 5000; // 5 seconds
-
+    private static final long CHECK_INTERVAL = 5000; // Check every 5 seconds
+    private Handler handler = new Handler();
+    private InternetConnectivityChecker connectivityChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner_qr);
-
+        connectivityChecker = new InternetConnectivityChecker(this);
         backbtn = findViewById(R.id.backbtn);
         barcodeText = findViewById(R.id.barcodeText);
         surfaceView = findViewById(R.id.surface_view);
@@ -67,6 +71,43 @@ public class ScannerQr extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+    private Runnable connectivityRunnable = new Runnable() {
+        @Override
+        public void run() {
+            checkInternetConnection();
+            handler.postDelayed(this, CHECK_INTERVAL);
+        }
+    };
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler.post(connectivityRunnable);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacks(connectivityRunnable);
+    }
+
+    public void checkInternetConnection() {
+        if (connectivityChecker.isInternetAvailable()) {
+
+
+
+        } else {
+            startActivity(new Intent(getApplicationContext(), NoInternetConnection.class));
+            finish();
+            showToast("No internet connection!");
+        }
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
 

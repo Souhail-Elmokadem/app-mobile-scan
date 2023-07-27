@@ -1,24 +1,29 @@
 package com.example.finestapp.user;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.R;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class Adduser extends AppCompatActivity {
-    EditText Prenom, Nom, Username, Password, Telephone;
+    EditText Prenom, Nom, Username, Password, Telephone,password2;
     Button Register;
     ProgressBar progressBar;
     RadioGroup roleRadioGroup;
@@ -26,6 +31,10 @@ public class Adduser extends AppCompatActivity {
 
     private Button leavebtn;
 
+
+    public static boolean isValidEmail(CharSequence target) {
+        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,24 +44,28 @@ public class Adduser extends AppCompatActivity {
         Nom = findViewById(R.id.nom);
         Username = findViewById(R.id.username);
         Password = findViewById(R.id.password);
+        password2 = findViewById(R.id.password2);
         Telephone = findViewById(R.id.telephone);
-
+        TextView oldpassword2  = findViewById(R.id.OldPassword2Alert);
         Register = findViewById(R.id.registerbtn);
 
         progressBar = findViewById(R.id.progress);
 
         roleRadioGroup = findViewById(R.id.radioGroupRoles);
 
+
+
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                TextView passwordalert = findViewById(R.id.OldPasswordAlert);
                 String prenom, nom, username, password, telephone;
                 prenom = String.valueOf(Prenom.getText());
                 nom = String.valueOf(Nom.getText());
                 username = String.valueOf(Username.getText());
                 password = String.valueOf(Password.getText());
                 telephone = String.valueOf(Telephone.getText());
+
 
                 int selectedRoleId = roleRadioGroup.getCheckedRadioButtonId();
                 if (selectedRoleId == -1) {
@@ -63,8 +76,57 @@ public class Adduser extends AppCompatActivity {
                 RadioButton selectedRoleRadioButton = findViewById(selectedRoleId);
                 String roleId = selectedRoleRadioButton.getTag().toString();
 
+                password2.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                if(!prenom.equals("") && !nom.equals("") && !username.equals("") && !password.equals("") && !telephone.equals("")) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                        oldpassword2.setText("");
+                        oldpassword2.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+
+                    }
+                });
+                Password.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                       passwordalert.setText("");
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+
+                if (!isValidEmail(username)){
+                    Toast.makeText(getApplicationContext(),"Le format de l'email ne correspond pas ",Toast.LENGTH_SHORT).show();
+                }
+                else if (!Password.getText().toString().equals(password2.getText().toString())){
+                    TextView oldpassword2  = findViewById(R.id.OldPassword2Alert);
+                    oldpassword2.setText("Mot de passe ne correspond pas");
+                    oldpassword2.setVisibility(View.VISIBLE);
+                }
+                 else if (password.trim().length()<5 ){
+
+
+                    passwordalert.setVisibility(View.VISIBLE);
+                    passwordalert.setText("mot de passe doit contenir au minimum 5 caractères");
+                }
+                else if(!prenom.equals("") && !nom.equals("") && !username.equals("") && !password.equals("") && !telephone.equals("")) {
                     progressBar.setVisibility(View.VISIBLE);
 
                         //Start ProgressBar first (Set visibility VISIBLE)

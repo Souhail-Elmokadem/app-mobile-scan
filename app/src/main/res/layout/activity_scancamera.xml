@@ -43,8 +43,8 @@
 
         <Button
             android:id="@+id/backbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="371dp"
+            android:layout_height="60dp"
             android:layout_gravity="bottom"
             android:backgroundTint="#E76161"
             android:text="Back" />
