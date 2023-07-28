@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,7 +38,7 @@ public class FournisseurDetail extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
     EditText editFournName,editFournPrenom,editFournTel;
-    Button savebtn,backbtn, cancelbtn;
+    Button savebtn, cancelbtn;
 
     @Override
     public void onBackPressed() {
@@ -49,7 +50,8 @@ public class FournisseurDetail extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId()==R.id.editbtn){
-
+            LinearLayout  layout = findViewById(R.id.barproduct);
+            layout.setVisibility(View.GONE);
             editFournName = findViewById(R.id.EditNom);
             editFournPrenom = findViewById(R.id.EditPrenom);
             editFournTel = findViewById(R.id.EditTele);
@@ -62,8 +64,7 @@ public class FournisseurDetail extends AppCompatActivity {
 //
             TextView textViewFournName = findViewById(R.id.textViewFournisseurNom) ;
             textViewFournName.setVisibility(View.GONE);
-            TextView textViewFournTel = findViewById(R.id.textViewFournisseurPrenom);
-            textViewFournTel.setVisibility(View.GONE);
+
             TextView textViewFournisseurPrenome = findViewById(R.id.textViewFournisseurTele);
             textViewFournisseurPrenome.setVisibility(View.GONE);
 
@@ -80,11 +81,11 @@ public class FournisseurDetail extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     linear.setVisibility(View.GONE);
-
+                    LinearLayout  layout = findViewById(R.id.barproduct);
+                    layout.setVisibility(View.VISIBLE);
                     TextView textViewFournName = findViewById(R.id.textViewFournisseurNom) ;
                     textViewFournName.setVisibility(View.VISIBLE);
-                    TextView textViewFournTel = findViewById(R.id.textViewFournisseurPrenom);
-                    textViewFournTel.setVisibility(View.VISIBLE);
+
                     TextView textViewFournisseurPrenome = findViewById(R.id.textViewFournisseurTele);
                     textViewFournisseurPrenome.setVisibility(View.VISIBLE);
 
@@ -119,9 +120,9 @@ public class FournisseurDetail extends AppCompatActivity {
                                         if (res.equals("Updated Success")){
                                             startActivity(new Intent(getApplicationContext(),FournisseurList.class));
                                             finish();
-                                            Toast.makeText(getApplicationContext(),"Update Success",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(),"Fournisseur Modifié !",Toast.LENGTH_SHORT).show();
                                         }else{
-                                            Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(),"Modification échouée",Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
@@ -129,7 +130,7 @@ public class FournisseurDetail extends AppCompatActivity {
                             }
                         });
                     }else{
-                        Toast.makeText(getApplicationContext(),"Remplire tous les champs vide",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Remplire tous les champs vides !",Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -137,14 +138,14 @@ public class FournisseurDetail extends AppCompatActivity {
         } else if (item.getItemId()==R.id.deletebtn) {
             alertdialog = new AlertDialog.Builder(FournisseurDetail.this);
             alertdialog.setTitle("Suppression")
-                    .setMessage("All products by this supplier will be deleted")
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    .setMessage("Tous les produits de ce fournisseur seront supprimés")
+                    .setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             finish();
                         }
                     })
-                    .setPositiveButton("Delete Anyway", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("Supprimer quand même", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Handler handler = new Handler();
@@ -163,9 +164,9 @@ public class FournisseurDetail extends AppCompatActivity {
                                             if(res.equals("fourn deleted successfully.")){
                                                 startActivity(new Intent(getApplicationContext(),FournisseurList.class));
                                                 finish();
-                                                Toast.makeText(getApplicationContext(),"Supplier Deleted !",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(),"Fournisseur Supprimé !",Toast.LENGTH_SHORT).show();
                                             }else {
-                                                Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(),"Suppression échouée !",Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     }
@@ -175,6 +176,9 @@ public class FournisseurDetail extends AppCompatActivity {
                     });
             AlertDialog dialog = alertdialog.create();
             dialog.show();
+        } else if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -183,26 +187,21 @@ public class FournisseurDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fournisseur_detail);
-        backbtn = findViewById(R.id.backbtnFour);
 
-        backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-                finish();
-            }
-        });
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        //remove shadow under actionbar
+        getSupportActionBar().setElevation(0);
         // view data
         Bundle extras = getIntent().getExtras();
         TextView textViewFournName = findViewById(R.id.textViewFournisseurNom);
         textViewFournName.setVisibility(View.VISIBLE);
-        textViewFournName.setText("Nom : "+ extras.getString("FournisseurNom"));
+        textViewFournName.setText( extras.getString("FournisseurNom")+" "+extras.getString("FournisseurPrenom"));
         TextView textViewFournTel = findViewById(R.id.textViewFournisseurTele);
         textViewFournTel.setVisibility(View.VISIBLE);
-        TextView textViewFournisseurPrenome = findViewById(R.id.textViewFournisseurPrenom);
-        textViewFournisseurPrenome.setText("Prenom: " + extras.getString("FournisseurPrenom"));
-        textViewFournTel.setText("Telephone : "+extras.getString("FournisseurTelephone"));
-        textViewFournisseurPrenome.setVisibility(View.VISIBLE);
+        textViewFournTel.setText("TELEPHONE : "+extras.getString("FournisseurTelephone"));
+
 
 
         // end view

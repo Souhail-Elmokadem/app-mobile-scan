@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.mainProduitTabbed.scanner.Scancamera"
-    android:background="#8CC0DE"
-    android:orientation="vertical">
+    android:background="#D0D2F1"
+    android:orientation="vertical"
+    tools:context=".scanner.Scancamera">
 
     <SurfaceView
-        android:layout_marginTop="50dp"
         android:id="@+id/surface_view"
         android:layout_width="380dp"
         android:layout_height="380dp"
-        android:layout_gravity="center">
-    </SurfaceView>
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"></SurfaceView>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -24,7 +23,7 @@
         android:layout_margin="16dp"
         android:max="5"
         android:progress="0"
-        android:progressDrawable="@drawable/progressbar"/>
+        android:progressDrawable="@drawable/progressbar" />
 
     <TextView
         android:id="@+id/barcodeText"
@@ -32,25 +31,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:textSize="30dp"
+        android:text="Barcode Text"
         android:textColor="@color/white"
-        android:text="Barcode Text"/>
+        android:textSize="30dp" />
 
     <RelativeLayout
-        android:padding="20dp"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        android:padding="20dp">
 
         <Button
             android:id="@+id/backbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Back"
+            android:layout_width="371dp"
+            android:layout_height="60dp"
             android:layout_gravity="bottom"
-            android:backgroundTint="#E76161"/>
+            android:backgroundTint="#E76161"
+            android:text="Back" />
     </RelativeLayout>
-
 
 
 </LinearLayout>

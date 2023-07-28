@@ -1,4 +1,4 @@
-package com.example.finestapp.ui.mainProduitTabbed.scanner;
+package com.example.finestapp.scanner;
 
 import android.Manifest;
 import android.content.Intent;
@@ -21,7 +21,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.finestapp.InternetConnectivityChecker;
+import com.example.finestapp.NoInternetConnection;
 import com.example.finestapp.R;
+import com.example.finestapp.product.AddProduct;
 import com.example.finestapp.product.frag_products.fragment_ProductMain;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -45,13 +48,15 @@ public class ScannerQr extends AppCompatActivity {
     private ProgressBar progressBar;
     private CountDownTimer timer;
     private static final int TIMER_DURATION = 5000; // 5 seconds
-
+    private static final long CHECK_INTERVAL = 5000; // Check every 5 seconds
+    private Handler handler = new Handler();
+    private InternetConnectivityChecker connectivityChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner_qr);
-
+        connectivityChecker = new InternetConnectivityChecker(this);
         backbtn = findViewById(R.id.backbtn);
         barcodeText = findViewById(R.id.barcodeText);
         surfaceView = findViewById(R.id.surface_view);
@@ -66,6 +71,43 @@ public class ScannerQr extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+    private Runnable connectivityRunnable = new Runnable() {
+        @Override
+        public void run() {
+            checkInternetConnection();
+            handler.postDelayed(this, CHECK_INTERVAL);
+        }
+    };
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler.post(connectivityRunnable);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacks(connectivityRunnable);
+    }
+
+    public void checkInternetConnection() {
+        if (connectivityChecker.isInternetAvailable()) {
+
+
+
+        } else {
+            startActivity(new Intent(getApplicationContext(), NoInternetConnection.class));
+            finish();
+            showToast("No internet connection!");
+        }
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -147,6 +189,11 @@ public class ScannerQr extends AppCompatActivity {
                     public void onClick(View v) {
                         Bundle extras = getIntent().getExtras();
 
+                        if (extras.getString("productName").equals("")) {
+                            Toast.makeText(getApplicationContext(), "veuillez remplire les champs vide", Toast.LENGTH_SHORT).show();
+                        } else {
+
+
 
                         Handler handler = new Handler(Looper.getMainLooper());
                         handler.post(new Runnable() {
@@ -158,6 +205,7 @@ public class ScannerQr extends AppCompatActivity {
                                 field[2] = "MargeProd";
                                 field[3] = "idFour";
                                 field[4] = "Libelle";
+
                                 //Creating array for data
                                 String[] data = new String[5];
                                 data[0] = extras.getString("productName");
@@ -165,26 +213,26 @@ public class ScannerQr extends AppCompatActivity {
                                 data[2] = extras.getString("productMarge");
                                 data[3] = extras.getString("fournisseurid");
                                 data[4] = barcodeData;
-                                //                        PutData putData = new PutData("http://192.168.11.66/Loginregister/addproduct.php", "POST", field, data);
+
                                 PutData putData = new PutData("http://ftapp.finesttechnology.ma/Loginregister/addProductWithQr.php", "POST", field, data);
 
-
-                                if(putData.startPut()){
-                                    if(putData.onComplete()){
+                                if (putData.startPut()) {
+                                    if (putData.onComplete()) {
                                         String res = putData.getResult();
-                                        if(res.equals("Add Success")){
+                                        if (res.equals("Add Success")) {
+                                            AddProduct.addproduct.finish();
                                             fragment_ProductMain.fa.finish();
                                             startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                             finish();
-                                            Toast.makeText(getApplicationContext(),"Product Added !",Toast.LENGTH_SHORT).show();
-                                        }else{
-                                            Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "Produit Ajouté !", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "QRcode existe deja !", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
                             }
                         });
-
+                    }
                     }
                 });
 

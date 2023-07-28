@@ -20,7 +20,6 @@ public class SessionActivity {
         editor = sharedPreferences.edit();
     }
     public void saveSession(String Email,String password){
-
         editor.putString("session_email",Email);
         editor.putString("session_password",password);
         editor.commit();
@@ -32,9 +31,9 @@ public class SessionActivity {
         editor.putString("session_role",idrole);
         editor.commit();
     }
-    public String getSession(){
-        return sharedPreferences.getString("session_email","null");
-    }
+//    public String getSession(){
+//        return sharedPreferences.getString("session_email","null");
+//    }
     public boolean isIscheckBox() {
         return ischeckBox;
     }
@@ -46,6 +45,17 @@ public class SessionActivity {
 
     public String getEmailSession() {
         return sharedPreferences.getString("session_email","null");
+    }
+    public void setEmailSession(String email){
+        editor.putString("session_email",email);
+        editor.commit();
+    }
+    public String getPassword(){
+        return  sharedPreferences.getString("session_email","null");
+    }
+    public void setPassword(String pass){
+        editor.putString("session_password",pass);
+        editor.commit();
     }
 
     public String getIdrole() {
@@ -69,7 +79,10 @@ public class SessionActivity {
         editor.putString("session_email","null").commit();
         editor.clear();
         editor.remove("session_email");
+        editor.remove("session_password");
+        editor.remove("session_role");
         editor.commit();
+        editor.apply();
     }
 
 }

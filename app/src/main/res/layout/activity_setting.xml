@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#8CC0DE">
+    android:background="@color/purple_light">
 
 
 
@@ -22,13 +22,13 @@
                     android:orientation="vertical"
                     android:layout_gravity="center_horizontal"
                     android:padding="24dp"
-                    android:backgroundTint="#1D5B79"
+                    android:backgroundTint="@color/purple"
                     android:background="@drawable/border">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Modify Your Password"
+                            android:text="CHANGER VOTRE MOT DE PASSE"
                             android:textSize="25dp"
                             android:textAlignment="center"
                             android:textStyle="bold"
@@ -41,27 +41,34 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginTop="20dp"
-                            android:background="@drawable/border"
+                            android:background="@drawable/border_selector"
                             android:drawableEnd="@drawable/baseline_passwordhidden_24"
                             android:drawablePadding="8dp"
                             android:drawableTint="#8CC0DE"
                             android:clickable="false"
-                            android:hint="Old Password"
+                            android:hint="Mot de passe ancient"
                             android:inputType="textPassword"
                             android:padding="8dp"
                             android:textColor="@color/white"
                             android:textColorHint="@color/white"/>
-
+                        <TextView
+                            android:id="@+id/OldPasswordAlert"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:textColor="@color/red"
+                            android:textSize="20dp"
+                            android:visibility="gone" />
 
                         <EditText
                             android:id="@+id/EditNewPassword"
                             android:layout_width="match_parent"
                             android:layout_below="@+id/EditOldPassword"
                             android:layout_height="50dp"
-                            android:hint="Enter Your New Password"
+                            android:hint="Nouveau mot de passe"
                             android:inputType="textPassword"
                             android:singleLine="true"
-                            android:background="@drawable/border"
+                            android:background="@drawable/border_selector"
                             android:layout_marginTop="20dp"
                             android:padding="8dp"
                             android:textColorHint="@color/white"
@@ -73,9 +80,10 @@
                             android:id="@+id/NewPaswordAlert"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="20dp"
                             android:layout_marginLeft="20dp"
-                            android:textColor="#B71C1C"/>
+                            android:textColor="@color/red"
+                            android:textSize="20dp"
+                            android:visibility="gone" />
 
 
                         <EditText
@@ -83,22 +91,24 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_below="@+id/EditNewPassword"
-                            android:hint="Confirme Your New Password"
+                            android:hint="Comfirmer le nouveau mot de passe"
                             android:inputType="textPassword"
                             android:singleLine="true"
-                            android:background="@drawable/border"
+                            android:background="@drawable/border_selector"
                             android:layout_marginTop="20dp"
                             android:padding="8dp"
                             android:textColorHint="@color/white"
                             android:textColor="@color/white"
                             android:drawablePadding="8dp"/>
+
                         <TextView
                             android:id="@+id/ConfirmPassAlert"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="20dp"
                             android:layout_marginLeft="20dp"
-                            android:textColor="#4CAF50"/>
+                            android:textColor="@color/red"
+                            android:textSize="20dp"
+                            android:visibility="gone" />
 
 
 
@@ -108,7 +118,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_below="@+id/EditConfirmNewPassword"
-                            android:text="save"
+                            android:text="ENREGISTRER"
                             android:backgroundTint="#00DFA2"
                             app:cornerRadius = "20dp"/>
 
@@ -117,10 +127,10 @@
 
         <Button
             android:id="@+id/logoutbtn"
-            android:layout_width="wrap_content"
+            android:layout_width="338dp"
             android:layout_height="80dp"
             android:layout_marginTop="20dp"
             android:backgroundTint="#E76161"
-            android:text="DISCONNECT"
-            app:cornerRadius="20dp" />
+            android:text="SE DECONNECTER"
+            app:cornerRadius="5dp" />
 </LinearLayout>

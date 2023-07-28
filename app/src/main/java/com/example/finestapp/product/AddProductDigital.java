@@ -4,16 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finestapp.R;
 import com.example.finestapp.product.frag_products.fragment_ProductMain;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
+
+import io.github.muddz.styleabletoast.StyleableToast;
 
 public class AddProductDigital extends AppCompatActivity {
     Button cancel, addbtn;
@@ -23,6 +27,9 @@ public class AddProductDigital extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product_digital);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         cancel = findViewById(R.id.cancel);
         addbtn = findViewById(R.id.addbtn);
@@ -58,16 +65,16 @@ public class AddProductDigital extends AppCompatActivity {
                                         fragment_ProductMain.fa.finish();
                                         startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
-                                        Toast.makeText(getApplicationContext(),"Digital Product Added !",Toast.LENGTH_SHORT).show();
+                                        StyleableToast.makeText(getApplicationContext(),"Produit Digital Ajouté !",R.style.successToast,Toast.LENGTH_SHORT).show();
                                     }else{
-                                        Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Ajout de produit digital échoué",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
                         }
                     });
                 }else{
-                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vide",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vides !",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -78,5 +85,15 @@ public class AddProductDigital extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

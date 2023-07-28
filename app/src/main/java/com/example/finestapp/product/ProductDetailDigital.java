@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,30 +48,31 @@ public class ProductDetailDigital extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail_digital);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
+        //remove shadow under actionbar
+        getSupportActionBar().setElevation(0);
         name = findViewById(R.id.editname);
         code = findViewById(R.id.editcode);
 
         textViewName = findViewById(R.id.textViewProductName);
         textViewCode = findViewById(R.id.textViewProductCode);
 
-        backbtn = findViewById(R.id.backbtn);
+
         savebtn = findViewById(R.id.savebtn);
         cancelbtn = findViewById(R.id.cancelbtn);
 
-        backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-                finish();
-            }
-        });
+
 
         Bundle extras = getIntent().getExtras();
         textViewName.setVisibility(View.VISIBLE);
         textViewName.setText(extras.getString("productName"));
 
         textViewCode.setVisibility(View.VISIBLE);
-        textViewCode.setText(extras.getString("productCode"));
+        textViewCode.setText("Code : "+extras.getString("productCode"));
+
     }
 
     @Override
@@ -78,6 +80,8 @@ public class ProductDetailDigital extends AppCompatActivity {
 
         if (item.getItemId() == R.id.editbtn) {
 
+           LinearLayout layout = findViewById(R.id.barproduct);
+           layout.setVisibility(View.GONE);
             Bundle extras = getIntent().getExtras();
             String productName = extras.getString("productName");
             String productCode = extras.getString("productCode");
@@ -96,7 +100,8 @@ public class ProductDetailDigital extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     linear.setVisibility(View.GONE);
-
+                    LinearLayout layout = findViewById(R.id.barproduct);
+                    layout.setVisibility(View.VISIBLE);
                     textViewName.setVisibility(View.VISIBLE);
                     textViewCode.setVisibility(View.VISIBLE);
 
@@ -132,16 +137,16 @@ public class ProductDetailDigital extends AppCompatActivity {
                                             fragment_ProductMain.fa.finish();
                                             startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                             finish();
-                                            Toast.makeText(getApplicationContext(), "Update Success", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "Produit Digital Modifié !", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "Modification échouée", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
                             }
                         });
                     } else {
-                        Toast.makeText(getApplicationContext(), "Remplire tout les champs vide", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Remplire tout les champs vides !", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -149,8 +154,8 @@ public class ProductDetailDigital extends AppCompatActivity {
         } else if (item.getItemId() == R.id.deletebtn) {
             alertDialog = new AlertDialog.Builder(ProductDetailDigital.this);
             alertDialog.setTitle("Suppression");
-            alertDialog.setMessage("Are you sure ?");
-            alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            alertDialog.setMessage("Êtes-vous sûr de vouloir supprimer ce produit ?");
+            alertDialog.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Handler handler = new Handler(Looper.getMainLooper());
@@ -169,7 +174,7 @@ public class ProductDetailDigital extends AppCompatActivity {
                                         fragment_ProductMain.fa.finish();
                                         startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
                                         finish();
-                                        Toast.makeText(getApplicationContext(), "Suppression with success", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Produit Digital Supprimé !", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -177,7 +182,7 @@ public class ProductDetailDigital extends AppCompatActivity {
                     });
                 }
             });
-            alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            alertDialog.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // Any Message for inform user cancel
@@ -187,6 +192,9 @@ public class ProductDetailDigital extends AppCompatActivity {
             AlertDialog dialog = alertDialog.create();
             dialog.show();
 
+        }else if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

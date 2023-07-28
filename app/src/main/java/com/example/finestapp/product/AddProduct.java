@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -23,7 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.finestapp.R;
 import com.example.finestapp.fournisseur.Fournisseur;
 import com.example.finestapp.product.frag_products.fragment_ProductMain;
-import com.example.finestapp.ui.mainProduitTabbed.scanner.ScannerQr;
+import com.example.finestapp.scanner.ScannerQr;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONArray;
@@ -54,6 +56,18 @@ public class AddProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+
+        cancel = findViewById(R.id.cancel);
+        addbtn = findViewById(R.id.addbtn);
+        name = findViewById(R.id.editname);
+        price = findViewById(R.id.editprice);
+        marge = findViewById(R.id.editmarge);
+
+
+        addproduct = this;
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         qrbtn = findViewById(R.id.qrbtn);
         qrbtn.setOnClickListener(new View.OnClickListener() {
@@ -123,12 +137,6 @@ public class AddProduct extends AppCompatActivity {
             }
         });
 
-        cancel = findViewById(R.id.cancel);
-        addbtn = findViewById(R.id.addbtn);
-        name = findViewById(R.id.editname);
-        price = findViewById(R.id.editprice);
-        marge = findViewById(R.id.editmarge);
-
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,24 +186,38 @@ public class AddProduct extends AppCompatActivity {
                                     if(res.equals("Add Success")){
                                         fragment_ProductMain.fa.finish();
                                         startActivity(new Intent(getApplicationContext(), fragment_ProductMain.class));
+                                        Toast.makeText(getApplicationContext(),"Produit Physique Ajouté !",Toast.LENGTH_SHORT).show();
                                         finish();
 
                                     }else{
-                                        Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Ajout de produit physique échoué",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
                         }
                     });
                 }else{
-                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vide",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Remplire tout les champs vides !",Toast.LENGTH_SHORT).show();
                 }
             }
         });
         requestQueue.add(jsonObjectRequest);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+    public static AddProduct addproduct;
 }

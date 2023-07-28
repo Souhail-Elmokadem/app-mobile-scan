@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/loginbk"
+    android:background="#D0D2F1"
     tools:context=".Dashboard"
-
     >
 
 
@@ -28,9 +27,9 @@
             android:layout_alignParentEnd="false"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:capitalize="characters"
+
             android:fontFamily="@font/archivo_bold"
-            android:text="DASHBOARD"
+            android:text="Tableau de bord"
             android:textColor="#6D77FA"
             android:textSize="16sp" />
 
@@ -95,7 +94,10 @@
         <TableRow
             android:id="@+id/tableRow2"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
 
             <ImageView
                 android:id="@+id/userbtn"

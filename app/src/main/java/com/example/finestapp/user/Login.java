@@ -47,6 +47,11 @@ public class Login extends AppCompatActivity {
 
     boolean PasswordVisable;
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        this.finish();
+    }
 
     @Override
     protected void onStart() {
@@ -56,12 +61,12 @@ public class Login extends AppCompatActivity {
 
     private void checkSession() {
         SessionActivity sessionActivity = new SessionActivity(Login.this);
-        String userEmail = sessionActivity.getSession();
+        String userEmail = sessionActivity.getEmailSession();
         if (userEmail != "null") {
             Intent intent = new Intent(getApplicationContext(), Dashboard.class);
             startActivity(intent);
             finish();
-            Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
+
         } else {
             // do somethings
         }
@@ -114,7 +119,7 @@ public class Login extends AppCompatActivity {
         });
 
         CheckBox = findViewById(R.id.checkBox);
-        SessionActivity sessionActivity = new SessionActivity(com.example.finestapp.user.Login.this);
+
 
 
         Login.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +128,7 @@ public class Login extends AppCompatActivity {
 
                 if(CheckBox.isChecked()==true) {
 
-                    sessionActivity.setIscheckBox(true);
+
 
                 }
                 String username, password;
@@ -158,13 +163,12 @@ public class Login extends AppCompatActivity {
                                     //End ProgressBar (Set visibility to GONE)
                                     if(result.equals("Login Success")){
                                         Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-                                        startActivity(intent);
-                                        finish();
+
                                        // Toast.makeText(Login.this, "Login Successful !", Toast.LENGTH_SHORT).show();
                                         //session start
-
-                                            sessionActivity.saveSession(username,password);
-                                        Login.DashListAsyncTask dashListAsyncTask= new Login.DashListAsyncTask(username);
+                                        SessionActivity sessionActivity = new SessionActivity(com.example.finestapp.user.Login.this);
+                                        sessionActivity.saveSession(username,password);
+                                        DashListAsyncTask dashListAsyncTask= new DashListAsyncTask(username,password);
                                         dashListAsyncTask.execute();
 
                                         //moveToDashboard();
@@ -173,7 +177,7 @@ public class Login extends AppCompatActivity {
 
 
                                     }else {
-                                        Toast.makeText(Login.this, "Try Again", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Login.this, "Les donnees sont incorrect", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -182,7 +186,7 @@ public class Login extends AppCompatActivity {
                     });
                 }
                 else {
-                    Toast.makeText(Login.this, "All fields are required", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Remplire tous les champs", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -208,8 +212,10 @@ public class Login extends AppCompatActivity {
     public class DashListAsyncTask extends AsyncTask<Void, Void, List<User>> {
 
         private String useremail;
-        public DashListAsyncTask(String username) {
+        private String userpasswrd;
+        public DashListAsyncTask(String username,String password) {
             useremail = username;
+            userpasswrd=password;
         }
 
         private  final String TAG = "UserList";
@@ -246,6 +252,12 @@ public class Login extends AppCompatActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     if (jsonObject.getString("EmailUser").equals(useremail)){
                         sessionActivity.saveSessionDetail(jsonObject.getString("idUser"),jsonObject.getString("NomUser")+" "+jsonObject.getString("PrenomUser"), jsonObject.getString("idrole"));
+                        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                        intent.putExtra("idrole", jsonObject.getString("idrole"));
+                        intent.putExtra("password",userpasswrd);
+                        intent.putExtra("email",useremail);
+                        startActivity(intent);
+                        finish();
                         break;
                     }
                     String idUser = jsonObject.getString("idUser");

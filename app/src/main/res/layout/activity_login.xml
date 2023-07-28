@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/loginbk"
+    android:background="@color/purple_light"
     >
 
     <LinearLayout
@@ -46,37 +46,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/border"
+                android:background="@drawable/border_selector"
                 android:drawableLeft="@drawable/baseline_alternate_email_24"
                 android:drawableTint="#8CC0DE"
                 android:drawablePadding="8dp"
-                android:hint="Email (DEV USERNAME)"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
                 android:textColorHint="@color/white"
                 android:padding="8dp"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:singleLine="true"
+                />
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/border"
+                android:background="@drawable/border_selector"
                 android:drawableStart="@drawable/baseline_lock_24"
                 android:drawableEnd="@drawable/baseline_passwordhidden_24"
                 android:drawablePadding="8dp"
                 android:drawableTint="#8CC0DE"
-                android:hint="Password"
+                android:hint="Mot de passe"
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                android:textColorHint="@color/white"
+                android:singleLine="true"
+
+                />
 
             <CheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Keep Me Logged In"
-                android:textColor="@color/white"/>
+                android:text="Rester Connecté"
+                android:textColor="@color/white"
+
+                />
 
             <Button
                 android:id="@+id/loginbtn"
@@ -84,7 +92,7 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/purple"
-                android:text="Login"
+                android:text="SE CONNECTER"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
 

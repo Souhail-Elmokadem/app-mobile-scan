@@ -10,24 +10,26 @@
     android:padding="0dp">
 
     <LinearLayout
+        android:id="@+id/barproduct"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-       android:background="@drawable/dashboard_navbar"
-        android:paddingTop="100dp"
-        >
+        android:layout_height="200dp"
+        android:background="@drawable/product_name_bg"
+        android:paddingTop="0dp">
 
         <TextView
             android:id="@+id/textViewProductName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
+
             android:hint="NAME"
-            android:padding="24dp"
             android:textAppearance="?android:textAppearanceLarge"
             android:textColor="@color/white"
             android:textSize="34sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:layout_marginBottom="15dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,7 +62,7 @@
                 android:padding="8dp"
                 android:singleLine="true"
                 android:textColor="#303DE3"
-                android:textColorHint="@color/white"
+
                 android:textFontWeight="400" />
 
             <EditText
@@ -76,7 +78,7 @@
                 android:maxLength="4"
                 android:padding="12dp"
                 android:textColor="#303DE3"
-                android:textColorHint="@color/white" />
+             />
 
             <EditText
                 android:id="@+id/editdate"
@@ -90,7 +92,7 @@
                 android:inputType="number"
                 android:padding="8dp"
                 android:textColor="#303DE3"
-                android:textColorHint="@color/white" />
+                />
 
             <EditText
                 android:id="@+id/editmarge"
@@ -105,7 +107,7 @@
                 android:maxLength="3"
                 android:padding="8dp"
                 android:textColor="#303DE3"
-                android:textColorHint="@color/white" />
+                />
 
             <Spinner
                 android:id="@+id/editfournisseur"
@@ -124,10 +126,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/green"
                 android:padding="20dp"
                 android:text="Save"
-                android:textColor="@color/purple"
+                android:textColor="@color/white"
                 app:cornerRadius="10dp" />
 
             <Button
@@ -135,11 +137,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="#10CAE1"
+                android:backgroundTint="@color/red"
                 android:padding="20dp"
                 android:text="discard"
                 android:textColor="#FFFFFF"
-                app:cornerRadius="20dp" />
+                app:cornerRadius="10dp" />
         </LinearLayout>
 
 
