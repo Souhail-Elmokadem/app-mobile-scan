@@ -4,3 +4,6 @@ L'application "Inventory Manager" est un outil de gestion des stocks puissant et
 
 
 https://github.com/Souhail-Elmokadem/app-mobile-scan/assets/102615382/8abd495b-0bb6-414e-a790-f7c78bcc7355
+
+Téléchargement de l'APK (décompression ZIP) <br>
+[Belhaj App.zip](https://github.com/Souhail-Elmokadem/app-mobile-scan/files/12500687/Belhaj.App.zip)
